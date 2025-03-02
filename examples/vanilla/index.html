@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div>Test</div>
+      <div id="scrollWrapper"></div>
+      <div>After</div>
+      <button id="play">play</button>
+      <button id="pause">pause</button>
+      <button id="stop">stop</button>
+    </div>
+    <script src="../../dist/index.min.js"></script>
+    <script>
+      const strings = ["Welcome", "<div>sss</div>"];
+      const scrollContainer = document.getElementById("scrollWrapper");
+      const scroller = new ScrollingText(scrollContainer, strings, {
+        interval: 2000,
+        animationDuration: 500,
+      });
+      scroller.play();
+
+      document.getElementById("play").addEventListener("click", () => {
+        scroller.play();
+      });
+      document.getElementById("pause").addEventListener("click", () => {
+        scroller.pause();
+      });
+      document.getElementById("stop").addEventListener("click", () => {
+        scroller.stop();
+      });
+    </script>
+  </body>
+</html>

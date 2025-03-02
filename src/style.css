@@ -1,0 +1,45 @@
+.scroll-wrapper {
+  position: relative;
+}
+
+.scroll-text {
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.scroll-text.enter {
+  animation: var(--duration) ease forwards;
+  animation-name: scrollUp;
+}
+
+.scroll-text.exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  animation: var(--duration) ease forwards;
+  animation-name: scrollOutUp;
+}
+
+@keyframes scrollUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scrollOutUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
