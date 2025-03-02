@@ -36,7 +36,6 @@ class ScrollingText {
   }
 
   private _setup() {
-    console.log("first", this._enterAnimation);
     this._innerWrapper = document.createElement("div");
     this._innerWrapper.className = "scroll-wrapper";
     this._innerWrapper.style.setProperty(
@@ -81,7 +80,6 @@ class ScrollingText {
   start() {
     if (this._timer) return; // already running
     this._timer = setInterval(() => {
-      console.log("interval called");
       this._next();
     }, this._intervalTime);
   }
