@@ -1,27 +1,23 @@
 .scroll-wrapper {
   position: relative;
 }
-
 .scroll-text {
   width: 100%;
   text-align: center;
   white-space: nowrap;
 }
-
 .scroll-text.enter {
   animation: var(--duration) ease forwards;
-  animation-name: scrollUp;
+  animation-name: var(--enter-animation, scrollUp);
 }
-
 .scroll-text.exit {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   animation: var(--duration) ease forwards;
-  animation-name: scrollOutUp;
+  animation-name: var(--exit-animation, scrollOutUp);
 }
-
 @keyframes scrollUp {
   from {
     transform: translateY(100%);

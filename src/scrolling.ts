@@ -42,17 +42,22 @@ class ScrollingText {
       "--duration",
       `${this._animationDuration}ms`
     );
+    if(this._enterAnimation)this._innerWrapper.style.setProperty(
+      "--enter-animation",
+      this._enterAnimation
+    );
+    if(this._exitAnimation)this._innerWrapper.style.setProperty(
+      "--exit-animation",
+      this._exitAnimation
+    );
     this._container.innerHTML = "";
     this._container.appendChild(this._innerWrapper);
-
     this._showText(this._texts[this._currentIndex]);
   }
 
   private _showText(text: TextType) {
     const textEl = document.createElement("div");
     textEl.className = "scroll-text enter";
-    if (this._enterAnimation)
-      textEl.style.animationName = this._enterAnimation as string;
     if (typeof text === "string") {
       textEl.innerHTML = text;
     }
@@ -60,8 +65,6 @@ class ScrollingText {
 
     if (this._currentTextEl) {
       this._currentTextEl.classList.add("exit");
-      if (this._exitAnimation)
-        this._currentTextEl.style.animationName = this._exitAnimation as string;
       setTimeout(() => {
         if (
           this._currentTextEl &&
