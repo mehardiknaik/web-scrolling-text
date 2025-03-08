@@ -29,6 +29,10 @@ function App() {
                   interval: interval,
                   animationDuration: animationDuration,
                   loop: loop,
+                  onStart: () => console.log("Start"),
+                  onStop: () => console.log("Stop"),
+                  onChange: (index) => console.log("Change", index),
+                  onReachEnd: () => console.log("End"),
                 }}
               >
                 <div className={Style.hello}>Hey</div>
