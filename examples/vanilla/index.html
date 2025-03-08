@@ -21,13 +21,14 @@
       const strings = ["Welcome", "<div>sss</div>"];
       const scrollContainer = document.getElementById("scrollWrapper");
       const scroller = new ScrollingText(scrollContainer, strings, {
-        interval: 2000,
-        animationDuration: 500,
+        onReachEnd: () => {
+          console.log("reached end");
+        },
       });
-      scroller.play();
+      scroller.start();
 
       document.getElementById("play").addEventListener("click", () => {
-        scroller.play();
+        scroller.start();
       });
       document.getElementById("pause").addEventListener("click", () => {
         scroller.pause();

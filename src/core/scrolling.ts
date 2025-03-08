@@ -1,13 +1,14 @@
 import "./style.css";
-import { Options, TextType } from "./types";
+import { OptionsType, TextType } from "./types";
 
-const defaultOptions: Options = {
-  interval: 5000,
+const defaultOptions: OptionsType = {
+  interval: 3000,
   animationDuration: 1000,
+  loop: true,
 };
 
 class ScrollingText {
-  private _container: any;
+  private _container: HTMLElement;
   private _intervalTime: number | undefined;
   private _texts: TextType[];
   private _animationDuration: number | undefined;
@@ -17,47 +18,59 @@ class ScrollingText {
   private _currentTextEl: HTMLDivElement | undefined | null;
   private _enterAnimation: string | undefined;
   private _exitAnimation: string | undefined;
+  private _loop: boolean | undefined;
+  private _onReachEnd: (() => void) | undefined;
+  private _onChange: ((index: number) => void) | undefined;
+  private _onStart: (() => void) | undefined;
+  private _onStop: (() => void) | undefined;
+
   constructor(
     container: HTMLElement,
     texts: TextType[],
-    options: Options = {}
+    options: OptionsType = {}
   ) {
     options = { ...defaultOptions, ...options };
     this._container = container;
     this._texts = texts;
     this._intervalTime = options.interval;
     this._animationDuration = options.animationDuration;
-    this._currentIndex = 0;
     this._enterAnimation = options.enterAnimation;
     this._exitAnimation = options.exitAnimation;
-    this.pause();
-
+    this._loop = options.loop;
+    this._currentIndex = 0;
+    this._onReachEnd = options.onReachEnd;
+    this._onChange = options.onChange;
+    this._onStart = options.onStart;
+    this._onStop = options.onStop;
     this._setup();
   }
 
   private _setup() {
+    this.dispose(); //clear any existing container
     this._innerWrapper = document.createElement("div");
     this._innerWrapper.className = "scroll-wrapper";
     this._innerWrapper.style.setProperty(
       "--duration",
       `${this._animationDuration}ms`
     );
-    if(this._enterAnimation)this._innerWrapper.style.setProperty(
-      "--enter-animation",
-      this._enterAnimation
-    );
-    if(this._exitAnimation)this._innerWrapper.style.setProperty(
-      "--exit-animation",
-      this._exitAnimation
-    );
-    this._container.innerHTML = "";
+    if (this._enterAnimation)
+      this._innerWrapper.style.setProperty(
+        "--enter-animation",
+        this._enterAnimation
+      );
+    if (this._exitAnimation)
+      this._innerWrapper.style.setProperty(
+        "--exit-animation",
+        this._exitAnimation
+      );
     this._container.appendChild(this._innerWrapper);
-    this._showText(this._texts[this._currentIndex]);
+    this._showText(this._texts[this._currentIndex], false);
   }
 
-  private _showText(text: TextType) {
+  private _showText(text: TextType, withAnimation = true) {
     const textEl = document.createElement("div");
-    textEl.className = "scroll-text enter";
+    textEl.className = "scroll-text";
+    if (withAnimation) textEl.classList.add("enter");
     if (typeof text === "string") {
       textEl.innerHTML = text;
     }
@@ -65,6 +78,7 @@ class ScrollingText {
 
     if (this._currentTextEl) {
       this._currentTextEl.classList.add("exit");
+      this._currentTextEl.setAttribute("aria-hidden", "true");
       setTimeout(() => {
         if (
           this._currentTextEl &&
@@ -72,7 +86,7 @@ class ScrollingText {
         ) {
           this._innerWrapper.removeChild(this._currentTextEl);
         }
-        textEl.classList.remove("enter");
+        if (withAnimation) textEl.classList.remove("enter");
         this._currentTextEl = textEl;
       }, this._animationDuration);
     } else {
@@ -80,37 +94,51 @@ class ScrollingText {
     }
   }
 
-  start() {
-    if (this._timer) return; // already running
-    this._timer = setInterval(() => {
-      this._next();
-    }, this._intervalTime);
-  }
-
   private _next() {
     this._currentIndex = (this._currentIndex + 1) % this._texts.length;
+    this._onChange?.(this._currentIndex);
+    if (this._currentIndex === this._texts.length - 1) {
+      this._onReachEnd?.();
+      if (!this._loop) {
+        this._cleanUp(); //stop the timer
+        this._onStop?.();
+      }
+    }
     this._showText(this._texts[this._currentIndex]);
   }
 
+  start() {
+    if (!this._timer) {
+      this._onStart?.();
+      this._timer = setInterval(() => {
+        this._next();
+      }, this._intervalTime);
+    }
+  }
+
   pause() {
+    this._cleanUp(); //clear the timer
+  }
+
+  stop() {
+    this._cleanUp();
+    if (this._currentIndex) {
+      this._currentIndex = 0;
+      this._showText(this._texts[this._currentIndex]); // no enter animation
+    }
+    this._onStop?.();
+  }
+
+  private _cleanUp() {
     if (this._timer) {
       clearInterval(this._timer);
       this._timer = null;
     }
   }
 
-  play() {
-    if (!this._timer) {
-      this.start();
-    }
-  }
-
-  stop() {
-    this.pause();
-    if (this._currentIndex) {
-      this._currentIndex = 0;
-      this._showText(this._texts[this._currentIndex]); // no enter animation
-    }
+  dispose() {
+    this._cleanUp();
+    this._container.innerHTML = "";
   }
 }
 

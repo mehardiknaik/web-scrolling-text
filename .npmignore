@@ -36,3 +36,4 @@ src/
 .eslintignore
 storybook-static
 .babelrc.json
+stats

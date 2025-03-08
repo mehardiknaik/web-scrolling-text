@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { babel } from "@rollup/plugin-babel";
+import { bundleStats } from "rollup-plugin-bundle-stats";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -34,8 +35,14 @@ const tsPlugin = typescript({
   tsconfig: "./tsconfig.json",
 });
 
+const stats = (folder) =>
+  bundleStats({
+    outDir: `stats/${folder}`,
+    compare: true,
+  });
+
 const coreBuild = {
-  input: "src/scrolling.ts",
+  input: "src/core/index.ts",
   output: [
     {
       file: "dist/index.es.js",
@@ -60,31 +67,34 @@ const coreBuild = {
     resolve(),
     commonjs(),
     tsPlugin,
-    postcss(),
+    postcss({
+      minimize: true,
+    }),
     terserPlugin,
     aliases,
     babel({
       babelHelpers: "bundled",
     }),
+    stats('core'),
   ],
 };
 
 const reactBuild = {
-  input: "src/react.tsx",
-  external: ["react", "@/scrolling"], //
+  input: "src/react/index.ts",
+  external: ["react", "@/core"], //
   output: [
     {
       file: "dist/react.es.js",
       format: "esm",
       paths: {
-        "@/scrolling": "./index.es.js",
+        "@/core": "./index.es.js",
       },
     },
     {
       file: "dist/react.cjs.js",
       format: "cjs",
       paths: {
-        "@/scrolling": "./index.cjs.js",
+        "@/core": "./index.cjs.js",
       },
     },
   ],
@@ -99,6 +109,7 @@ const reactBuild = {
     babel({
       babelHelpers: "bundled",
     }),
+    stats('react'),
   ],
 };
 

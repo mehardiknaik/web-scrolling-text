@@ -3,12 +3,11 @@
 }
 .scroll-text {
   width: 100%;
-  text-align: center;
   white-space: nowrap;
 }
 .scroll-text.enter {
   animation: var(--duration) ease forwards;
-  animation-name: var(--enter-animation, scrollUp);
+  animation-name: var(--enter-animation, scrollin);
 }
 .scroll-text.exit {
   position: absolute;
@@ -16,9 +15,9 @@
   left: 0;
   width: 100%;
   animation: var(--duration) ease forwards;
-  animation-name: var(--exit-animation, scrollOutUp);
+  animation-name: var(--exit-animation, scrollout);
 }
-@keyframes scrollUp {
+@keyframes scrollin {
   from {
     transform: translateY(100%);
     opacity: 0;
@@ -29,7 +28,7 @@
   }
 }
 
-@keyframes scrollOutUp {
+@keyframes scrollout {
   from {
     transform: translateY(0);
     opacity: 1;
