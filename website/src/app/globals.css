@@ -24,7 +24,6 @@ body {
   color: var(--foreground);
 }
 
-
 @keyframes flipEnter {
   from {
     transform: rotateX(-90deg) translateY(-30px);
@@ -42,6 +41,23 @@ body {
   }
   to {
     transform: rotateX(90deg) translateY(30px);
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
     opacity: 0;
   }
 }
