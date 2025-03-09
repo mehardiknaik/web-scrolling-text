@@ -1,14 +1,8 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === 'production';
-
 const nextConfig: NextConfig = {
   output: "export",
-  assetPrefix: isProd ? '/web-scrolling-text' : '',
-  basePath: isProd ? '/web-scrolling-text' : '',
-  images: {
-    unoptimized: true, // Disable default image optimization
-  },
+  basePath: process.env.PAGES_BASE_PATH,
 };
 
 export default nextConfig;
