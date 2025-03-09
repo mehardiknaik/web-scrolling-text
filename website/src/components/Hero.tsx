@@ -9,7 +9,7 @@ import { ScrollingType } from "web-scrolling-text";
 const Hero = () => {
   const compatibleRef = useRef<ScrollingType>(null);
   return (
-    <div className="h-screen w-full flex flex-col justify-center md:items-center px-3">
+    <div className="min-h-[calc(100vh-85px)] md:min-h-[calc(100vh-60px)] w-full flex flex-col justify-center md:items-center px-3">
       <div className="md:flex items-center text-6xl font-semibold">
         <h1>This is</h1>
         <div className="ml-1 text-7xl">
@@ -38,13 +38,12 @@ const Hero = () => {
           <div className="text-blue-500">React</div>
           <div className="text-yellow-500">Vanilla Js</div>
           <div className="text-teal-500">JQuery</div>
-          <div className="text-black/80">Next js</div>
+          <div className="text-black/80 dark:text-white/80">Next js</div>
         </ScrollingText>
       </div>
       <div className="my-6 text-gray-500 flex gap-1 flex-wrap">
         web scrolling text enables you to create
         <strong className="text-gray-800 dark:text-gray-200 flex gap-1">
-      
           <ScrollingText options={{
             enterAnimation:"fadeIn",
             exitAnimation:"fadeOut",
