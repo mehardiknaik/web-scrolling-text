@@ -1,11 +1,15 @@
 {
   "name": "web-scrolling-text",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/types/core/index.d.ts",
   "source": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mehardiknaik/web-scrolling-text.git"
+  },
   "exports": {
     ".": {
       "module": "./dist/index.es.js",
