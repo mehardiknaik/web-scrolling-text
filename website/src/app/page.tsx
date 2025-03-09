@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 
 const basePath = process.env.PAGES_BASE_PATH || "";
