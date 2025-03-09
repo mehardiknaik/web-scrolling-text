@@ -1,5 +1,4 @@
 "use client"
-import Search from "@/components/Search/Search";
 import styles from "./page.module.css";
 import ScrollingText from "web-scrolling-text/react";
 
@@ -15,7 +14,6 @@ export default function Home() {
             <div>How Are You !</div>
             bye
           </ScrollingText>
-          <Search />
        </main>
     </div>
   );

@@ -21,13 +21,14 @@ const Hero = () => {
         </div>
       </div>
       <div
-        className="md:flex mt-6 text-5xl text-gray-600 dark:text-gray-400"
+        className="flex mt-6 gap-2 text-5xl text-gray-600 dark:text-gray-400 flex-wrap"
         onMouseEnter={() => compatibleRef.current?.pause()}
         onMouseLeave={() => compatibleRef.current?.start()}
         onTouchStart={() => compatibleRef.current?.pause()}
         onTouchEnd={() => compatibleRef.current?.start()}
       >
-        <h1 className="mr-1">Compatible with</h1>
+        <h1>Compatible</h1>
+        <h1>with</h1>
         <ScrollingText
           options={{
             enterAnimation: "flipEnter",

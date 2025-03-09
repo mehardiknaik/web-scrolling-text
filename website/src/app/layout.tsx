@@ -32,8 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${geistSans.className}`}
       >
-        <Header/>
-        {children}
+        <main className="bg-linear-to-r from-transparent via-blue-300/40 dark:via-blue-700/40 to-transparent">
+        <Header />
+          {children}
+        </main>
       </body>
     </html>
   );

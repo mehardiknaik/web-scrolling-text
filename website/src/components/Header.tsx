@@ -6,11 +6,11 @@ import React from "react";
 const Header = () => {
   const path = usePathname();
   return (
-    <header className="sticky top-0 w-full px-2 py-4 border-b-2 border-gray-200 dark:border-gray-700 z-10 md:flex items-center justify-between">
+    <header className="sticky top-0 w-full px-2 py-4 bg-white/60 dark:bg-black/60 border-b-2 border-gray-200 dark:border-gray-700 z-10 md:flex items-center justify-between">
       <Link prefetch={false} href={"/"} className="font-bold">
-        Web Scrolling Text
+        WST
       </Link>
-      <nav className="flex gap-3">
+      <nav className="flex gap-3 flex-1 md:justify-center">
         <Link
           prefetch={false}
           href="/react"
