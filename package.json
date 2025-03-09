@@ -22,7 +22,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "build:website":"cd website && npm run build"
   },
   "author": "",
   "license": "ISC",

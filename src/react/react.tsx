@@ -1,8 +1,8 @@
 import React from "react";
+import ReactDOMServer from "react-dom/server";
 import Scrolling from "@/core";
 import { ScrollingType, OptionsType } from "../core";
 import { TextType } from "../core/types";
-import ReactDOMServer from "react-dom/server";
 import { useScrolling } from "./context";
 interface ScrollingTextProps {
   options?: OptionsType;
