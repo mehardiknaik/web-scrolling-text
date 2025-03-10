@@ -70,8 +70,9 @@ const App = () => {
   return (
     <ScrollingText>
       <div>Hey</div>
-      How Are You !<>Good Morning</>
-      {["Welcome Back", "Loren Ipsum"]}
+      <div>Hello</div>
+      <div>From</div>
+      <div>NextJs</div>
     </ScrollingText>
   );
 };
