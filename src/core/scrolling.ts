@@ -7,6 +7,14 @@ const defaultOptions: OptionsType = {
   loop: true,
 };
 
+/**
+ * @description: A class to create a scrolling text
+ * @param {HTMLElement} container: The container element
+ * @param {TextType[]} texts: The texts to be scrolled
+ * @param {OptionsType} options: The options for the scrolling text
+ * @returns {ScrollingText}
+ * @requires: true
+ */
 class ScrollingText {
   private _container: HTMLElement;
   private _intervalTime: number | undefined;
@@ -107,6 +115,11 @@ class ScrollingText {
     this._showText(this._texts[this._currentIndex]);
   }
 
+  /**
+   * @description: Start the scrolling text
+   * @returns {void}
+   */
+
   start() {
     if (!this._timer) {
       this._onStart?.();
@@ -116,15 +129,25 @@ class ScrollingText {
     }
   }
 
+  /**
+   * @description: Pause the scrolling text
+   * @returns {void}
+   */
+
   pause() {
     this._cleanUp(); //clear the timer
   }
+
+  /**
+   * @description: Stop the scrolling text nad move to the first text
+   * @returns {void}
+   */
 
   stop() {
     this._cleanUp();
     if (this._currentIndex) {
       this._currentIndex = 0;
-      this._showText(this._texts[this._currentIndex]); // no enter animation
+      this._showText(this._texts[this._currentIndex]);
     }
     this._onStop?.();
   }
@@ -136,10 +159,16 @@ class ScrollingText {
     }
   }
 
+  /**
+   * @description: Dispose the scrolling text and remove the container
+   * @returns {void}
+   */
+
   dispose() {
     this._cleanUp();
     this._container.innerHTML = "";
   }
 }
+
 
 export default ScrollingText;
