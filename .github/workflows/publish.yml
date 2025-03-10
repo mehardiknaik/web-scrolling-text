@@ -22,7 +22,18 @@ jobs:
           npm version $VERSION --no-git-tag-version
       - name: Build 📦
         run: npm run build
+      - name: Get build size 📏
+        run: |
+          BUILD_SIZE=$(du -sh dist/ | cut -f1) # Assuming the build output is in the 'dist/' directory
+          echo "Build size: $BUILD_SIZE"
+          echo "BUILD_SIZE=$BUILD_SIZE" >> $GITHUB_ENV
       - name: Publish package on NPM 🚀
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Update release with build size 📄
+        run: |
+          curl -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d "{\"body\": \"Build Size: $BUILD_SIZE\"}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}"

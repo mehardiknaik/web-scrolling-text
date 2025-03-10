@@ -44,14 +44,19 @@ const Hero = () => {
       </div>
       <div className="my-6 text-gray-500 flex gap-1 flex-wrap">
         web scrolling text enables you to create
-        <strong className="text-gray-800 dark:text-gray-200 flex gap-1">
-          <ScrollingText options={{
-            enterAnimation:"fadeIn",
-            exitAnimation:"fadeOut",
-            interval:2000
-          }}>{["high-quality", "light-weight "]}</ScrollingText> text
-          animation
-        </strong>
+        <div className="text-gray-800 dark:text-gray-200 flex gap-1 font-bold">
+          <ScrollingText
+            options={{
+              enterAnimation: "fadeIn",
+              exitAnimation: "fadeOut",
+              interval: 3500,
+              animationDuration:1500
+            }}
+          >
+            {["High-quality", "Light-weight ", "SEO-friendly"]}
+          </ScrollingText>
+          text animation
+        </div>
         for your website.
       </div>
       <SyntaxHighlighter
