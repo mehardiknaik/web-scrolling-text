@@ -5,6 +5,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
@@ -37,6 +40,3 @@ jobs:
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -d "{\"body\": \"Build Size: $BUILD_SIZE\"}" \
             "https://api.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}"
-        permissions:
-          contents: write
-          actions: write
