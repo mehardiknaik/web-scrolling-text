@@ -25,7 +25,7 @@ npm i web-scrolling-text
 <body>
   <div id="scrollWrapper"></div>
   <!-- the src of the bundle -->
-  <script src="./dist/index.min.js"></script>
+  <script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
   <script>
     const strings = ["Welcome", "How Are You!"];
     const scrollContainer = document.getElementById("scrollWrapper");
