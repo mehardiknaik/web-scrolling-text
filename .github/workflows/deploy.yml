@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v4
 
       - name: Install Node.js
@@ -32,7 +32,7 @@ jobs:
           node-version: 22
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install dependencies 🔧
         run: npm install
         working-directory: website # Specify the 'website' directory
 
@@ -49,7 +49,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('website/**/package-lock.json') }}-
 
-      - name: Build with Next.js
+      - name: Build with Next.js 📦
         run: npm run build
         working-directory: website # Specify the 'website' directory
         env:
@@ -67,6 +67,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages 🚀
         id: deployment
         uses: actions/deploy-pages@v4
