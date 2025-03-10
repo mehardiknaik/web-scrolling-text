@@ -139,7 +139,7 @@ class ScrollingText {
   }
 
   /**
-   * @description: Stop the scrolling text nad move to the first text
+   * @description: Stop the scrolling text and move to the first text
    * @returns {void}
    */
 
