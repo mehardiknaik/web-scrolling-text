@@ -108,7 +108,7 @@ export default App;
 | `animationDuration` |         Number          |    no    |  `1000`  | The duration of the animation.                                                                            |
 | `enterAnimation`    |         String          |    no    |    -     | The animation to be used when the text enters the screen (The animation should be a valid CSS animation). |
 | `exitAnimation`     |         String          |    no    |    -     | The animation to be used when the text exits the screen (The animation should be a valid CSS animation).  |
-| `loop`              |         Boolean         |    no    |  `true`  | The animation to be used when the text exits the screen (The animation should be a valid CSS animation).  |
+| `loop`              |         Boolean         |    no    |  `true`  | Continues scrolling animation after reach end.                                                            |
 | `onStart`           |       () => void        |    no    |    -     | Callback when the text starts scrolling.                                                                  |
 | `onStop`            |       () => void        |    no    |    -     | Callback when the text stops scrolling.                                                                   |
 | `onReachEnd`        |       () => void        |    no    |    -     | Callback when the text reaches the end.                                                                   |
