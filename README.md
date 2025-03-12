@@ -29,7 +29,8 @@ npm i web-scrolling-text
   <script>
     const strings = ["Welcome", "How Are You!"];
     const scrollContainer = document.getElementById("scrollWrapper");
-    const scroller = new ScrollingText(scrollContainer, strings);
+    const options={}
+    const scroller = new ScrollingText(scrollContainer, strings, options);
     scroller.start();
   </script>
 </body>
@@ -45,7 +46,7 @@ import { ScrollingType } from "web-scrolling-text";
 const App = () => {
   const ref = React.useRef<ScrollingType>(null);
   return (
-    <ScrollingText ref={ref}>
+    <ScrollingText ref={ref} options={{}}>
       <div>Hey</div>
       How Are You !<>Good Morning</>
       {["Welcome Back", "Loren Ipsum"]}
@@ -68,12 +69,31 @@ import { ScrollingType } from "web-scrolling-text";
 
 const App = () => {
   return (
-    <ScrollingText>
+    <ScrollingText options={{}}>
       <div>Hey</div>
       <div>Hello</div>
       <div>From</div>
       <div>NextJs</div>
     </ScrollingText>
+  );
+};
+
+export default App;
+```
+
+### React Global Config
+
+```tsx
+import React from "react";
+import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
+import { ScrollingType } from "web-scrolling-text";
+
+const App = ({children}) => {
+  const ref = React.useRef<ScrollingType>(null);
+  return (
+    <ScrollingTextProvider options={{}}>
+      {children}
+    </ScrollingTextProvider>
   );
 };
 
