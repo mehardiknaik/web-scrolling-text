@@ -34,9 +34,3 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Update release with build size 📄
-        run: |
-          curl -X PATCH \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -d "{\"body\": \"Build Size: $BUILD_SIZE\"}" \
-            "https://api.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}"
