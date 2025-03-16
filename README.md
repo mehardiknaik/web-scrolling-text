@@ -120,7 +120,7 @@ export default App;
 | `onReachEnd`        |       () => void        |    no    |    -     | Callback when the text reaches the end.                                                                   |
 | `onChange`          | (index: number) => void |    no    |    -     | Callback when the text changes.                                                                           |
 
-## To get a cuurrent version
+## To get a current version
 
 ```jsx
 import ScrollingText from "web-scrolling-text";
