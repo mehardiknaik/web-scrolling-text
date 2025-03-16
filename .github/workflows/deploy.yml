@@ -32,9 +32,9 @@ jobs:
           node-version: 22
           cache: 'npm'
 
-      - name: Install dependencies 🔧
-        run: npm install
-        working-directory: website # Specify the 'website' directory
+      # - name: Install dependencies 🔧
+      #   run: npm install
+      #   working-directory: website # Specify the 'website' directory
 
       - name: Update Library 📤
         run: npm install web-scrolling-text@latest --save
