@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "build:website":"cd website && npm run build"
+    "build:website": "cd website && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -42,6 +42,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-typescript": "^12.1.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

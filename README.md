@@ -40,13 +40,15 @@ npm i web-scrolling-text
 
 ```tsx
 import React from "react";
-import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
+import ScrollingText from "web-scrolling-text/react";
 import { ScrollingType } from "web-scrolling-text";
 
 const App = () => {
   const ref = React.useRef<ScrollingType>(null);
   return (
-    <ScrollingText ref={ref} options={{}}>
+    <ScrollingText ref={ref} options={{
+      // options comes here
+    }}>
       <div>Hey</div>
       How Are You !<>Good Morning</>
       {["Welcome Back", "Loren Ipsum"]}
@@ -69,7 +71,9 @@ import { ScrollingType } from "web-scrolling-text";
 
 const App = () => {
   return (
-    <ScrollingText options={{}}>
+    <ScrollingText options={{
+      // options comes here
+    }}>
       <div>Hey</div>
       <div>Hello</div>
       <div>From</div>
@@ -91,7 +95,9 @@ import { ScrollingType } from "web-scrolling-text";
 const App = ({children}) => {
   const ref = React.useRef<ScrollingType>(null);
   return (
-    <ScrollingTextProvider options={{}}>
+    <ScrollingTextProvider options={{
+      // options comes here
+    }}>
       {children}
     </ScrollingTextProvider>
   );
@@ -113,6 +119,14 @@ export default App;
 | `onStop`            |       () => void        |    no    |    -     | Callback when the text stops scrolling.                                                                   |
 | `onReachEnd`        |       () => void        |    no    |    -     | Callback when the text reaches the end.                                                                   |
 | `onChange`          | (index: number) => void |    no    |    -     | Callback when the text changes.                                                                           |
+
+## To get a cuurrent version
+
+```jsx
+import ScrollingText from "web-scrolling-text";
+ScrollingText.version //this will gives you the current library version
+```
+
 
 ## Method details
 

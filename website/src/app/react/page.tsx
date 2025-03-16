@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const ReactPage = () => {
   return (
-    <div>ReactPage</div>
+    <div className='min-h-[calc(100vh-85px)] md:min-h-[calc(100vh-60px)] w-full'>React Coming Soon...</div>
   )
 }
 

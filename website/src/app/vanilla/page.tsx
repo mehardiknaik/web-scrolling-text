@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 const VanillaPage = () => {
   return (
-    <div>VanillaPage</div>
+    <div className='min-h-[calc(100vh-85px)] md:min-h-[calc(100vh-60px)] w-full'>Vanilla Coming Soon...</div>
   )
 }
 

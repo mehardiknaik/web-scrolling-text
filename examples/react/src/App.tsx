@@ -1,10 +1,14 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Style from "./App.module.css";
 import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
-import { ScrollingType } from "web-scrolling-text";
+import Scrolling, { ScrollingType } from "web-scrolling-text";
 
 function App() {
   const ref = useRef<ScrollingType>(null);
+
+  useEffect(() => {
+    console.log(Scrolling.version);
+  }, []);
 
   return (
     <ScrollingTextProvider

@@ -11,6 +11,9 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { babel } from "@rollup/plugin-babel";
 import { bundleStats } from "rollup-plugin-bundle-stats";
+import replace from "@rollup/plugin-replace";
+
+import pkg from "./package.json" with { type: "json" };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -76,12 +79,15 @@ const coreBuild = {
       babelHelpers: "bundled",
     }),
     stats('core'),
+    replace({
+      __VERSION__: () => pkg.version,
+    })
   ],
 };
 
 const reactBuild = {
   input: "src/react/index.ts",
-  external: ["react", "@/core"], //
+  external: ["react", "@/core"],
   output: [
     {
       file: "dist/react.es.js",

@@ -168,7 +168,15 @@ class ScrollingText {
     this._cleanUp();
     this._container.innerHTML = "";
   }
-}
 
+  /**
+   * @description: Get the version of the package
+   * @returns {string}
+   */
+
+  static get version(): string {
+    return "__VERSION__";
+  }
+}
 
 export default ScrollingText;
