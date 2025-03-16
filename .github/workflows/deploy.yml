@@ -37,7 +37,7 @@ jobs:
         working-directory: website # Specify the 'website' directory
 
       - name: Update Library 📤
-        run: npm install web-scrolling-text@latest
+        run: npm install web-scrolling-text@latest --save
         working-directory: website
 
       - name: Setup Pages
