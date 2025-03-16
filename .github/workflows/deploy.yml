@@ -33,7 +33,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies 🔧
-        run: npm install
+        run: npm install web-scrolling-text@latest
         working-directory: website # Specify the 'website' directory
 
       - name: Setup Pages
