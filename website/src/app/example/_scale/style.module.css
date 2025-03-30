@@ -1,0 +1,24 @@
+
+
+@keyframes in {
+  from {
+    /* transform: translateY(30px); */
+    scale: 1.2;
+  }
+  to {
+    transform: translateY(0);
+    scale: 1;
+  }
+}
+
+@keyframes out {
+  from {
+    transform: translateY(0);
+    scale: 1;
+  }
+  to {
+    /* transform: translateY(-30px); */
+    scale: 0.5;
+    opacity: 0;
+  }
+}

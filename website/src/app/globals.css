@@ -64,3 +64,34 @@ body {
     scale: 0;
   }
 }
+
+.search {
+  display: flex;
+  gap: 4px;
+  background: #ffffff;
+  width: 100%;
+  border-radius: 6px;
+  padding: 10px;
+  border: 1px solid #a9a9a9;
+}
+.hero {
+  display: flex;
+  gap: 4px;
+  font-size: 20px;
+  flex-wrap: wrap;
+}
+.first {
+  color: red;
+}
+.second {
+  color: blue;
+}
+.third {
+  color: green;
+}
+.fourth {
+  color: orange;
+}
+.fifth {
+  color: purple;
+}

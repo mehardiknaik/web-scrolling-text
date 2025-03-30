@@ -25,6 +25,13 @@ const Header = () => {
         >
           Vanilla Js
         </Link>
+        <Link
+          prefetch={false}
+          href="/example"
+          className={`${path === "/example" ? "border-b-2 font-semibold" : ""}`}
+        >
+          Example
+        </Link>
       </nav>
     </header>
   );

@@ -20,7 +20,8 @@
       "module": "./dist/react.es.js",
       "require": "./dist/react.cjs.js",
       "types": "./dist/types/react/index.d.ts"
-    }
+    },
+    "./css/*": "./dist/styles/*"
   },
   "out": [
     "dist"

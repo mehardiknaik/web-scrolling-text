@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import Style from "./App.module.css";
 import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
 import Scrolling, { ScrollingType } from "web-scrolling-text";
+import "web-scrolling-text/css/scale.css";
 
 function App() {
   const ref = useRef<ScrollingType>(null);
@@ -27,6 +28,8 @@ function App() {
             onStop: () => console.log("Stop"),
             onChange: (index) => console.log("Change", index),
             onReachEnd: () => console.log("End"),
+            // enterAnimation: "fadein",
+            // exitAnimation: "fadeout",
           }}
         >
           <div className={Style.hello}>Hey</div>
