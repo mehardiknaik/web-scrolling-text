@@ -1,7 +1,7 @@
 import React from "react";
 import ScrollingText from "web-scrolling-text";
 
-const {basePath=""}= process.env
+const {basePath="."}= process.env
 
 const Footer = () => {
   return (
