@@ -1,0 +1,24 @@
+.scroll-wrapper.scale {
+  --enter-animation: scaleIn;
+  --exit-animation: scaleOut;
+}
+@keyframes scaleIn {
+  from {
+    scale: 1.2;
+  }
+  to {
+    transform: translateY(0);
+    scale: 1;
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    transform: translateY(0);
+    scale: 1;
+  }
+  to {
+    scale: 0.5;
+    opacity: 0;
+  }
+}

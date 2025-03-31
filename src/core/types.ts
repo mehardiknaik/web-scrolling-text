@@ -1,3 +1,5 @@
+import ScrollingText from "./scrolling";
+
 export interface ConfigType {
   /**
    * @description: The interval between each text change
@@ -66,3 +68,15 @@ export interface MethodType {
 export interface OptionsType extends ConfigType, MethodType {}
 
 export type TextType = string;
+
+export interface PluginType {
+  name: string;
+  init: (scrolling: ScrollingText, options: PluginOptionsType) => void;
+}
+
+interface PluginOptionsType {
+  container: HTMLElement;
+  wrapper: HTMLDivElement;
+  text: HTMLDivElement | null | undefined;
+  [key: string]: any;
+}

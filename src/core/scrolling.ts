@@ -1,5 +1,5 @@
 import "./style.css";
-import { OptionsType, TextType } from "./types";
+import { OptionsType, PluginType, TextType } from "./types";
 
 const defaultOptions: OptionsType = {
   interval: 3000,
@@ -167,6 +167,19 @@ class ScrollingText {
   dispose() {
     this._cleanUp();
     this._container.innerHTML = "";
+  }
+
+  addPlugins(plugins: PluginType[]) {
+    const options={
+      container: this._container,
+      wrapper: this._innerWrapper,
+      text: this._currentTextEl,
+    }
+    plugins.forEach((plugin) => {
+      if (plugin.init) {
+        plugin.init(this, options);
+      }
+    });
   }
 
   /**

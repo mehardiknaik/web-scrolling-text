@@ -1,5 +1,5 @@
 import coreBuild from "./build/core.mjs";
 import reactBuild from "./build/react.mjs";
-import styleBuild from "./build/style.mjs";
+import moduleBuild from "./build/module.mjs";
 
-export default [coreBuild, reactBuild, ...styleBuild];
+export default [coreBuild, reactBuild, ...moduleBuild];

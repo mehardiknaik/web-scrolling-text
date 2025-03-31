@@ -2,7 +2,14 @@ import { useEffect, useRef } from "react";
 import Style from "./App.module.css";
 import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
 import Scrolling, { ScrollingType } from "web-scrolling-text";
-import "web-scrolling-text/css/scale.css";
+import fade from "web-scrolling-text/modules/scale"
+
+const plugin={
+  name: "test",
+  init: (scrolling: ScrollingType, options: any) => {
+    console.log("Plugin initialized", scrolling, options);
+  },
+}
 
 function App() {
   const ref = useRef<ScrollingType>(null);
@@ -28,9 +35,10 @@ function App() {
             onStop: () => console.log("Stop"),
             onChange: (index) => console.log("Change", index),
             onReachEnd: () => console.log("End"),
-            // enterAnimation: "fadein",
-            // exitAnimation: "fadeout",
+            // enterAnimation: "enterup",
+            // exitAnimation: "exitup",
           }}
+          plugins={[plugin,fade]}
         >
           <div className={Style.hello}>Hey</div>
           <div className={Style.how}>Welcome Back</div>

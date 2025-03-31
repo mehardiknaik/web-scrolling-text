@@ -1,4 +1,4 @@
-.scroll-text {
+.scroll-wrapper.fade {
   --enter-animation: fadein;
   --exit-animation: fadeout;
 }

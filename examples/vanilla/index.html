@@ -16,8 +16,8 @@
       <button id="pause">pause</button>
       <button id="stop">stop</button>
     </div>
-    <link rel="stylesheet" href="../../dist/styles/flip.css" />
     <script src="../../dist/index.min.js"></script>
+    <script src="../../dist/modules/fade.min.js"></script>
     <script>
       const strings = ["Welcome", "<div>sss</div>"];
       const scrollContainer = document.getElementById("scrollWrapper");
@@ -26,6 +26,7 @@
           console.log("reached end");
         },
       });
+      scroller.addPlugins([fade]);
       scroller.start();
 
       document.getElementById("play").addEventListener("click", () => {

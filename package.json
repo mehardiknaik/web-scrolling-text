@@ -21,7 +21,11 @@
       "require": "./dist/react.cjs.js",
       "types": "./dist/types/react/index.d.ts"
     },
-    "./css/*": "./dist/styles/*"
+    "./modules/*": {
+      "module": "./dist/modules/*.es.js",
+      "require": "./dist/modules/*.cjs.js",
+      "types": "./dist/types/modules/*.d.ts"
+    }
   },
   "out": [
     "dist"
