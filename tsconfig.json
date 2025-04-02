@@ -20,9 +20,11 @@
         "src/*"
       ]
     },
+    "resolveJsonModule": true,
   },
   "include": [
-    "src"
+    "src",
+    "*.config.ts",
   ],
   "exclude": [
     "node_modules",

@@ -3,8 +3,10 @@ import { terser } from "rollup-plugin-terser";
 import alias from "@rollup/plugin-alias";
 import path from "path";
 import { dirname } from "path";
-import { bundleStats } from "rollup-plugin-bundle-stats";
 import { fileURLToPath } from "url";
+import banner2 from 'rollup-plugin-banner2'
+
+import pkg from "../package.json" with { type: "json" };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,10 +29,17 @@ export const terserPlugin = terser({
 
 export const tsPlugin = typescript({
   tsconfig: "./tsconfig.json",
+  exclude: ["*.config.ts"],
 });
 
-export const stats = (folder) =>
-  bundleStats({
-    outDir: `stats/${folder}`,
-    compare: true,
-  });
+export const banner=banner2(
+  (a,b) => {
+    const moduleName=b.dir?.includes("modules")?`-${a.name}`:""
+    return`/**
+* ScrollingText${moduleName} v${pkg.version}
+* build on ${new Date().toUTCString()}
+* (c) ${new Date().getFullYear()} ${pkg.author}
+* Released under the ${pkg.license} License.
+*/
+`},
+)

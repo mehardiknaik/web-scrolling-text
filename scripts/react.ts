@@ -1,11 +1,12 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import external from "rollup-plugin-peer-deps-external";
+import external from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
 import { babel } from "@rollup/plugin-babel";
-import { aliases, stats, terserPlugin, tsPlugin } from "./common.mjs";
+import { aliases, banner, terserPlugin, tsPlugin } from "./common";
+import { RollupOptions } from "rollup";
 
-const reactBuild = {
+const reactBuild: RollupOptions = {
   input: "src/react/index.ts",
   external: ["react", "@/core"],
   output: [
@@ -20,7 +21,7 @@ const reactBuild = {
       file: "dist/react.cjs.js",
       format: "cjs",
       paths: {
-        "@/core": "./index.cjs.js",
+        "@/core": "./index.min.js",
       },
     },
   ],
@@ -35,7 +36,7 @@ const reactBuild = {
     babel({
       babelHelpers: "bundled",
     }),
-    stats("react"),
+    banner
   ],
 };
 

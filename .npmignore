@@ -39,4 +39,4 @@ storybook-static
 stats
 website/
 rollup.*
-build/
+scripts/

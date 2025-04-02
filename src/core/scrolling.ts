@@ -108,11 +108,29 @@ class ScrollingText {
     if (this._currentIndex === this._texts.length - 1) {
       this._onReachEnd?.();
       if (!this._loop) {
-        this._cleanUp(); //stop the timer
         this._onStop?.();
+        this._cleanUp();
+      } else {
+        this._startTimer(); //start the timer again
       }
+    } else {
+      this._startTimer(); //start the timer again
     }
     this._showText(this._texts[this._currentIndex]);
+  }
+
+  private _startTimer() {
+    this._cleanUp(); //clear the timer
+    this._timer = setTimeout(() => {
+      this._next();
+    }, this._intervalTime);
+  }
+
+  private _cleanUp() {
+    if (this._timer) {
+      clearTimeout(this._timer);
+      this._timer = null;
+    }
   }
 
   /**
@@ -120,12 +138,10 @@ class ScrollingText {
    * @returns {void}
    */
 
-  start() {
-    if (!this._timer) {
+  start(): void {
+    if (!this._timer && this._container?.innerHTML) {
       this._onStart?.();
-      this._timer = setInterval(() => {
-        this._next();
-      }, this._intervalTime);
+      this._startTimer();
     }
   }
 
@@ -134,7 +150,7 @@ class ScrollingText {
    * @returns {void}
    */
 
-  pause() {
+  pause(): void {
     this._cleanUp(); //clear the timer
   }
 
@@ -143,7 +159,7 @@ class ScrollingText {
    * @returns {void}
    */
 
-  stop() {
+  stop(): void {
     this._cleanUp();
     if (this._currentIndex) {
       this._currentIndex = 0;
@@ -152,34 +168,34 @@ class ScrollingText {
     this._onStop?.();
   }
 
-  private _cleanUp() {
-    if (this._timer) {
-      clearInterval(this._timer);
-      this._timer = null;
-    }
-  }
-
   /**
    * @description: Dispose the scrolling text and remove the container
    * @returns {void}
    */
 
-  dispose() {
+  dispose(): void {
     this._cleanUp();
     this._container.innerHTML = "";
   }
 
-  addPlugins(plugins: PluginType[]) {
-    const options={
+  /**
+   * @description: Add plugins to the scrolling text
+   * @param {PluginType[]} plugins: The plugins to be added
+   * @returns {ScrollingText}
+   */
+
+  addPlugins(plugins: PluginType[]): ScrollingText {
+    const options = {
       container: this._container,
       wrapper: this._innerWrapper,
       text: this._currentTextEl,
-    }
+    };
     plugins.forEach((plugin) => {
       if (plugin.init) {
         plugin.init(this, options);
       }
     });
+    return this
   }
 
   /**

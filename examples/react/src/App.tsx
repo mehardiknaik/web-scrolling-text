@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react";
 import Style from "./App.module.css";
 import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
-import Scrolling, { ScrollingType } from "web-scrolling-text";
-import fade from "web-scrolling-text/modules/scale"
+import Scrolling, { PluginType } from "web-scrolling-text";
+import fade from "web-scrolling-text/modules/fade";
 
 const plugin={
   name: "test",
-  init: (scrolling: ScrollingType, options: any) => {
+  init: (scrolling, options) => {
     console.log("Plugin initialized", scrolling, options);
   },
-}
+} as PluginType
 
 function App() {
-  const ref = useRef<ScrollingType>(null);
+  const ref = useRef<Scrolling>(null);
 
   useEffect(() => {
     console.log(Scrolling.version);
@@ -38,7 +38,7 @@ function App() {
             // enterAnimation: "enterup",
             // exitAnimation: "exitup",
           }}
-          plugins={[plugin,fade]}
+          plugins={[plugin]}
         >
           <div className={Style.hello}>Hey</div>
           <div className={Style.how}>Welcome Back</div>
@@ -47,6 +47,13 @@ function App() {
           bye
         </ScrollingText>
         <div>After</div>
+      <div>
+        <button onClick={() => ref.current?.start()}>Start</button>
+        <button onClick={() => ref.current?.stop()}>Stop</button>
+        <button onClick={() => ref.current?.pause()}>pause</button>
+        <button onClick={() => ref.current?.dispose()}>dispose</button>
+        <button onClick={() => ref.current?.addPlugins([fade])}>addPlugin</button>
+      </div>
       </div>
     </ScrollingTextProvider>
   );

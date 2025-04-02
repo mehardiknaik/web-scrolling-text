@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import ScrollingText from "web-scrolling-text/react";
-import x from "./style.module.css";
+import fade from "web-scrolling-text/modules/fade";
 
 const Fadein = () => {
   return (
@@ -10,12 +10,7 @@ const Fadein = () => {
         <h1>Fade In</h1>
         <div className="search">
           You can Search For
-          <ScrollingText
-            options={{
-              enterAnimation: x.in,
-              exitAnimation: x.out,
-            }}
-          >
+          <ScrollingText plugins={[fade]}>
             {["Electronics", "Clothes", "Furniture", "Grocery", "Books"]}
           </ScrollingText>
         </div>
@@ -23,12 +18,7 @@ const Fadein = () => {
       <div>
         <h1>Fade In with Whole text</h1>
         <div className="search">
-          <ScrollingText
-            options={{
-              enterAnimation: x.in,
-              exitAnimation: x.out,
-            }}
-          >
+          <ScrollingText plugins={[fade]}>
             <>You Can Search For Electronics</>
             <>You Can Search For Clothes</>
             <>You Can Search For Furniture</>
@@ -41,12 +31,7 @@ const Fadein = () => {
         <h1>Fade In With Hero Text</h1>
         <div className="hero">
           Login With
-          <ScrollingText
-            options={{
-              enterAnimation: x.in,
-              exitAnimation: x.out,
-            }}
-          >
+          <ScrollingText plugins={[fade]}>
             <div className="fourth">Facebook</div>
             <div className="first">Mobile Number</div>
             <div className="third">Google</div>

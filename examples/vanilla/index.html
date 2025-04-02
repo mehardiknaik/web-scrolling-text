@@ -17,7 +17,7 @@
       <button id="stop">stop</button>
     </div>
     <script src="../../dist/index.min.js"></script>
-    <script src="../../dist/modules/fade.min.js"></script>
+    <script src="../../dist/modules/bounce.min.js"></script>
     <script>
       const strings = ["Welcome", "<div>sss</div>"];
       const scrollContainer = document.getElementById("scrollWrapper");
@@ -25,8 +25,7 @@
         onReachEnd: () => {
           console.log("reached end");
         },
-      });
-      scroller.addPlugins([fade]);
+      }).addPlugins([bounce]);
       scroller.start();
 
       document.getElementById("play").addEventListener("click", () => {

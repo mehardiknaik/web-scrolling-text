@@ -1,8 +1,7 @@
 import ScrollingText from "./scrolling";
 import type ScrollingType from "./scrolling";
 
-import { OptionsType } from "./types";
+import { OptionsType, PluginType } from "./types";
 
-export { OptionsType, ScrollingType };
+export { OptionsType, ScrollingType, PluginType };
 export default ScrollingText;
-
