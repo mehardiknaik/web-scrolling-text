@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { banner, terserPlugin } from "./common";
+import { banner, ScrollingTextModule, terserPlugin } from "./common";
 import typescript from "@rollup/plugin-typescript";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -33,7 +33,7 @@ const moduleBuild: RollupOptions[] = fs
             dir: "dist/modules",
             entryFileNames: "[name].min.js",
             format: "umd",
-            name: file.replace(/\.[^/.]+$/, ""),
+            name: `${ScrollingTextModule}.${file.replace(/\.[^/.]+$/, "")}`,
           },
         ],
         plugins: [

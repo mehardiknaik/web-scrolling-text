@@ -1,0 +1,25 @@
+.debug.scroll-wrapper {
+  border: 1px solid green;
+}
+
+.debug .scroll-text{
+  border: 1px solid purple;
+}
+.debug .exit{
+  border: 1px solid blueviolet;
+}
+.debug .enter{
+  border: 1px solid aqua;
+}
+.debug .scroll-text:not(.enter):not(.exit) {
+  position: relative;
+}
+.debug .scroll-text:before {
+  background: purple;
+  color: white;
+  position: absolute;
+  content: attr(text-index);
+  padding: 4px;
+  top: calc(-8px - 100%);
+  border-radius: 5px 5px 0 0;
+}

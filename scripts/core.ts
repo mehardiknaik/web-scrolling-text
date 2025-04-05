@@ -7,7 +7,7 @@ import postcss from "rollup-plugin-postcss";
 import { babel } from "@rollup/plugin-babel";
 import replace from "@rollup/plugin-replace";
 import { RollupOptions } from "rollup";
-import { aliases, banner, terserPlugin, tsPlugin } from "./common";
+import { aliases, banner, ScrollingText, terserPlugin, tsPlugin } from "./common";
 
 import pkg from "../package.json" with { type: "json" };
 
@@ -21,7 +21,7 @@ const coreBuild:RollupOptions  = {
     {
       file: "dist/index.min.js",
       format: "umd",
-      name: "ScrollingText",
+      name: ScrollingText,
     },
   ],
   plugins: [

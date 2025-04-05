@@ -43,3 +43,6 @@ export const banner=banner2(
 */
 `},
 )
+
+export const ScrollingTextModule="ScrollingTextModule"
+export const ScrollingText="ScrollingText"

@@ -25,7 +25,7 @@
         onReachEnd: () => {
           console.log("reached end");
         },
-      }).addPlugins([bounce]);
+      }).addPlugins([ScrollingTextModule.bounce]);
       scroller.start();
 
       document.getElementById("play").addEventListener("click", () => {

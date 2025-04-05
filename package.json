@@ -18,7 +18,7 @@
     },
     "./react": {
       "module": "./dist/react.es.js",
-      "require": "./dist/react.min.js",
+      "require": "./dist/react.cjs.js",
       "types": "./dist/types/react/index.d.ts"
     },
     "./modules/*": {

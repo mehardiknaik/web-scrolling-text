@@ -78,6 +78,7 @@ class ScrollingText {
   private _showText(text: TextType, withAnimation = true) {
     const textEl = document.createElement("div");
     textEl.className = "scroll-text";
+    textEl.setAttribute("text-index", this._currentIndex.toString());
     if (withAnimation) textEl.classList.add("enter");
     if (typeof text === "string") {
       textEl.innerHTML = text;
