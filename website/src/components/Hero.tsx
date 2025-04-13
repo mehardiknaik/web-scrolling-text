@@ -36,10 +36,11 @@ const Hero = () => {
           }}
           ref={compatibleRef}
         >
-          <div className="text-blue-500">React</div>
+          <div className="text-sky-500">React</div>
           <div className="text-yellow-500">Vanilla Js</div>
           <div className="text-teal-500">JQuery</div>
           <div className="text-black/80 dark:text-white/80">Next js</div>
+          <div className="text-red-500">Angular</div>
         </ScrollingText>
       </div>
       <div className="my-6 text-gray-500 flex gap-1 flex-wrap">

@@ -1,31 +1,32 @@
 import React from "react";
 import ScrollingText from "web-scrolling-text";
-
-const {basePath="."}= process.env
+import { RiNpmjsFill } from "react-icons/ri";
+import { FaGithub } from "react-icons/fa";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 text-center p-4">
+    <footer className="bg-gray-100/60 dark:bg-gray-800/60 text-center p-4">
       <p>© {new Date().getFullYear()} Web Scrolling Text H.N.</p>
-      <div className="flex justify-center space-x-4">
-        <a
+      <div className="flex justify-center space-x-3 items-center">
+        <Link
           href="https://github.com/mehardiknaik/web-scrolling-text"
           title="Github"
           target="_blank"
           rel="noreferrer"
-          className="text-blue-500"
+          className="text-2xl"
         >
-          <img src={`${basePath}/git.png`} alt="GitHub" width={24} height={24} />
-        </a>
-        <a
+          <FaGithub />
+        </Link>
+        <Link
           href="https://www.npmjs.com/package/web-scrolling-text"
           title="Npmjs"
           target="_blank"
           rel="noreferrer"
-          className="text-blue-500"
+          className="text-red-600 text-3xl"
         >
-          <img src={`${basePath}/npm.png`} alt="Npmjs" width={24} height={24} />
-        </a>
+          <RiNpmjsFill />
+        </Link>
       </div>
       <p>
         Version- <strong>{ScrollingText.version}</strong>

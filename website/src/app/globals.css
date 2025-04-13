@@ -95,3 +95,11 @@ body {
 .fifth {
   color: purple;
 }
+
+.file-name {
+  @apply text-gray-800 p-2 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-gray-200;
+}
+
+div[id]{
+  @apply scroll-mt-22 lg:scroll-mt-16
+}
