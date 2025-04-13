@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -23,16 +23,19 @@ export const metadata: Metadata = {
     default: "Web Scrolling Text",
   },
 };
-
+export const viewport: Viewport = { 
+  colorScheme: "dark",
+  themeColor: "#000000",
+}
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${geistSans.className}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${geistSans.className} text-black dark:text-white bg-white dark:bg-black`}
       >
         <Header />
         <main className="relative bg-linear-to-r from-transparent via-blue-300/40 dark:via-blue-700/40 to-transparent">
