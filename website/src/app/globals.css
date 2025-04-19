@@ -42,10 +42,24 @@
   }
 }
 
+.animate-fade{
+  @apply opacity-0
+}
+@theme {
+  --animate-fade: fade 0.7s ease-in-out 1 forwards;
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
 .search {
   display: flex;
   gap: 4px;
-  background: #ffffff;
   width: 100%;
   border-radius: 6px;
   padding: 10px;
@@ -77,6 +91,6 @@
   @apply text-gray-800 p-2 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-gray-200;
 }
 
-div[id]{
-  @apply scroll-mt-22 lg:scroll-mt-16
+div[id] {
+  @apply scroll-mt-22 lg:scroll-mt-16;
 }

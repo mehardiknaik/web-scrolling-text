@@ -2,7 +2,7 @@ import React from "react";
 
 const Note = () => {
   return (
-    <div id="note" className="text-gray-700 dark:text-gray-200 pb-5 mt-5">
+    <div id="note" className="text-gray-700 dark:text-gray-200 mt-5">
       <h1 className="font-semibold">Note:</h1>
       <ul className="text-sm ml-5 list-disc">
         <li>

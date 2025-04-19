@@ -12,35 +12,39 @@ const Header = () => {
           WST
         </Link>
         <nav className="flex gap-3 flex-1 md:justify-center">
-          <Link
-            prefetch={false}
-            href="/react"
-            className={`${path === "/react" ? "border-b-2 font-semibold" : ""}`}
-          >
-            React
-          </Link>
-          <Link
-            prefetch={false}
-            href="/vanilla"
-            className={`${
-              path === "/vanilla" ? "border-b-2 font-semibold" : ""
-            }`}
-          >
-            Vanilla Js
-          </Link>
-          <Link
-            prefetch={false}
-            href="/example"
-            className={`${
-              path === "/example" ? "border-b-2 font-semibold" : ""
-            }`}
-          >
-            Example
-          </Link>
+          {navItems.map(({ href, name }) => (
+            <Link
+              key={href}
+              prefetch={false}
+              href={href}
+              className={`${path === href ? "border-b-2 font-semibold" : ""}`}
+            >
+              {name}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>
   );
 };
+
+const navItems = [
+  {
+    name: "React",
+    href: "/react",
+  },
+  {
+    name: "Vanilla Js",
+    href: "/vanilla",
+  },
+  {
+    name: "Angular",
+    href: "/angular",
+  },
+  {
+    name: "Example",
+    href: "/example",
+  },
+];
 
 export default Header;

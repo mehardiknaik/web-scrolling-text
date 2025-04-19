@@ -1,9 +1,7 @@
-"use client";
 import React from "react";
 import GlobalConfig from "./GlobalConfig";
 import WithEvents from "./WithEvents";
 import WithConfig from "./WithConfig";
-import Note from "./Note";
 import WithPlugins from "./WithPlugins";
 import WithControls from "./WithControls";
 
@@ -15,7 +13,6 @@ const Advance = () => {
         {elements.map(({ Element }, index) => (
           <Element key={index} number={index + 1} />
         ))}
-        <Note />
       </div>
     </div>
   );

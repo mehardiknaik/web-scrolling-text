@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import React from 'react'
+import Simple from './Simple'
 
 export const metadata: Metadata = {
   title: 'Vanilla',
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
 
 const VanillaPage = () => {
   return (
-    <div className='min-h-[calc(100vh-85px)] md:min-h-[calc(100vh-60px)] w-full'>Vanilla Coming Soon...</div>
+    <div className="min-h-[calc(100vh-85px)] md:min-h-[calc(100vh-60px)]">
+    <Simple />
+  </div>
   )
 }
 

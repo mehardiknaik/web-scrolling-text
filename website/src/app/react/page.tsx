@@ -3,6 +3,7 @@ import React from "react";
 import Simple from "./Simple";
 import Advance from "./_Advance";
 import Next from "./Next";
+import Note from "./Note";
 
 export const metadata: Metadata = {
   title: "React",
@@ -14,6 +15,7 @@ const ReactPage = () => {
       <Simple />
       <Next />
       <Advance />
+      <Note />
     </div>
   );
 };

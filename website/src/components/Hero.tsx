@@ -9,7 +9,7 @@ import { ScrollingType } from "web-scrolling-text";
 const Hero = () => {
   const compatibleRef = useRef<ScrollingType>(null);
   return (
-    <div className="min-h-[calc(100vh-85px)] md:min-h-[calc(100vh-60px)] w-full flex flex-col justify-center md:items-center px-3">
+    <section className="min-h-[calc(100vh-85px)] md:min-h-[calc(100vh-60px)] w-full flex flex-col justify-center md:items-center px-3">
       <div className="md:flex items-center text-6xl font-semibold">
         <h1>This is</h1>
         <div className="ml-1 text-7xl">
@@ -70,7 +70,7 @@ const Hero = () => {
       >
         npm i web-scrolling-text
       </SyntaxHighlighter>
-    </div>
+    </section>
   );
 };
 
