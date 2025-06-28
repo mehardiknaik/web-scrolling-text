@@ -27,11 +27,11 @@ jobs:
         run: npm run build
       - name: File size 📏
         run: |
-          echo "Build size:" >> #GITHUB_STEP_SUMMARY
+          echo "Build size:" >> $GITHUB_STEP_SUMMARY
           find dist -type f | while read file; do
             size=$(du -b "$file" | cut -f1)
             HR_SIZE=$(numfmt --to=iec-i --suffix=B "$size")
-            echo "- $(basename "$file"): $HR_SIZE" >> #GITHUB_STEP_SUMMARY
+            echo "- $(basename "$file"): $HR_SIZE" >> $GITHUB_STEP_SUMMARY
           done
       - name: Publish package on NPM 🚀
         run: npm publish
