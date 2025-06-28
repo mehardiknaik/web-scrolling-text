@@ -1,31 +1,9 @@
-
-.demo{
-    height: 100vh;
-    display: flex;
-    gap: 5px;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-}
-
-.controls{
-    display: flex;
-    gap: 5px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    padding: 20px;
-}
-
-.hello{
-    color: blue;
-}
-.how{
-    color: salmon;
-    font-weight: 700;
-}
-.are{
-    color: green;
-}
-.you{
-    color: purple;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+  gap: 20px;
 }

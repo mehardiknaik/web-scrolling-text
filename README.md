@@ -1,134 +1,174 @@
-# web-scrolling-text
+# 🎬 Web Scrolling Text
 
+A lightweight, customizable text animation library for creating smooth scrolling text effects.
 
+**[🚀 Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)**
 
 https://github.com/user-attachments/assets/87e55d25-2435-4ca6-aaad-ef0fb9d378d7
 
-
-
-<p>
-  <a href="https://mehardiknaik.github.io/web-scrolling-text/">Demo
-  </a>
-</p>
-
-## Install
+## 📦 Installation
 
 ```bash
 npm i web-scrolling-text
 ```
 
-## Usage
+## 🚀 Quick Start
 
-### Vanilla Javascript
-
+### Vanilla JavaScript
 ```html
-<body>
-  <div id="scrollWrapper"></div>
-  <!-- the src of the bundle -->
-  <script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
-  <script>
-    const strings = ["Welcome", "How Are You!"];
-    const scrollContainer = document.getElementById("scrollWrapper");
-    const options={}
-    const scroller = new ScrollingText(scrollContainer, strings, options);
-    scroller.start();
-  </script>
-</body>
+<div id="myText"></div>
+<script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
+<script>
+  const scroller = new ScrollingText(
+    document.getElementById("myText"), 
+    ["Hello", "World", "👋"]
+  );
+  scroller.start();
+</script>
 ```
 
 ### React
-
 ```tsx
-import React from "react";
 import ScrollingText from "web-scrolling-text/react";
-import { ScrollingType } from "web-scrolling-text";
 
-const App = () => {
-  const ref = React.useRef<ScrollingType>(null);
+function App() {
   return (
-    <ScrollingText ref={ref} options={{
-      // options comes here
-    }}>
-      <div>Hey</div>
-      How Are You !<>Good Morning</>
-      {["Welcome Back", "Loren Ipsum"]}
+    <ScrollingText>
+      <div>Hello</div>
+      <div>World</div>
+      <div>👋</div>
     </ScrollingText>
   );
-};
-
-export default App;
+}
 ```
 
-### Next Js
-
-#### for nextjs the first element is render on server side
-
+### Next.js
 ```tsx
 "use client";
-import React from "react";
-import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
-import { ScrollingType } from "web-scrolling-text";
+import ScrollingText from "web-scrolling-text/react";
 
-const App = () => {
+export default function App() {
   return (
-    <ScrollingText options={{
-      // options comes here
-    }}>
-      <div>Hey</div>
-      <div>Hello</div>
-      <div>From</div>
-      <div>NextJs</div>
+    <ScrollingText options={{ interval: 2000 }}>
+      <div>Welcome</div>
+      <div>to Next.js</div>
     </ScrollingText>
   );
-};
+}
 
-export default App;
 ```
 
-### React Global Config
+## ⚙️ Configuration
 
-```tsx
-import React from "react";
-import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
-import { ScrollingType } from "web-scrolling-text";
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `interval` | `number` | `3000` | Time between text changes (ms) |
+| `animationDuration` | `number` | `1000` | Animation duration (ms) |
+| `enterAnimation` | `string` | - | CSS animation for text entry |
+| `exitAnimation` | `string` | - | CSS animation for text exit |
+| `loop` | `boolean` | `true` | Loop animation after reaching end |
+| `onStart` | `function` | - | Callback when animation starts |
+| `onStop` | `function` | - | Callback when animation stops |
+| `onReachEnd` | `function` | - | Callback when reaching last text |
+| `onChange` | `function` | - | Callback when text changes |
 
-const App = ({children}) => {
-  const ref = React.useRef<ScrollingType>(null);
-  return (
-    <ScrollingTextProvider options={{
-      // options comes here
-    }}>
-      {children}
-    </ScrollingTextProvider>
+### Example with Options
+
+**HTML/Vanilla JavaScript:**
+```html
+<div id="advancedText"></div>
+<script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
+<script>
+  const scroller = new ScrollingText(
+    document.getElementById("advancedText"),
+    ["First", "Second", "Third"],
+    {
+      interval: 2500,
+      animationDuration: 800,
+      loop: false,
+      onChange: (index) => console.log(`Current text: ${index}`)
+    }
   );
-};
-
-export default App;
+  scroller.start();
+</script>
 ```
 
-## Options details
+**React:**
+```tsx
+<ScrollingText 
+  options={{
+    interval: 2500,
+    animationDuration: 800,
+    loop: false,
+    onChange: (index) => console.log(`Current text: ${index}`)
+  }}
+>
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</ScrollingText>
+```
 
-| Parameter           |          Type           | Required | Defaults | Description                                                                                               |
-| ------------------- | :---------------------: | :------: | :------: | --------------------------------------------------------------------------------------------------------- |
-| `interval`          |         Number          |    no    |  `3000`  | The interval between each text change.                                                                    |
-| `animationDuration` |         Number          |    no    |  `1000`  | The duration of the animation.                                                                            |
-| `enterAnimation`    |         String          |    no    |    -     | The animation to be used when the text enters the screen (The animation should be a valid CSS animation). |
-| `exitAnimation`     |         String          |    no    |    -     | The animation to be used when the text exits the screen (The animation should be a valid CSS animation).  |
-| `loop`              |         Boolean         |    no    |  `true`  | Continues scrolling animation after reach end.                                                            |
-| `onStart`           |       () => void        |    no    |    -     | Callback when the text starts scrolling.                                                                  |
-| `onStop`            |       () => void        |    no    |    -     | Callback when the text stops scrolling.                                                                   |
-| `onReachEnd`        |       () => void        |    no    |    -     | Callback when the text reaches the end.                                                                   |
-| `onChange`          | (index: number) => void |    no    |    -     | Callback when the text changes.                                                                           |
+### Example with Plugins
 
-## To get a current version
+**HTML/Vanilla JavaScript:**
+```html
+<div id="pluginText"></div>
+<script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
+<script src="https://unpkg.com/web-scrolling-text/dist/modules/fade.min.js"></script>
+<script>
+  const scroller = new ScrollingText(
+    document.getElementById("pluginText"),
+    ["Fade In", "Fade Out", "Animation"]
+  );
+  scroller.addPlugins([ScrollingTextModule.fade]);
+  scroller.start();
+</script>
+```
 
-```jsx
+**React:**
+```tsx
+import ScrollingText from "web-scrolling-text/react";
+import fadeAnimation from "web-scrolling-text/modules/fade";
+
+function App() {
+  return (
+    <ScrollingText plugins={[fadeAnimation]}>
+      <div>Fade In</div>
+      <div>Fade Out</div>
+      <div>Animation</div>
+    </ScrollingText>
+  );
+}
+```
+
+## 🎮 Methods
+
+Control your scrolling text programmatically:
+
+| Method | Description |
+|--------|-------------|
+| `start()` | ▶️ Start the animation |
+| `pause()` | ⏸️ Pause the animation |
+| `stop()` | ⏹️ Stop and reset to first text |
+| `dispose()` | 🗑️ Clean up and remove all elements |
+| `addPlugins(plugins)` | 🔌 Add functionality plugins |
+
+### Using Methods
+```javascript
+const scroller = new ScrollingText(container, texts);
+
+scroller.start();    // Start animation
+scroller.pause();    // Pause it
+scroller.stop();     // Stop and reset
+scroller.dispose();  // Clean up
+```
+
+## 📋 Version Info
+```javascript
 import ScrollingText from "web-scrolling-text";
-ScrollingText.version //this will gives you the current library version
+console.log(ScrollingText.version); // Get current version
 ```
-
-
-## Method details
 
 ## License
 

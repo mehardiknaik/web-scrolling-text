@@ -1,4 +1,6 @@
-console.log(ScrollingText.version)
-const element = document.getElementById('container')
-const scrollingText = new ScrollingText(element, ["Hello", "World", "How", "Are", "You"])
-scrollingText.start()
+console.log(ScrollingText.version);
+const element = document.getElementById("container");
+
+const scroller = new ScrollingText(element, ["Hello", "How", "Are", "You"]);
+scroller.addPlugins([ScrollingTextModule.fade]);
+scroller.start();

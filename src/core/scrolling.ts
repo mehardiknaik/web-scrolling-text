@@ -177,6 +177,7 @@ class ScrollingText {
   dispose(): void {
     this._cleanUp();
     this._container.innerHTML = "";
+    this._currentTextEl = null;
   }
 
   /**
@@ -196,7 +197,7 @@ class ScrollingText {
         plugin.init(this, options);
       }
     });
-    return this
+    return this;
   }
 
   /**
