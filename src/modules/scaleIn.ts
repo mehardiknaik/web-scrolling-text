@@ -1,5 +1,6 @@
 import { PluginType } from "../core/types";
-import "./scale.css";
+import classReplacer from "./common/classReplacer";
+import style from "./scaleIn.module.css";
 
 /**
  * description: A plugin that adds a scale effect to the scrolling text.
@@ -11,11 +12,11 @@ import "./scale.css";
  *   {["Electronics", "Clothes", "Furniture", "Grocery", "Books"]}
  * </ScrollingText>
  */
-const scale: PluginType = {
-  name: "scale",
+const scaleIn: PluginType = {
+  name: "scaleIn",
   init: (_, options) => {
-    options.wrapper.classList.add("scale");
+    classReplacer(options.wrapper, 'animation', style.scale);
   },
 };
 
-export default scale;
+export default scaleIn;

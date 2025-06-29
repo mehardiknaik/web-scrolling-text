@@ -1,4 +1,4 @@
-.scroll-wrapper.scale {
+.scale {
   --enter-animation: scaleIn;
   --exit-animation: scaleOut;
 }

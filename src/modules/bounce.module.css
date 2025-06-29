@@ -1,4 +1,4 @@
-.scroll-wrapper.bounce {
+.bounce {
   --enter-animation: bounceIn;
   --exit-animation: bounceOut;
 }

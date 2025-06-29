@@ -1,5 +1,5 @@
-import "./style.css";
 import { OptionsType, PluginType, TextType } from "./types";
+import style from "./style.module.css";
 
 const defaultOptions: OptionsType = {
   interval: 3000,
@@ -56,7 +56,7 @@ class ScrollingText {
   private _setup() {
     this.dispose(); //clear any existing container
     this._innerWrapper = document.createElement("div");
-    this._innerWrapper.className = "scroll-wrapper";
+    this._innerWrapper.className = style.wrapper;
     this._innerWrapper.style.setProperty(
       "--duration",
       `${this._animationDuration}ms`
@@ -66,27 +66,29 @@ class ScrollingText {
         "--enter-animation",
         this._enterAnimation
       );
+    else this._innerWrapper.classList.add(style.animationin); //default animation
     if (this._exitAnimation)
       this._innerWrapper.style.setProperty(
         "--exit-animation",
         this._exitAnimation
       );
+    else this._innerWrapper.classList.add(style.animationout); //default animation
     this._container.appendChild(this._innerWrapper);
     this._showText(this._texts[this._currentIndex], false);
   }
 
   private _showText(text: TextType, withAnimation = true) {
     const textEl = document.createElement("div");
-    textEl.className = "scroll-text";
+    textEl.className = style.text;
     textEl.setAttribute("text-index", this._currentIndex.toString());
-    if (withAnimation) textEl.classList.add("enter");
+    if (withAnimation) textEl.classList.add(style.enter);
     if (typeof text === "string") {
       textEl.innerHTML = text;
     }
     this._innerWrapper?.appendChild(textEl);
 
     if (this._currentTextEl) {
-      this._currentTextEl.classList.add("exit");
+      this._currentTextEl.classList.add(style.exit);
       this._currentTextEl.setAttribute("aria-hidden", "true");
       setTimeout(() => {
         if (
@@ -95,7 +97,7 @@ class ScrollingText {
         ) {
           this._innerWrapper.removeChild(this._currentTextEl);
         }
-        if (withAnimation) textEl.classList.remove("enter");
+        if (withAnimation) textEl.classList.remove(style.enter);
         this._currentTextEl = textEl;
       }, this._animationDuration);
     } else {

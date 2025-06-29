@@ -1,5 +1,6 @@
 import { PluginType } from "../core/types";
-import "./flip.css"
+import classReplacer from "./common/classReplacer";
+import style from "./flip.module.css"
 
 /**
  * description: A plugin that adds a flip effect to the scrolling text.
@@ -14,7 +15,7 @@ import "./flip.css"
 const flip: PluginType = {
   name: "flip",
   init: (_, options) => {
-    options.wrapper.classList.add("flip");
+    classReplacer(options.wrapper, 'animation', style.flip);
   },
 };
 

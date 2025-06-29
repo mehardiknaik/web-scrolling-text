@@ -3,7 +3,12 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { banner, ScrollingTextModule, terserPlugin } from "./common";
+import {
+  banner,
+  classNamePrefix,
+  ScrollingTextModule,
+  terserPlugin,
+} from "./common";
 import typescript from "@rollup/plugin-typescript";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -39,6 +44,9 @@ const moduleBuild: RollupOptions[] = fs
         plugins: [
           postcss({
             minimize: true,
+            modules: {
+              generateScopedName: `${classNamePrefix}-[local]`,
+            },
           }),
           external(),
           resolve(),
@@ -55,7 +63,7 @@ const moduleBuild: RollupOptions[] = fs
           babel({
             babelHelpers: "bundled",
           }),
-          banner
+          banner,
         ],
       } as RollupOptions)
   );

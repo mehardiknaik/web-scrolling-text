@@ -1,4 +1,4 @@
-.scroll-wrapper.flip {
+.flip {
   --enter-animation: flipEnter;
   --exit-animation: flipExit;
 }

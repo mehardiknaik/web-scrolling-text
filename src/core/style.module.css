@@ -1,21 +1,29 @@
-.scroll-wrapper {
+.wrapper {
   position: relative;
 }
-.scroll-text {
+
+.animationin{
+  --enter-animation: scrollin;
+}
+
+.animationout {
+  --exit-animation: scrollout;
+}
+.text {
   width: 100%;
   white-space: nowrap;
 }
-.scroll-text.enter {
+.enter {
   animation: var(--duration) ease forwards;
-  animation-name: var(--enter-animation, scrollin);
+  animation-name: var(--enter-animation);
 }
-.scroll-text.exit {
+.exit {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   animation: var(--duration) ease forwards;
-  animation-name: var(--exit-animation, scrollout);
+  animation-name: var(--exit-animation);
 }
 @keyframes scrollin {
   from {

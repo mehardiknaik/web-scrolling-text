@@ -1,5 +1,6 @@
 import { PluginType } from "../core/types";
-import "./fade.css"
+import classReplacer from "./common/classReplacer";
+import style from "./fade.module.css"
 
 
 /**
@@ -15,7 +16,11 @@ import "./fade.css"
 const fade: PluginType = {
   name: "fade",
   init: (_, options) => {
-    options.wrapper.classList.add("fade");
+    // options.wrapper.className = Array.from(options.wrapper.classList)
+    // .filter(c => !c.includes('animation'))  // Remove classes containing 'scroll'
+    // .concat(style.fade)       // Add the new class
+    // .join(' ');
+    classReplacer(options.wrapper, 'animation', style.fade);
   },
 };
 

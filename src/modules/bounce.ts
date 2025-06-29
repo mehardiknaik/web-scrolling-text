@@ -1,5 +1,6 @@
 import { PluginType } from "../core/types";
-import "./bounce.css";
+import style from "./bounce.module.css";
+import classReplacer from "./common/classReplacer";
 
 /**
  * description: A plugin that adds a bounce effect to the scrolling text.
@@ -14,7 +15,7 @@ import "./bounce.css";
 const bounce: PluginType = {
   name: "bounce",
   init: (_, options) => {
-    options.wrapper.classList.add("bounce");
+    classReplacer(options.wrapper, 'animation', style.bounce);
   },
 };
 

@@ -7,7 +7,7 @@ import postcss from "rollup-plugin-postcss";
 import { babel } from "@rollup/plugin-babel";
 import replace from "@rollup/plugin-replace";
 import { RollupOptions } from "rollup";
-import { aliases, banner, ScrollingText, terserPlugin, tsPlugin } from "./common";
+import { aliases, banner, classNamePrefix, ScrollingText, terserPlugin, tsPlugin } from "./common";
 
 import pkg from "../package.json" with { type: "json" };
 
@@ -35,6 +35,9 @@ const coreBuild:RollupOptions  = {
     tsPlugin,
     postcss({
       minimize: true,
+      modules:{
+        generateScopedName: `${classNamePrefix}-[local]`,
+      }
     }),
     terserPlugin,
     aliases,
