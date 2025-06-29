@@ -1,5 +1,5 @@
 import { PluginType } from "../core/types";
-import "./debug.css";
+import style from "./debug.module.css";
 
 /**
  * description: A plugin that adds a debug effect to the scrolling text.
@@ -14,7 +14,7 @@ import "./debug.css";
 const debug: PluginType = {
   name: "debug",
   init: (_, options) => {
-    options.wrapper.classList.add("debug");
+    options.wrapper.classList.add(style.debug);
   },
 };
 

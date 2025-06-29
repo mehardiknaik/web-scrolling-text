@@ -6,4 +6,6 @@
   overflow: hidden;
   flex-direction: column;
   gap: 20px;
+  font-size: 30px;
+  text-align: center;
 }

@@ -7,9 +7,7 @@ function App() {
   const ref = React.useRef<ScrollingType>(null);
   return (
     <div className={style.container}>
-      <ScrollingText ref={ref}>
-        {["Hello", "World", "How", "Are", "You"]}
-      </ScrollingText>
+      <ScrollingText ref={ref}>{["How", "Are", "You"]}</ScrollingText>
     </div>
   );
 }

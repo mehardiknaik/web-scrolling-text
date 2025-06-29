@@ -1,4 +1,4 @@
-.debug.scroll-wrapper {
+.debug.wrapper {
   border: 1px solid green;
 }
 
@@ -11,10 +11,10 @@
 .debug .enter{
   border: 1px solid aqua;
 }
-.debug .scroll-text:not(.enter):not(.exit) {
+.debug .text:not(.enter):not(.exit) {
   position: relative;
 }
-.debug .scroll-text:before {
+.debug .text:before {
   background: purple;
   color: white;
   position: absolute;
