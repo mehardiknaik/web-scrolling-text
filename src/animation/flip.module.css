@@ -1,8 +1,5 @@
-.flip {
-  --enter-animation: flipEnter;
-  --exit-animation: flipExit;
-}
-@keyframes flipEnter {
+
+@keyframes in {
   from {
     transform: rotateX(-90deg) translateY(-30px);
     opacity: 0;
@@ -13,7 +10,7 @@
   }
 }
 
-@keyframes flipExit {
+@keyframes out {
   from {
     transform: rotateX(0deg) translateY(0px);
   }

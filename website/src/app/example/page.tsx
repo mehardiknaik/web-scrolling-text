@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 const ExamplePage = () => {
   return (
     <Context>
-    <div className="container space-y-2.5 mt-2">
-      <Config />
-      <Examples />
-    </div>
+      <div className="space-y-2.5 mt-2">
+        <Config />
+        <Examples />
+      </div>
     </Context>
   );
 };

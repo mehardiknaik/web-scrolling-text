@@ -49,10 +49,10 @@
       "require": "./dist/react.cjs.js",
       "types": "./dist/types/react/index.d.ts"
     },
-    "./modules/*": {
-      "module": "./dist/modules/*.es.js",
-      "require": "./dist/modules/*.min.js",
-      "types": "./dist/types/modules/*.d.ts"
+    "./animation/*": {
+      "module": "./dist/animation/*.es.js",
+      "require": "./dist/animation/*.min.js",
+      "types": "./dist/types/animation/*.d.ts"
     }
   },
   "out": [

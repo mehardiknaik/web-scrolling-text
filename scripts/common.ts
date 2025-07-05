@@ -44,6 +44,6 @@ export const banner=banner2(
 `},
 )
 
-export const ScrollingTextModule="ScrollingTextModule"
+export const ScrollingTextAnimation="ScrollingTextAnimation"
 export const ScrollingText="ScrollingText"
 export const classNamePrefix = "scrolling-text";

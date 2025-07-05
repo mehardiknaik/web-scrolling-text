@@ -6,7 +6,7 @@ import { dirname } from "path";
 import {
   banner,
   classNamePrefix,
-  ScrollingTextModule,
+  ScrollingTextAnimation,
   terserPlugin,
 } from "./common";
 import typescript from "@rollup/plugin-typescript";
@@ -19,33 +19,33 @@ import { RollupOptions } from "rollup";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const module = path.resolve(__dirname, "../src/modules");
+const animation = path.resolve(__dirname, "../src/animation");
 
 const moduleBuild: RollupOptions[] = fs
-  .readdirSync(module)
+  .readdirSync(animation)
   .filter((file) => file.endsWith(".ts") || file.endsWith(".tsx"))
   .map(
     (file) =>
       ({
-        input: path.resolve(module, file),
+        input: path.resolve(animation, file),
         output: [
           {
-            dir: "dist/modules",
+            dir: "dist/animation",
             entryFileNames: "[name].es.js",
             format: "esm",
           },
           {
-            dir: "dist/modules",
+            dir: "dist/animation",
             entryFileNames: "[name].min.js",
             format: "umd",
-            name: `${ScrollingTextModule}.${file.replace(/\.[^/.]+$/, "")}`,
+            name: `${ScrollingTextAnimation}.${file.replace(/\.[^/.]+$/, "")}`,
           },
         ],
         plugins: [
           postcss({
             minimize: true,
             modules: {
-              generateScopedName: `${classNamePrefix}-[local]`,
+              generateScopedName: `${classNamePrefix}-${file.replace(/\.[^/.]+$/, "")}-[local]`,
             },
           }),
           external(),
@@ -56,8 +56,8 @@ const moduleBuild: RollupOptions[] = fs
             tsconfig: "./tsconfig.json",
             compilerOptions: {
               declaration: false,
-              outDir: "dist/modules",
-              declarationDir: "dist/modules",
+              outDir: "dist/animation",
+              declarationDir: "dist/animation",
             },
           }),
           babel({

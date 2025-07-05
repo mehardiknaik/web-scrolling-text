@@ -13,6 +13,8 @@ const pluginLoader = async (name: string) => {
         return (await import("web-scrolling-text/modules/flip")).default;
       case "scaleIn":
         return (await import("web-scrolling-text/modules/scaleIn")).default;
+      // case "scaleOut":
+      //   return (await import("web-scrolling-text/modules/scaleOut")).default;
       default:
         return null;
     }
@@ -27,11 +29,12 @@ const PLUGINS = [
   { name: "Bounce", value: "bounce" },
   { name: "Flip", value: "flip" },
   { name: "Scale In", value: "scaleIn" },
+  { name: "Scale Out", value: "scaleOut" },
 ];
 
 const Config = () => {
   const [isPending, startTransition] = useTransition();
-  const [interval, setInterval] = useState<number>(2000);
+  const [interval, setInterval] = useState<number>(3000);
   const [animationDuration, setAnimationDuration] = useState<number>(1000);
   const [loop, setLoop] = useState<boolean>(true); // ✅ loop state
 

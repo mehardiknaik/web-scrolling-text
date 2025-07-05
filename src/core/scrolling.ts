@@ -1,4 +1,4 @@
-import { OptionsType, PluginType, TextType } from "./types";
+import { OptionsType, TextType } from "./types";
 import style from "./style.module.css";
 
 const defaultOptions: OptionsType = {
@@ -180,26 +180,6 @@ class ScrollingText {
     this._cleanUp();
     this._container.innerHTML = "";
     this._currentTextEl = null;
-  }
-
-  /**
-   * @description: Add plugins to the scrolling text
-   * @param {PluginType[]} plugins: The plugins to be added
-   * @returns {ScrollingText}
-   */
-
-  addPlugins(plugins: PluginType[]): ScrollingText {
-    const options = {
-      container: this._container,
-      wrapper: this._innerWrapper,
-      text: this._currentTextEl,
-    };
-    plugins.forEach((plugin) => {
-      if (plugin.init) {
-        plugin.init(this, options);
-      }
-    });
-    return this;
   }
 
   /**

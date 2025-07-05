@@ -1,8 +1,4 @@
-.scale {
-  --enter-animation: scaleIn;
-  --exit-animation: scaleOut;
-}
-@keyframes scaleIn {
+@keyframes in {
   from {
     scale: 1.2;
   }
@@ -12,7 +8,7 @@
   }
 }
 
-@keyframes scaleOut {
+@keyframes out {
   from {
     transform: translateY(0);
     scale: 1;

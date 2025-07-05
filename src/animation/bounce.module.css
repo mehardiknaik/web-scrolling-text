@@ -1,8 +1,5 @@
-.bounce {
-  --enter-animation: bounceIn;
-  --exit-animation: bounceOut;
-}
-@keyframes bounceIn {
+
+@keyframes in {
   from,50% {
     opacity: 0;
     -webkit-transform: scale3d(0.3, 0.3, 0.3);
@@ -36,7 +33,7 @@
   }
 }
 
-@keyframes bounceOut {
+@keyframes out {
   10% {
     -webkit-transform: scale3d(0.9, 0.9, 0.9);
     transform: scale3d(0.9, 0.9, 0.9);
