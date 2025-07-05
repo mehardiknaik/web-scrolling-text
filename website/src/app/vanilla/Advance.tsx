@@ -2,11 +2,11 @@ import React from "react";
 import { FaFile } from "react-icons/fa";
 import Code from "@/components/Code";
 
-const Simple = () => {
+const Advance = () => {
   return (
     <div id="simple">
       <h2 className="font-medium text-2xl flex gap-2 items-center">
-        Simple Example
+        Advance Example
       </h2>
       <div className="flex flex-col lg:flex-row gap-4 mt-2">
         <div className="lg:w-1/2 pl-2">
@@ -38,13 +38,21 @@ const code = `<!DOCTYPE html>
   </head>
   <body>
     <div id="container"></div>
-    <script src="https://cdn.jsdelivr.net/npm/web-scrolling-text/dist/index.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/web-scrolling-text/dist/animation/fade.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web-scrolling-text/dist/index.min.js"></script> -->
+    <script src="https://unpkg.com/web-scrolling-text/dist/animation/fade.min.js"></script>
+    <script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
 `;
-const js = `const element = document.getElementById('container')
-const scrollingText = new ScrollingText(element, ["Hello", "World", "How", "Are", "You"])
-scrollingText.start()
+const js = `const element = document.getElementById("container");
+
+const scroller = new ScrollingText(element, ["Hello", "How", "Are", "You"], {
+  ...ScrollingTextAnimation.fade,
+  // Other options can be added here
+});
+scroller.start();
+
 `;
-export default Simple;
+export default Advance;

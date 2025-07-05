@@ -8,7 +8,7 @@ const Search = () => {
   const [text, setText] = React.useState<string>("");
   const inputRef2 = React.useRef<HTMLInputElement>(null);
   const [text2, setText2] = React.useState<string>("");
-  const config = useConfig();
+  const {options} = useConfig();
 
   useEffect(() => {}, []);
   return (
@@ -32,7 +32,7 @@ const Search = () => {
           }`}
         >
           You can Search For
-          <ScrollingText {...config}>
+          <ScrollingText options={options}>
             {['"Burger"', '"Pizza"', '"Pasta"', '"Salad"', '"Sushi"']}
           </ScrollingText>
         </div>
@@ -50,7 +50,7 @@ const Search = () => {
         />
 
         <div className={`ml-2 ${text2 ? "opacity-0" : "opacity-60"}`}>
-          <ScrollingText {...config}>
+          <ScrollingText options={options}>
             {[
               'Search "Final Destination"',
               'Search "Ice Age"',

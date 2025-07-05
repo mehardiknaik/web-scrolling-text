@@ -3,12 +3,12 @@ import { PiPlugsFill } from "react-icons/pi";
 import Code from "@/components/Code";
 import { ElementProps } from "./elementProps.";
 
-const WithPlugins = ({ number }: ElementProps) => {
+const WithAnimations = ({ number }: ElementProps) => {
   return (
     <div id="plugin">
       <h2 className="font-medium text-xl flex gap-2 items-center">
         <PiPlugsFill />
-        {number}. Plugin
+        {number}. Default Animations
       </h2>
       <div className="w-full pl-2 max-w-3xl">
         <Code>{data}</Code>
@@ -19,11 +19,11 @@ const WithPlugins = ({ number }: ElementProps) => {
 
 const data = `import React from "react";
 import ScrollingText from "web-scrolling-text/react";
-import fadeAnimation from "web-scrolling-text/modules/fade";
+import fadeAnimation from "web-scrolling-text/animation/fade";
 
 function App() {
   return (
-    <ScrollingText plugins={[fadeAnimation]}>
+    <ScrollingText options={{...fadeAnimation}}>
         {["Hello", "World", "How", "Are", "You"]}
     </ScrollingText>
   );
@@ -32,4 +32,4 @@ function App() {
 export default App;
 `;
 
-export default WithPlugins;
+export default WithAnimations;

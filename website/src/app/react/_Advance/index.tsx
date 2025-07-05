@@ -2,7 +2,7 @@ import React from "react";
 import GlobalConfig from "./GlobalConfig";
 import WithEvents from "./WithEvents";
 import WithConfig from "./WithConfig";
-import WithPlugins from "./WithPlugins";
+import WithAnimations from "./WithAnimations";
 import WithControls from "./WithControls";
 
 const Advance = () => {
@@ -32,7 +32,7 @@ const elements = [
     Element: WithControls,
   },
   {
-    Element: WithPlugins,
+    Element: WithAnimations,
   },
 ];
 

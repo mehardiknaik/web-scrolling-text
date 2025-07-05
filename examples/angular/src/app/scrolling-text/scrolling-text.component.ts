@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import Scrolling from 'web-scrolling-text';
-// import plugin from 'web-scrolling-text/modules/fade';
 
 @Component({
   selector: 'app-scrolling-text',

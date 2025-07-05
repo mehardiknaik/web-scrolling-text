@@ -7,13 +7,13 @@ import { MdEmail } from "react-icons/md";
 import { useConfig } from "./Context";
 
 const Button = () => {
-  const config = useConfig();
+  const {options} = useConfig();
   return (
     <div>
       <h1>Example 2 (Button)</h1>
       <button className="cursor-pointer mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 flex gap-1.5">
         Pay With
-        <ScrollingText {...config}>
+        <ScrollingText options={options}>
           <div className="flex gap-1 items-center">
             <FaCcVisa />
             Visa
@@ -33,7 +33,7 @@ const Button = () => {
         </ScrollingText>
       </button>
       <button className="mt-4 cursor-pointer px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full">
-        <ScrollingText {...config}>
+        <ScrollingText options={options}>
           <div className="flex gap-1 items-center">
             Login With
             <FaQrcode />

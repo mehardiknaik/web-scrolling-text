@@ -15,19 +15,22 @@ npm i web-scrolling-text
 ## 🚀 Quick Start
 
 ### Vanilla JavaScript
+
 ```html
 <div id="myText"></div>
 <script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
 <script>
-  const scroller = new ScrollingText(
-    document.getElementById("myText"), 
-    ["Hello", "World", "👋"]
-  );
+  const scroller = new ScrollingText(document.getElementById("myText"), [
+    "Hello",
+    "World",
+    "👋",
+  ]);
   scroller.start();
 </script>
 ```
 
 ### React
+
 ```tsx
 import ScrollingText from "web-scrolling-text/react";
 
@@ -43,6 +46,7 @@ function App() {
 ```
 
 ### Next.js
+
 ```tsx
 "use client";
 import ScrollingText from "web-scrolling-text/react";
@@ -55,26 +59,26 @@ export default function App() {
     </ScrollingText>
   );
 }
-
 ```
 
 ## ⚙️ Configuration
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `interval` | `number` | `3000` | Time between text changes (ms) |
-| `animationDuration` | `number` | `1000` | Animation duration (ms) |
-| `enterAnimation` | `string` | - | CSS animation for text entry |
-| `exitAnimation` | `string` | - | CSS animation for text exit |
-| `loop` | `boolean` | `true` | Loop animation after reaching end |
-| `onStart` | `function` | - | Callback when animation starts |
-| `onStop` | `function` | - | Callback when animation stops |
-| `onReachEnd` | `function` | - | Callback when reaching last text |
-| `onChange` | `function` | - | Callback when text changes |
+| Option              | Type       | Default | Description                       |
+| ------------------- | ---------- | ------- | --------------------------------- |
+| `interval`          | `number`   | `3000`  | Time between text changes (ms)    |
+| `animationDuration` | `number`   | `1000`  | Animation duration (ms)           |
+| `enterAnimation`    | `string`   | -       | CSS animation for text entry      |
+| `exitAnimation`     | `string`   | -       | CSS animation for text exit       |
+| `loop`              | `boolean`  | `true`  | Loop animation after reaching end |
+| `onStart`           | `function` | -       | Callback when animation starts    |
+| `onStop`            | `function` | -       | Callback when animation stops     |
+| `onReachEnd`        | `function` | -       | Callback when reaching last text  |
+| `onChange`          | `function` | -       | Callback when text changes        |
 
 ### Example with Options
 
 **HTML/Vanilla JavaScript:**
+
 ```html
 <div id="advancedText"></div>
 <script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
@@ -86,7 +90,7 @@ export default function App() {
       interval: 2500,
       animationDuration: 800,
       loop: false,
-      onChange: (index) => console.log(`Current text: ${index}`)
+      onChange: (index) => console.log(`Current text: ${index}`),
     }
   );
   scroller.start();
@@ -94,13 +98,14 @@ export default function App() {
 ```
 
 **React:**
+
 ```tsx
-<ScrollingText 
+<ScrollingText
   options={{
     interval: 2500,
     animationDuration: 800,
     loop: false,
-    onChange: (index) => console.log(`Current text: ${index}`)
+    onChange: (index) => console.log(`Current text: ${index}`),
   }}
 >
   <div>First</div>
@@ -109,31 +114,35 @@ export default function App() {
 </ScrollingText>
 ```
 
-### Example with Plugins
+### Example with Animation
 
 **HTML/Vanilla JavaScript:**
+
 ```html
 <div id="pluginText"></div>
 <script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
-<script src="https://unpkg.com/web-scrolling-text/dist/modules/fade.min.js"></script>
+<script src="https://unpkg.com/web-scrolling-text/dist/animation/fade.min.js"></script>
 <script>
   const scroller = new ScrollingText(
     document.getElementById("pluginText"),
-    ["Fade In", "Fade Out", "Animation"]
+    ["Fade In", "Fade Out", "Animation"],
+    {
+      ...ScrollingTextAnimation.fade,
+    }
   );
-  scroller.addPlugins([ScrollingTextModule.fade]);
   scroller.start();
 </script>
 ```
 
 **React:**
+
 ```tsx
 import ScrollingText from "web-scrolling-text/react";
-import fadeAnimation from "web-scrolling-text/modules/fade";
+import fadeAnimation from "web-scrolling-text/animation/fade";
 
 function App() {
   return (
-    <ScrollingText plugins={[fadeAnimation]}>
+    <ScrollingText options={{ ...fadeAnimation }}>
       <div>Fade In</div>
       <div>Fade Out</div>
       <div>Animation</div>
@@ -146,25 +155,26 @@ function App() {
 
 Control your scrolling text programmatically:
 
-| Method | Description |
-|--------|-------------|
-| `start()` | ▶️ Start the animation |
-| `pause()` | ⏸️ Pause the animation |
-| `stop()` | ⏹️ Stop and reset to first text |
-| `dispose()` | 🗑️ Clean up and remove all elements |
-| `addPlugins(plugins)` | 🔌 Add functionality plugins |
+| Method                | Description                         |
+| --------------------- | ----------------------------------- |
+| `start()`             | ▶️ Start the animation              |
+| `pause()`             | ⏸️ Pause the animation              |
+| `stop()`              | ⏹️ Stop and reset to first text     |
+| `dispose()`           | 🗑️ Clean up and remove all elements |
 
 ### Using Methods
+
 ```javascript
 const scroller = new ScrollingText(container, texts);
 
-scroller.start();    // Start animation
-scroller.pause();    // Pause it
-scroller.stop();     // Stop and reset
-scroller.dispose();  // Clean up
+scroller.start(); // Start animation
+scroller.pause(); // Pause it
+scroller.stop(); // Stop and reset
+scroller.dispose(); // Clean up
 ```
 
 ## 📋 Version Info
+
 ```javascript
 import ScrollingText from "web-scrolling-text";
 console.log(ScrollingText.version); // Get current version

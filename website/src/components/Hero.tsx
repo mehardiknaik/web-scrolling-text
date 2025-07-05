@@ -5,8 +5,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { ghcolors } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
 import { ScrollingType } from "web-scrolling-text";
-import flip from "web-scrolling-text/modules/flip";
-import fade from "web-scrolling-text/modules/bounce";
+import flip from "web-scrolling-text/animation/flip";
+import fade from "web-scrolling-text/animation/bounce";
 
 
 const Hero = () => {
@@ -33,7 +33,9 @@ const Hero = () => {
         <h1>Compatible</h1>
         <h1>with</h1>
         <ScrollingText
-          plugins={[flip]}
+          options={{
+            ...flip,
+          }}
           ref={compatibleRef}
         >
           <div className="text-sky-500">React</div>
@@ -48,10 +50,10 @@ const Hero = () => {
         <div className="text-gray-800 dark:text-gray-200 flex gap-1 font-bold">
           <ScrollingText
             options={{
+              ...fade,
               interval: 3500,
               animationDuration:1500
             }}
-            plugins={[fade]}
           >
             {["High-quality", "Light-weight ", "SEO-friendly"]}
           </ScrollingText>

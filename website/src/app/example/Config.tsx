@@ -1,33 +1,36 @@
 "use client";
 import React, { useState, useTransition } from "react";
-import { useSetConfig } from "./Context";
+import { useConfig } from "./Context";
 
-const pluginLoader = async (name: string) => {
+const animationLoader = async (name: string) => {
   try {
     switch (name) {
-      case "fade":
-        return (await import("web-scrolling-text/modules/fade")).default;
       case "bounce":
-        return (await import("web-scrolling-text/modules/bounce")).default;
-      case "flip":
-        return (await import("web-scrolling-text/modules/flip")).default;
+        return (await import("web-scrolling-text/animation/bounce")).default;
+      case "fade":
+        return (await import("web-scrolling-text/animation/fade")).default;
+        case "flip":
+        return (await import("web-scrolling-text/animation/flip")).default;
+        case "rotate":
+        return (await import("web-scrolling-text/animation/rotate")).default;
       case "scaleIn":
-        return (await import("web-scrolling-text/modules/scaleIn")).default;
-      // case "scaleOut":
-      //   return (await import("web-scrolling-text/modules/scaleOut")).default;
+        return (await import("web-scrolling-text/animation/scaleIn")).default;
+      case "scaleOut":
+        return (await import("web-scrolling-text/animation/scaleOut")).default;
       default:
-        return null;
+        return {};
     }
   } catch {
-    return null;
+    return {};
   }
 };
 
-const PLUGINS = [
+const ANIMATIONS = [
   { name: "Default", value: "" },
   { name: "Fade", value: "fade" },
   { name: "Bounce", value: "bounce" },
   { name: "Flip", value: "flip" },
+  { name: "Rotate", value: "rotate" },
   { name: "Scale In", value: "scaleIn" },
   { name: "Scale Out", value: "scaleOut" },
 ];
@@ -38,29 +41,32 @@ const Config = () => {
   const [animationDuration, setAnimationDuration] = useState<number>(1000);
   const [loop, setLoop] = useState<boolean>(true); // ✅ loop state
 
-  const { setConfigValue } = useSetConfig();
+  const { setConfig } = useConfig();
 
   const handleSubmit = (formData: FormData) => {
     startTransition(async () => {
-      let intervalValue = parseInt(formData.get("interval") as string || "2000", 10);
-      let durationValue = parseInt(formData.get("animationDuration") as string || "1000", 10);
+      let intervalValue = parseInt(
+        (formData.get("interval") as string) || "2000",
+        10
+      );
+      let durationValue = parseInt(
+        (formData.get("animationDuration") as string) || "1000",
+        10
+      );
 
       // Final validation
       if (intervalValue <= durationValue) {
         intervalValue = durationValue + 100;
       }
 
-      const plugin = formData.get("plugin") as string;
-      const module = await pluginLoader(plugin);
+      const animation = formData.get("animation") as string;
+      const module = await animationLoader(animation);
 
-      setConfigValue(
-        {
-          interval: intervalValue,
-          animationDuration: durationValue,
-          loop,
-        },
-        module
-      );
+      setConfig({
+        interval: intervalValue,
+        animationDuration: durationValue,
+        ...module,
+      });
     });
   };
 
@@ -81,7 +87,9 @@ const Config = () => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 w-full max-w-md mx-auto">
-      <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Config</h2>
+      <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+        Config
+      </h2>
 
       <form
         onSubmit={(e) => {
@@ -91,18 +99,21 @@ const Config = () => {
         }}
         className="space-y-4"
       >
-        {/* Plugin Selector */}
+        {/* Animation Selector */}
         <div>
-          <label htmlFor="plugin" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Plugin
+          <label
+            htmlFor="animation"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
+            Animation
           </label>
           <select
-            name="plugin"
-            id="plugin"
+            name="animation"
+            id="animation"
             className="w-full p-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             defaultValue=""
           >
-            {PLUGINS.map(({ name, value }) => (
+            {ANIMATIONS.map(({ name, value }) => (
               <option key={value} value={value}>
                 {name}
               </option>
@@ -112,8 +123,12 @@ const Config = () => {
 
         {/* Interval */}
         <div>
-          <label htmlFor="interval" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Interval: <span className="text-blue-600 font-semibold">{interval}ms</span>
+          <label
+            htmlFor="interval"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
+            Interval:{" "}
+            <span className="text-blue-600 font-semibold">{interval}ms</span>
           </label>
           <input
             name="interval"
@@ -130,8 +145,14 @@ const Config = () => {
 
         {/* Animation Duration */}
         <div>
-          <label htmlFor="animationDuration" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Animation Duration: <span className="text-purple-600 font-semibold">{animationDuration}ms</span>
+          <label
+            htmlFor="animationDuration"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
+            Animation Duration:{" "}
+            <span className="text-purple-600 font-semibold">
+              {animationDuration}ms
+            </span>
           </label>
           <input
             name="animationDuration"
@@ -141,7 +162,9 @@ const Config = () => {
             max="3000"
             step="100"
             value={animationDuration}
-            onChange={(e) => handleAnimationDurationChange(Number(e.target.value))}
+            onChange={(e) =>
+              handleAnimationDurationChange(Number(e.target.value))
+            }
             className="w-full"
           />
         </div>
@@ -156,7 +179,10 @@ const Config = () => {
             onChange={(e) => setLoop(e.target.checked)}
             className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
           />
-          <label htmlFor="loop" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label
+            htmlFor="loop"
+            className="text-sm font-medium text-gray-700 dark:text-gray-300"
+          >
             Loop animation
           </label>
         </div>
