@@ -2,7 +2,12 @@
 import React, { useState, useTransition } from "react";
 import { useConfig } from "./Context";
 
-const animationLoader = async (name: string) => {
+interface AnimationLoader {
+  enterAnimation?: string;
+  exitAnimation?: string;
+}
+
+const animationLoader = async (name: string): Promise<AnimationLoader> => {
   try {
     switch (name) {
       case "bounce":
@@ -18,7 +23,8 @@ const animationLoader = async (name: string) => {
       case "scaleOut":
         return (await import("web-scrolling-text/animation/scaleOut")).default;
       case "zoomInDown":
-        return (await import("web-scrolling-text/animation/zoomInDown")).default;
+        return (await import("web-scrolling-text/animation/zoomInDown"))
+          .default;
       case "hinge":
         return (await import("web-scrolling-text/animation/hinge")).default;
       default:
@@ -79,12 +85,6 @@ const ANIMATIONS = [
     enterAnimationSupport: true,
   },
   {
-    name: "Scale Out",
-    value: "scaleOut",
-    exitAnimationSupport: true,
-    enterAnimationSupport: true,
-  },
-  {
     name: "zoom In Down",
     value: "zoomInDown",
     exitAnimationSupport: true,
@@ -118,7 +118,7 @@ const Config = () => {
 
       const enterVal = formData.get("enterAnimation") as string;
       const exitVal = formData.get("exitAnimation") as string;
-      const [{ enterAnimation }, { exitAnimation }] = await Promise.all([
+      const [enter, exit] = await Promise.all([
         animationLoader(enterVal),
         animationLoader(exitVal),
       ]);
@@ -126,8 +126,8 @@ const Config = () => {
       setConfig({
         interval: intervalValue,
         animationDuration: durationValue,
-        enterAnimation,
-        exitAnimation,
+        enterAnimation: enter?.enterAnimation || "",
+        exitAnimation: exit?.exitAnimation || "",
       });
     });
   };

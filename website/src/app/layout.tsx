@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     default: "Web Scrolling Text",
   },
 };
-export const viewport: Viewport = { 
+export const viewport: Viewport = {
   colorScheme: "dark",
   themeColor: "#000000",
-}
+};
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,12 +37,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${geistSans.className} text-black dark:text-white bg-white dark:bg-black`}
       >
-        <Header />
-        <main className="relative bg-linear-to-r from-transparent via-blue-300/40 dark:via-blue-700/40 to-transparent pb-5">
-          <div className="max-w-5xl mx-auto px-2">{children}</div>
-        </main>
-        <Footer />
-        <Background className="fixed inset-0 h-full -z-10 pointer-events-none" />
+        <div className="overflow-hidden">
+          <Header />
+          <main className="relative bg-linear-to-r from-transparent via-blue-300/40 dark:via-blue-700/40 to-transparent pb-5">
+            <div className="max-w-5xl mx-auto px-2">{children}</div>
+          </main>
+          <Footer />
+          <Background className="fixed inset-0 h-full -z-10 pointer-events-none" />
+        </div>
       </body>
     </html>
   );
