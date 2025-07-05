@@ -9,30 +9,87 @@ const animationLoader = async (name: string) => {
         return (await import("web-scrolling-text/animation/bounce")).default;
       case "fade":
         return (await import("web-scrolling-text/animation/fade")).default;
-        case "flip":
+      case "flip":
         return (await import("web-scrolling-text/animation/flip")).default;
-        case "rotate":
+      case "rotate":
         return (await import("web-scrolling-text/animation/rotate")).default;
       case "scaleIn":
         return (await import("web-scrolling-text/animation/scaleIn")).default;
       case "scaleOut":
         return (await import("web-scrolling-text/animation/scaleOut")).default;
+      case "zoomInDown":
+        return (await import("web-scrolling-text/animation/zoomInDown")).default;
+      case "hinge":
+        return (await import("web-scrolling-text/animation/hinge")).default;
       default:
-        return {};
+        return { enterAnimation: "", exitAnimation: "" };
     }
   } catch {
-    return {};
+    return { enterAnimation: "", exitAnimation: "" }; // Fallback if import fails
   }
 };
 
 const ANIMATIONS = [
-  { name: "Default", value: "" },
-  { name: "Fade", value: "fade" },
-  { name: "Bounce", value: "bounce" },
-  { name: "Flip", value: "flip" },
-  { name: "Rotate", value: "rotate" },
-  { name: "Scale In", value: "scaleIn" },
-  { name: "Scale Out", value: "scaleOut" },
+  {
+    name: "Default",
+    value: "",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "Fade",
+    value: "fade",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "Bounce",
+    value: "bounce",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "Flip",
+    value: "flip",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "Hinge",
+    value: "hinge",
+    exitAnimationSupport: true,
+    enterAnimationSupport: false,
+  },
+  {
+    name: "Rotate",
+    value: "rotate",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "Scale In",
+    value: "scaleIn",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "Scale Out",
+    value: "scaleOut",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "Scale Out",
+    value: "scaleOut",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
+  {
+    name: "zoom In Down",
+    value: "zoomInDown",
+    exitAnimationSupport: true,
+    enterAnimationSupport: true,
+  },
 ];
 
 const Config = () => {
@@ -59,13 +116,18 @@ const Config = () => {
         intervalValue = durationValue + 100;
       }
 
-      const animation = formData.get("animation") as string;
-      const module = await animationLoader(animation);
+      const enterVal = formData.get("enterAnimation") as string;
+      const exitVal = formData.get("exitAnimation") as string;
+      const [{ enterAnimation }, { exitAnimation }] = await Promise.all([
+        animationLoader(enterVal),
+        animationLoader(exitVal),
+      ]);
 
       setConfig({
         interval: intervalValue,
         animationDuration: durationValue,
-        ...module,
+        enterAnimation,
+        exitAnimation,
       });
     });
   };
@@ -97,80 +159,106 @@ const Config = () => {
           const formData = new FormData(e.currentTarget);
           handleSubmit(formData);
         }}
-        className="space-y-4"
+        className="space-y-4 divide-y divide-gray-400"
       >
-        {/* Animation Selector */}
-        <div>
-          <label
-            htmlFor="animation"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Animation
-          </label>
-          <select
-            name="animation"
-            id="animation"
-            className="w-full p-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            defaultValue=""
-          >
-            {ANIMATIONS.map(({ name, value }) => (
-              <option key={value} value={value}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </div>
+        {/* Enter Animation Selector */}
+        <div className="pb-4">
+          <div>
+            <label
+              htmlFor="enterAnimation"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >
+              Enter Animation
+            </label>
+            <select
+              name="enterAnimation"
+              id="enterAnimation"
+              className="w-full p-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              defaultValue=""
+            >
+              {ANIMATIONS.map(({ name, value, enterAnimationSupport }) =>
+                enterAnimationSupport ? (
+                  <option key={value} value={value}>
+                    {name}
+                  </option>
+                ) : null
+              )}
+            </select>
+          </div>
 
+          {/* Exit Animation Selector */}
+          <div>
+            <label
+              htmlFor="exitAnimation"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >
+              Exit Animation
+            </label>
+            <select
+              name="exitAnimation"
+              id="exitAnimation"
+              className="w-full p-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              defaultValue=""
+            >
+              {ANIMATIONS.map(({ name, value }) => (
+                <option key={value} value={value}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         {/* Interval */}
-        <div>
-          <label
-            htmlFor="interval"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Interval:{" "}
-            <span className="text-blue-600 font-semibold">{interval}ms</span>
-          </label>
-          <input
-            name="interval"
-            id="interval"
-            type="range"
-            min="1000"
-            max="5000"
-            step="100"
-            value={interval}
-            onChange={(e) => handleIntervalChange(Number(e.target.value))}
-            className="w-full"
-          />
-        </div>
+        <div className="pb-4">
+          <div>
+            <label
+              htmlFor="interval"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >
+              Interval:{" "}
+              <span className="text-blue-600 font-semibold">{interval}ms</span>
+            </label>
+            <input
+              name="interval"
+              id="interval"
+              type="range"
+              min="1000"
+              max="5000"
+              step="100"
+              value={interval}
+              onChange={(e) => handleIntervalChange(Number(e.target.value))}
+              className="w-full"
+            />
+          </div>
 
-        {/* Animation Duration */}
-        <div>
-          <label
-            htmlFor="animationDuration"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Animation Duration:{" "}
-            <span className="text-purple-600 font-semibold">
-              {animationDuration}ms
-            </span>
-          </label>
-          <input
-            name="animationDuration"
-            id="animationDuration"
-            type="range"
-            min="300"
-            max="3000"
-            step="100"
-            value={animationDuration}
-            onChange={(e) =>
-              handleAnimationDurationChange(Number(e.target.value))
-            }
-            className="w-full"
-          />
+          {/* Animation Duration */}
+          <div>
+            <label
+              htmlFor="animationDuration"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+            >
+              Animation Duration:{" "}
+              <span className="text-purple-600 font-semibold">
+                {animationDuration}ms
+              </span>
+            </label>
+            <input
+              name="animationDuration"
+              id="animationDuration"
+              type="range"
+              min="300"
+              max="3000"
+              step="100"
+              value={animationDuration}
+              onChange={(e) =>
+                handleAnimationDurationChange(Number(e.target.value))
+              }
+              className="w-full"
+            />
+          </div>
         </div>
-
         {/* Loop Checkbox */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 pb-4">
           <input
             id="loop"
             name="loop"
