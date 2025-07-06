@@ -28,16 +28,11 @@ jobs:
       - name: File size 📏
         run: |
           echo "Build size:" >> $GITHUB_STEP_SUMMARY
-          total_size=0
           find dist -type f ! -name '*.d.ts' | sort | while read file; do
             size=$(du -b "$file" | cut -f1)
-            total_size=$((total_size + size))
             HR_SIZE=$(numfmt --to=iec-i --suffix=B "$size")
             echo "- $(basename "$file"): $HR_SIZE" >> $GITHUB_STEP_SUMMARY
           done
-          HR_TOTAL=$(numfmt --to=iec-i --suffix=B "$total_size")
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Total size: $HR_TOTAL**" >> $GITHUB_STEP_SUMMARY
       - name: Publish package on NPM 🚀
         run: npm publish
         env:

@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, FC, PropsWithChildren } from "react";
-import ScrollingText, { OptionsType, ScrollingType } from "web-scrolling-text";
+import { OptionsType } from "web-scrolling-text";
 
 interface AnimationLoader {
   enterAnimation?: string;
