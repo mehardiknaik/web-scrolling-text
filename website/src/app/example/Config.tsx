@@ -2,39 +2,6 @@
 import React, { useState, useTransition } from "react";
 import { useConfig } from "./Context";
 
-interface AnimationLoader {
-  enterAnimation?: string;
-  exitAnimation?: string;
-}
-
-const animationLoader = async (name: string): Promise<AnimationLoader> => {
-  try {
-    switch (name) {
-      case "bounce":
-        return (await import("web-scrolling-text/animation/bounce")).default;
-      case "fade":
-        return (await import("web-scrolling-text/animation/fade")).default;
-      case "flip":
-        return (await import("web-scrolling-text/animation/flip")).default;
-      case "rotate":
-        return (await import("web-scrolling-text/animation/rotate")).default;
-      case "scaleIn":
-        return (await import("web-scrolling-text/animation/scaleIn")).default;
-      case "scaleOut":
-        return (await import("web-scrolling-text/animation/scaleOut")).default;
-      case "zoomInDown":
-        return (await import("web-scrolling-text/animation/zoomInDown"))
-          .default;
-      case "hinge":
-        return (await import("web-scrolling-text/animation/hinge")).default;
-      default:
-        return { enterAnimation: "", exitAnimation: "" };
-    }
-  } catch {
-    return { enterAnimation: "", exitAnimation: "" }; // Fallback if import fails
-  }
-};
-
 const ANIMATIONS = [
   {
     name: "Default",
@@ -118,16 +85,12 @@ const Config = () => {
 
       const enterVal = formData.get("enterAnimation") as string;
       const exitVal = formData.get("exitAnimation") as string;
-      const [enter, exit] = await Promise.all([
-        animationLoader(enterVal),
-        animationLoader(exitVal),
-      ]);
-
       setConfig({
         interval: intervalValue,
         animationDuration: durationValue,
-        enterAnimation: enter?.enterAnimation || "",
-        exitAnimation: exit?.exitAnimation || "",
+        enterAnimationName: enterVal || "",
+        exitAnimationName: exitVal || "",
+        loop: formData.get("loop") === "on" ? true : false, // ✅ handle loop state
       });
     });
   };
