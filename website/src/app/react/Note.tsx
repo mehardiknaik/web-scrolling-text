@@ -24,7 +24,6 @@ const Note = () => {
           <code className="bg-white dark:bg-black p-1 rounded-md">loop</code> is{" "}
           <code className="bg-white dark:bg-black p-1 rounded-md">true</code>
         </li>
-        <li>You can use <strong>multiple plugins</strong> by importing them from <i>modules</i></li>
       </ul>
     </div>
   );

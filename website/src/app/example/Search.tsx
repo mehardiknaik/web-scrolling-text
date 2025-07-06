@@ -15,7 +15,7 @@ const Search = () => {
     <div className="">
       <h1>Example 1 (Search Field)</h1>
       <div
-        className="mt-2 relative flex items-center h-12 bg-slate-700 border border-gray-300 rounded-lg"
+        className="mt-2 relative flex items-center h-12 bg-slate-200 border-gray-600 dark:bg-slate-700 border dark:border-gray-300 rounded-lg"
         onClick={() => inputRef.current?.focus()}
       >
         <IoSearch className="ml-2 text-xl" />
@@ -38,7 +38,7 @@ const Search = () => {
         </div>
       </div>
       <div
-        className="mt-4 relative flex items-center h-12 bg-slate-700 border border-gray-300 rounded-full"
+        className="mt-4 relative flex items-center h-12 bg-slate-200 border-gray-600 dark:bg-slate-700 border dark:border-gray-300 rounded-full"
         onClick={() => inputRef2.current?.focus()}
       >
         <IoSearch className="ml-2 text-xl" />

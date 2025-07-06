@@ -4,6 +4,8 @@ A lightweight, customizable text animation library for creating smooth scrolling
 
 **[🚀 Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)**
 
+**[🎮 Playground & Sample](https://mehardiknaik.github.io/web-scrolling-text/example)**
+
 https://github.com/user-attachments/assets/87e55d25-2435-4ca6-aaad-ef0fb9d378d7
 
 ## 📦 Installation
@@ -172,6 +174,8 @@ scroller.pause(); // Pause it
 scroller.stop(); // Stop and reset
 scroller.dispose(); // Clean up
 ```
+
+**React Example:** [View interactive demo →](https://mehardiknaik.github.io/web-scrolling-text/react#control)
 
 ## 📋 Version Info
 

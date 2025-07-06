@@ -6,7 +6,7 @@ import { ghcolors } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
 import { ScrollingType } from "web-scrolling-text";
 import flip from "web-scrolling-text/animation/flip";
-import fade from "web-scrolling-text/animation/bounce";
+import fade from "web-scrolling-text/animation/zoomInDown";
 
 
 const Hero = () => {

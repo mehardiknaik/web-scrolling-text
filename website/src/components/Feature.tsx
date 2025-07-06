@@ -7,11 +7,11 @@ const Feature = () => {
         <div
           key={title}
           style={{animationDelay:`${index * 0.2}s`}}
-          className="bg-blue-900/60 p-4 rounded-3xl hover:shadow-lg transition hover:bg-blue-900/90 border-2 border-transparent hover:border-blue-300 space-y-3 animate-fade"
+          className="bg-blue-300/60 dark:bg-blue-900/60 dark:hover:bg-blue-900/90 p-4 rounded-3xl hover:shadow-lg transition  border-2 border-transparent hover:border-blue-300 space-y-3 animate-fade"
         >
           <div className="text-4xl text-center">{icon}</div>
           <h2 className="font-bold text-center">{title}</h2>
-          <p className="text-gray-300/70">{desc}</p>
+          <p className="text-gray-700/70 dark:text-gray-300/70">{desc}</p>
         </div>
       ))}
     </section>

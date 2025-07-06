@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Background from "@/components/Background";
+import Script from "next/script";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,8 +25,8 @@ export const metadata: Metadata = {
   },
 };
 export const viewport: Viewport = {
-  colorScheme: "dark",
-  themeColor: "#000000",
+  // colorScheme: "dark",
+  // themeColor: "#000000",
 };
 export default function RootLayout({
   children,
@@ -33,13 +34,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
+      <head>
+      <Script id="theme" strategy="beforeInteractive">
+        {`const savedTheme = localStorage.getItem("theme");
+    let dark = false;
+    if (savedTheme) {
+      dark = savedTheme === "dark";
+    } else {
+      dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    document.documentElement.classList.toggle("dark", dark);`}
+      </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${geistSans.className} text-black dark:text-white bg-white dark:bg-black`}
       >
+        <Header />
         <div className="overflow-hidden">
-          <Header />
-          <main className="relative bg-linear-to-r from-transparent via-blue-300/40 dark:via-blue-700/40 to-transparent pb-5">
+          <main className="relative bg-linear-to-r from-transparent via-blue-400/40 dark:via-blue-700/40 to-transparent pb-5">
             <div className="max-w-5xl mx-auto px-2">{children}</div>
           </main>
           <Footer />

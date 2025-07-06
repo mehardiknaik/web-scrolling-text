@@ -8,7 +8,7 @@ const WithAnimations = ({ number }: ElementProps) => {
     <div id="plugin">
       <h2 className="font-medium text-xl flex gap-2 items-center">
         <PiPlugsFill />
-        {number}. Default Animations
+        {number}. Predefined Animations
       </h2>
       <div className="w-full pl-2 max-w-3xl">
         <Code>{data}</Code>

@@ -1,96 +1,23 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+  }
 
-@keyframes flipEnter {
-  from {
-    transform: rotateX(-90deg) translateY(-30px);
-    opacity: 0;
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f7f4ed;
   }
-  to {
-    transform: rotateX(0deg) translateY(0px);
-    opacity: 1;
-  }
-}
 
-@keyframes flipExit {
-  from {
-    transform: rotateX(0deg) translateY(0px);
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #e0cbcb;
+    border-radius: 100vh;
+    border: 3px solid #f6f7ed;
   }
-  to {
-    transform: rotateX(90deg) translateY(30px);
-    opacity: 0;
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    scale: 1.4;
-  }
-  to {
-    opacity: 1;
-    scale: 1;
-  }
-}
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
   }
-  to {
-    opacity: 0;
-    scale: 0;
-  }
-}
-
-.animate-fade{
-  @apply opacity-0
-}
-@theme {
-  --animate-fade: fade 0.7s ease-in-out 1 forwards;
-  @keyframes fade {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-}
-
-.search {
-  display: flex;
-  gap: 4px;
-  width: 100%;
-  border-radius: 6px;
-  padding: 10px;
-  border: 1px solid #a9a9a9;
-}
-.hero {
-  display: flex;
-  gap: 4px;
-  font-size: 20px;
-  flex-wrap: wrap;
-}
-.first {
-  color: red;
-}
-.second {
-  color: blue;
-}
-.third {
-  color: green;
-}
-.fourth {
-  color: orange;
-}
-.fifth {
-  color: purple;
-}
-
-.file-name {
-  @apply text-gray-800 p-2 rounded-md bg-gray-100 dark:bg-gray-800 dark:text-gray-200;
-}
-
-div[id] {
-  @apply scroll-mt-22 lg:scroll-mt-16;
 }

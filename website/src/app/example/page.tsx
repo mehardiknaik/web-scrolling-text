@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const ExamplePage = () => {
   return (
     <Context>
-      <div className="space-y-2.5 mt-2">
+      <div className="space-y-2.5 pt-5">
         <Config />
         <Examples />
       </div>
