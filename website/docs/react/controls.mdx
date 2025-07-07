@@ -1,0 +1,95 @@
+---
+sidebar_position: 3
+---
+
+# Controls
+
+## Supported Methods
+
+| Method      | Description                         |
+| ----------- | ----------------------------------- |
+| `start()`   | ▶️ Start the animation              |
+| `pause()`   | ⏸️ Pause the animation              |
+| `stop()`    | ⏹️ Stop and reset to first text     |
+| `dispose()` | 🗑️ Clean up and remove all elements |
+
+## Example
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs groupId="language">
+  <TabItem value="typescript" label="Typescript" default>
+    ```tsx title="App.tsx"
+    import React from "react";
+    // highlight-start
+    import ScrollingText from "web-scrolling-text/react";
+    import { ScrollingType } from "web-scrolling-text";
+    // highlight-end
+
+    function App() {
+      // highlight-next-line
+      const ref = React.useRef<ScrollingType>(null);
+
+      // highlight-start
+      const handleStart = () => {
+        ref.current?.start();
+      };
+      const handleStop = () => {
+        ref.current?.stop();
+      };
+      const handlePause = () => {
+        ref.current?.pause();
+      };
+      const handleDestroy = () => {
+        ref.current?.dispose();
+      };
+      // highlight-end
+      return (
+        // highlight-next-line
+        <ScrollingText ref={ref}>
+          {["Hello", "World", "How", "Are", "You"]}
+        </ScrollingText>
+      );
+    }
+
+    export default App;
+    ```
+  </TabItem>
+  <TabItem value="javascript" label="Javascript">
+```jsx title="App.tsx"
+import React from "react";
+// highlight-next-line
+import ScrollingText from "web-scrolling-text/react";
+
+function App() {
+  // highlight-next-line
+  const ref = React.useRef();
+
+// highlight-start
+  const handleStart = () => {
+    ref.current.start();
+  };
+  const handleStop = () => {
+    ref.current.stop();
+  };
+  const handlePause = () => {
+    ref.current.pause();
+  };
+  const handleDestroy = () => {
+    ref.current.dispose();
+  };
+  // highlight-end
+  return (
+    // highlight-next-line
+    <ScrollingText ref={ref}>
+      {["Hello", "World", "How", "Are", "You"]}
+    </ScrollingText>
+  );
+}
+
+export default App;
+```
+  </TabItem>
+</Tabs>
+
+

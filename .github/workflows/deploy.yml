@@ -44,16 +44,7 @@ jobs:
         id: setup_pages
         uses: actions/configure-pages@v5
 
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            website/.next/cache # Adjust path to the Next.js cache in the 'website' directory
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('website/**/package-lock.json') }}-${{ hashFiles('website/**.[jt]s', 'website/**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('website/**/package-lock.json') }}-
-
-      - name: Build with Next.js 📦
+      - name: Build with Docusaurus 📦
         run: npm run build
         working-directory: website # Specify the 'website' directory
         env:
@@ -62,7 +53,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: website/out # Adjust path to your output directory (assuming it's inside 'website')
+          path: website/build # Adjust path to your output directory (assuming it's inside 'website')
 
   deploy:
     environment:
