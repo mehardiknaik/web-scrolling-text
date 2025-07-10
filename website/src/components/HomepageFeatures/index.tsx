@@ -15,28 +15,25 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Get started quickly with minimal setup. Our package provides intuitive APIs and clear documentation, making it simple to integrate scrolling text into your website in minutes.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Lightweight & Customizable',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Built with performance in mind, our library offers smooth animations with customizable options. Control timing, animations, and behavior to match your design needs perfectly.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Multi-Framework Support',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Works seamlessly with React, Next.js, Angular, and vanilla JavaScript. Use the same powerful scrolling text animations across different frameworks and projects.
       </>
     ),
   },

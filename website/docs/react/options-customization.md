@@ -66,7 +66,7 @@ export default App;
 ```
 :::info
 
-Some **Animations** are already avalible, Check [this](/docs/react/basic.md).
+Some **Animations** are already avalible, Check [this](/docs/react/animations#with-other-options).
 
 :::
 

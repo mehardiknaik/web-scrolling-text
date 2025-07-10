@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Global Configration
 
-```tsx
+```tsx title="index.tsx"
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 // highlight-next-line
@@ -50,6 +50,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 :::info
 
-You can use predefined **Animations**, Check [this](/docs/react/basic.md).
+You can use predefined **Animations**, Check [this](/docs/react/animations#with-global-configration).
 
 :::
