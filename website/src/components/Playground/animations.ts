@@ -41,6 +41,7 @@ export const animations: AnimationOption[] = [
   { value: 'zoomInDown', label: 'Zoom In Down', ...animationMap.zoomInDown },
 ];
 
+
 // Helper function to get animation strings by name
 export const getAnimationByName = (animationName: string): { enterAnimation?: string; exitAnimation?: string } => {
   const animation = animations.find(anim => anim.value === animationName);
@@ -55,6 +56,7 @@ export const getAnimationByName = (animationName: string): { enterAnimation?: st
 
 // Helper function to build config from separate enter/exit animations
 export const getAnimationConfig = (enterAnim: string, exitAnim: string) => {
+
   const enterConfig = getAnimationByName(enterAnim);
   const exitConfig = getAnimationByName(exitAnim);
   

@@ -8,7 +8,7 @@ import { RollupOptions } from "rollup";
 
 const reactBuild: RollupOptions = {
   input: "src/react/index.ts",
-  external: ["react", "@/core"],
+  external: ["react", "@/core","react-dom/server"],
   output: [
     {
       file: "dist/react.es.js",

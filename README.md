@@ -96,7 +96,7 @@ export default function App() {
 
 ### Additional Resources
 - [API Reference & Types](https://mehardiknaik.github.io/web-scrolling-text/docs/version)
-- [Interactive Playground](https://mehardiknaik.github.io/web-scrolling-text/example)
+- [Interactive Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)
 
 ## 🎯 Quick Examples
 
@@ -142,4 +142,4 @@ MIT © [Hardik Naik](https://github.com/mehardiknaik)
 - [NPM Package](https://www.npmjs.com/package/web-scrolling-text)
 - [Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)
 - [Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)
-- [Playground](https://mehardiknaik.github.io/web-scrolling-text/example)
+- [Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)

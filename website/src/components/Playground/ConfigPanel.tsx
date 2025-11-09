@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './Playground.module.css';
-import { animations } from './animations';
+import React from "react";
+import styles from "./Playground.module.css";
+import { animations } from "./animations";
 
 interface ConfigPanelProps {
   interval: number;
@@ -30,7 +30,7 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({
   return (
     <div className={styles.configPanel}>
       <h3>⚙️ Configuration</h3>
-      
+
       <div className={styles.configGroup}>
         <label htmlFor="interval">
           Interval (ms): <span className={styles.value}>{interval}</span>
@@ -48,7 +48,8 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({
 
       <div className={styles.configGroup}>
         <label htmlFor="duration">
-          Animation Duration (ms): <span className={styles.value}>{animationDuration}</span>
+          Animation Duration (ms):{" "}
+          <span className={styles.value}>{animationDuration}</span>
         </label>
         <input
           id="duration"
@@ -62,38 +63,38 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({
       </div>
 
       <div className={styles.configGroup}>
-        <label htmlFor="enterAnimation">
-          Enter Animation:
-        </label>
+        <label htmlFor="enterAnimation">Enter Animation:</label>
         <select
           id="enterAnimation"
           value={enterAnimation}
           onChange={(e) => onEnterAnimationChange(e.target.value)}
           className={styles.select}
         >
-          {animations.map((anim) => (
-            <option key={anim.value} value={anim.value}>
-              {anim.label}
-            </option>
-          ))}
+          {animations
+            .filter((anim) => anim.enterAnimation)
+            .map((anim) => (
+              <option key={anim.value} value={anim.value}>
+                {anim.label}
+              </option>
+            ))}
         </select>
       </div>
 
       <div className={styles.configGroup}>
-        <label htmlFor="exitAnimation">
-          Exit Animation:
-        </label>
+        <label htmlFor="exitAnimation">Exit Animation:</label>
         <select
           id="exitAnimation"
           value={exitAnimation}
           onChange={(e) => onExitAnimationChange(e.target.value)}
           className={styles.select}
         >
-          {animations.map((anim) => (
-            <option key={anim.value} value={anim.value}>
-              {anim.label}
-            </option>
-          ))}
+          {animations
+            .filter((anim) => anim.exitAnimation)
+            .map((anim) => (
+              <option key={anim.value} value={anim.value}>
+                {anim.label}
+              </option>
+            ))}
         </select>
       </div>
 

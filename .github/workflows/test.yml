@@ -1,0 +1,60 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests with coverage
+      run: npm run test:coverage -- --json --outputFile=test-results.json
+    
+    - name: Generate test report
+      if: always()
+      run: |
+        echo "# Test Results 🧪" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Parse test results
+        TOTAL_TESTS=$(cat coverage/coverage-summary.json | jq '.total.lines.total')
+        COVERED_TESTS=$(cat coverage/coverage-summary.json | jq '.total.lines.covered')
+        STMT_PCT=$(cat coverage/coverage-summary.json | jq '.total.statements.pct')
+        BRANCH_PCT=$(cat coverage/coverage-summary.json | jq '.total.branches.pct')
+        FUNC_PCT=$(cat coverage/coverage-summary.json | jq '.total.functions.pct')
+        LINE_PCT=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+        
+        echo "## Coverage Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Metric | Coverage |" >> $GITHUB_STEP_SUMMARY
+        echo "|--------|----------|" >> $GITHUB_STEP_SUMMARY
+        echo "| Statements | ${STMT_PCT}% |" >> $GITHUB_STEP_SUMMARY
+        echo "| Branches | ${BRANCH_PCT}% |" >> $GITHUB_STEP_SUMMARY
+        echo "| Functions | ${FUNC_PCT}% |" >> $GITHUB_STEP_SUMMARY
+        echo "| Lines | ${LINE_PCT}% |" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        echo "## Detailed Coverage" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        npm run test:coverage 2>&1 | grep -A 50 "File\|All files" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

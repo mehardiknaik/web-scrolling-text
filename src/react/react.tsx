@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import Scrolling from "@/core";
-import { ScrollingType, OptionsType } from "../core";
+import type { ScrollingType, OptionsType } from "../core";
 import { TextType } from "../core/types";
 import { useScrolling } from "./context";
 interface ScrollingTextProps {
@@ -21,7 +21,10 @@ const ScrollingText: React.FC<ScrollingTextProps> = ({
   React.useEffect(() => {
     const texts = React.Children.map(children, (child) =>
       ReactDOMServer.renderToStaticMarkup(child)
-    ) as TextType[];
+    ) as TextType[] || [];
+
+    // Don't initialize if no children
+    if (texts.length === 0) return;
 
     const mergedOptions = { ...contextOptions, ...options };
 
