@@ -1,6 +1,7 @@
-import React from 'react';
-import ScrollingText from 'web-scrolling-text/react';
-import styles from './Playground.module.css';
+import React from "react";
+import ScrollingText from "web-scrolling-text/react";
+import { ScrollingType } from "web-scrolling-text";
+import styles from "./Playground.module.css";
 
 interface PreviewPanelProps {
   texts: string[];
@@ -21,7 +22,10 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
   currentIndex,
   onCurrentIndexChange,
 }) => {
-  const scrollerRef = React.useRef<any>(null);
+  const scrollerRef = React.useRef<ScrollingType>(null);
+  const [playState, setPlayState] = React.useState<
+    "stopped" | "playing" | "paused"
+  >("playing");
 
   const handleStart = () => {
     scrollerRef.current?.start();
@@ -29,10 +33,15 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
 
   const handlePause = () => {
     scrollerRef.current?.pause();
+    handleStateChange("paused");
   };
 
   const handleStop = () => {
     scrollerRef.current?.stop();
+  };
+
+  const handleStateChange = (state: "stopped" | "playing" | "paused") => {
+    setPlayState(state);
   };
 
   if (texts.length === 0) {
@@ -48,7 +57,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
   return (
     <div className={styles.previewPanel}>
       <h3>👁️ Preview</h3>
-      
+
       <div className={styles.previewContainer}>
         <ScrollingText
           ref={scrollerRef}
@@ -58,24 +67,37 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
             loop,
             ...animationConfig,
             onChange: onCurrentIndexChange,
+            onStart: () => handleStateChange("playing"),
+            onStop: () => handleStateChange("stopped"),
           }}
         >
-          {texts.map((text, index) => (
-            <div key={index} className={styles.previewText}>
-              {text}
-            </div>
-          ))}
+          {texts}
         </ScrollingText>
       </div>
 
       <div className={styles.controls}>
-        <button onClick={handleStart} className={styles.controlButton}>
+        <button
+          onClick={handleStart}
+          className={`${styles.controlButton} ${
+            playState === "playing" ? styles.controlButtonActive : ""
+          }`}
+        >
           ▶️ Start
         </button>
-        <button onClick={handlePause} className={styles.controlButton}>
+        <button
+          onClick={handlePause}
+          className={`${styles.controlButton} ${
+            playState === "paused" ? styles.controlButtonActive : ""
+          }`}
+        >
           ⏸️ Pause
         </button>
-        <button onClick={handleStop} className={styles.controlButton}>
+        <button
+          onClick={handleStop}
+          className={`${styles.controlButton} ${
+            playState === "stopped" ? styles.controlButtonActive : ""
+          }`}
+        >
           ⏹️ Stop
         </button>
       </div>

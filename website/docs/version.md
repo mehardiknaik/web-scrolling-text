@@ -11,7 +11,7 @@ Get the current version of the library and access type definitions.
 ### Vanilla JavaScript / TypeScript
 
 ```javascript
-import ScrollingText from 'web-scrolling-text';
+import ScrollingText from "web-scrolling-text";
 
 console.log(ScrollingText.version);
 // Output: "0.0.0" (or current version)
@@ -33,66 +33,111 @@ The library is fully typed with TypeScript. Import types from the package:
 ### Core Types
 
 ```typescript
-import type { 
-  ConfigType,
-  OptionsType, 
-  TextType,
-  PluginType 
-} from 'web-scrolling-text';
+import ScrollingText from "web-scrolling-text";
+import type { OptionsType, ScrollingType } from "web-scrolling-text";
 ```
 
 ### React Types
 
 ```typescript
-import type { ScrollingType } from 'web-scrolling-text';
-import ScrollingText from 'web-scrolling-text/react';
+import ScrollingText, { ScrollingTextProvider } from "web-scrolling-text/react";
+import type { OptionsType, ScrollingType } from "web-scrolling-text";
 
+// For component ref
 const ref = React.useRef<ScrollingType>(null);
 ```
 
 ## Type Definitions
 
-### ConfigType
-
-Configuration options for the scrolling text:
-
-```typescript
-interface ConfigType {
-  interval?: number;              // Time between changes (ms)
-  animationDuration?: number;     // Animation duration (ms)
-  enterAnimation?: string;        // CSS animation for entry
-  exitAnimation?: string;         // CSS animation for exit
-  loop?: boolean;                 // Loop after reaching end
-}
-```
-
-### MethodType
-
-Callback methods:
-
-```typescript
-interface MethodType {
-  onReachEnd?: () => void;        // Called when reaching end
-  onChange?: (index: number) => void;  // Called on text change
-  onStart?: () => void;           // Called on start
-  onStop?: () => void;            // Called on stop
-}
-```
-
 ### OptionsType
 
-Complete options (combination of Config and Methods):
+Complete configuration and callback options:
 
 ```typescript
-interface OptionsType extends ConfigType, MethodType {}
+interface OptionsType {
+  /**
+   * The interval between each text change
+   * @default 3000
+   */
+  interval?: number;
+  
+  /**
+   * The duration of the animation
+   * @default 1000
+   */
+  animationDuration?: number;
+  
+  /**
+   * The animation to be used when the text enters the screen
+   * Should be a valid CSS animation
+   */
+  enterAnimation?: string;
+  
+  /**
+   * The animation to be used when the text exits the screen
+   * Should be a valid CSS animation
+   */
+  exitAnimation?: string;
+  
+  /**
+   * Loop the text after reaching the end
+   * @default true
+   */
+  loop?: boolean;
+  
+  /**
+   * Callback when the text reaches the end
+   */
+  onReachEnd?: () => void;
+  
+  /**
+   * Callback when the text changes
+   */
+  onChange?: (index: number) => void;
+  
+  /**
+   * Callback when the text starts scrolling
+   */
+  onStart?: () => void;
+  
+  /**
+   * Callback when the text stops scrolling
+   */
+  onStop?: () => void;
+}
 ```
 
-### TextType
+### ScrollingType
 
-Text content type:
+The ScrollingText instance type with control methods:
 
 ```typescript
-type TextType = string;
+class ScrollingType {
+  /**
+   * Start the scrolling animation
+   */
+  start(): void;
+  
+  /**
+   * Pause the scrolling animation
+   */
+  pause(): void;
+  
+  /**
+   * Stop the scrolling animation and move to the first text
+   */
+  stop(): void;
+  
+  /**
+   * Dispose the scrolling text and remove the container
+   */
+  dispose(): void;
+  
+  /**
+   * Get the current version
+   */
+  static version: string;
+}
 ```
 
 ## Package Information
@@ -103,41 +148,70 @@ type TextType = string;
 - **License:** ISC
 - **Author:** Hardik Naik
 
-## Exports
+## Available Exports
 
-### Main Export
+### Core Package (`web-scrolling-text`)
 
 ```typescript
-import ScrollingText from 'web-scrolling-text';
+// Default export - ScrollingText class
+import ScrollingText from "web-scrolling-text";
+
+// Type exports
+import type { 
+  OptionsType,     // Configuration and callback options
+  ScrollingType    // ScrollingText instance type
+} from "web-scrolling-text";
 ```
 
-### React Export
+### React Package (`web-scrolling-text/react`)
 
 ```typescript
-import ScrollingText, { ScrollingTextProvider } from 'web-scrolling-text/react';
+// Default export - React component
+import ScrollingText from "web-scrolling-text/react";
+
+// Named export - Context provider
+import { ScrollingTextProvider } from "web-scrolling-text/react";
+
+// Types from core package
+import type { OptionsType, ScrollingType } from "web-scrolling-text";
 ```
 
-### Animation Exports
+### Animation Modules
 
 ```typescript
-import fade from 'web-scrolling-text/animation/fade';
-import bounce from 'web-scrolling-text/animation/bounce';
-import flip from 'web-scrolling-text/animation/flip';
-import rotate from 'web-scrolling-text/animation/rotate';
-import scaleIn from 'web-scrolling-text/animation/scaleIn';
-import scaleOut from 'web-scrolling-text/animation/scaleOut';
-import hinge from 'web-scrolling-text/animation/hinge';
-import zoomInDown from 'web-scrolling-text/animation/zoomInDown';
+import fade from "web-scrolling-text/animation/fade";
+import bounce from "web-scrolling-text/animation/bounce";
+import flip from "web-scrolling-text/animation/flip";
+import rotate from "web-scrolling-text/animation/rotate";
+import scaleIn from "web-scrolling-text/animation/scaleIn";
+import scaleOut from "web-scrolling-text/animation/scaleOut";
+import hinge from "web-scrolling-text/animation/hinge";
+import zoomInDown from "web-scrolling-text/animation/zoomInDown";
+
+// Each animation exports an object with enterAnimation and exitAnimation
+// Type: { enterAnimation: string; exitAnimation: string; }
+
+// Usage - Spread the animation object into options
+const options = {
+  ...fade,
+  interval: 3000
+};
+
+// Or use individual properties
+const options2 = {
+  enterAnimation: fade.enterAnimation,
+  exitAnimation: bounce.exitAnimation
+};
 ```
 
 ## Checking Compatibility
 
 ```javascript
 // Check if ScrollingText is available
-if (typeof ScrollingText !== 'undefined') {
-  console.log('ScrollingText loaded, version:', ScrollingText.version);
+if (typeof ScrollingText !== "undefined") {
+  console.log("ScrollingText loaded, version:", ScrollingText.version);
 } else {
-  console.error('ScrollingText not loaded');
+  console.error("ScrollingText not loaded");
 }
 ```
 
@@ -152,9 +226,46 @@ The library supports all modern browsers that support ES6:
 
 For older browsers, use a polyfill or transpiler.
 
-to get current **version** use:
-```js
+## Complete Usage Example
+
+```typescript
 import ScrollingText from "web-scrolling-text";
-//highlight-next-line
-console.log(ScrollingText.version); 
+import type { OptionsType, ScrollingType } from "web-scrolling-text";
+import fade from "web-scrolling-text/animation/fade";
+import bounce from "web-scrolling-text/animation/bounce";
+
+// Use animation by spreading it into options
+const options: OptionsType = {
+  ...fade,
+  interval: 3000,
+  animationDuration: 1000,
+  loop: true,
+  onChange: (index: number) => console.log("Index:", index),
+  onReachEnd: () => console.log("Reached end")
+};
+
+// Or mix different enter/exit animations
+const mixedOptions: OptionsType = {
+  enterAnimation: fade.enterAnimation,
+  exitAnimation: bounce.exitAnimation,
+  interval: 3000,
+  animationDuration: 1000,
+  loop: true
+};
+
+// Create instance with type
+const scrollingText: ScrollingType = new ScrollingText(
+  document.getElementById("container"),
+  ["Text 1", "Text 2", "Text 3"],
+  options
+);
+
+// Use control methods
+scrollingText.start();
+scrollingText.pause();
+scrollingText.stop();
+scrollingText.dispose();
+
+// Check version
+console.log(ScrollingText.version);
 ```

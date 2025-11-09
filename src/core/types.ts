@@ -63,6 +63,12 @@ export interface MethodType {
    * @requires: false
    */
   onStop?: () => void;
+  /**
+   * @description: Callback when the text is paused
+   * @type: {() => void}
+   * @requires: false
+   */
+  onPause?: () => void;
 }
 
 export interface OptionsType extends ConfigType, MethodType {}
