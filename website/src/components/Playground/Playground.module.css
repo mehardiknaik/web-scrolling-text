@@ -4,6 +4,18 @@
   padding: 2rem;
 }
 
+@media (max-width: 768px) {
+  .playgroundContainer {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .playgroundContainer {
+    padding: 0.5rem;
+  }
+}
+
 .playgroundGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,6 +26,13 @@
 @media (max-width: 968px) {
   .playgroundGrid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .playgroundGrid {
+    gap: 0.75rem;
   }
 }
 
@@ -23,6 +42,12 @@
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .configPanel {
+    padding: 1rem;
+  }
 }
 
 .configPanel h3 {
@@ -108,6 +133,12 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+@media (max-width: 480px) {
+  .textEditor {
+    padding: 1rem;
+  }
+}
+
 .textEditor h3 {
   margin-top: 0;
   margin-bottom: 1.5rem;
@@ -118,6 +149,13 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+  .inputGroup {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 }
 
 .textInput {
@@ -139,6 +177,13 @@
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .addButton {
+    width: 100%;
+  }
 }
 
 .addButton:hover {
@@ -211,6 +256,12 @@
   grid-column: 1 / -1;
 }
 
+@media (max-width: 480px) {
+  .previewPanel {
+    padding: 1rem;
+  }
+}
+
 .previewPanel h3 {
   margin-top: 0;
   margin-bottom: 1.5rem;
@@ -232,6 +283,22 @@
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .previewContainer {
+    font-size: 2rem;
+    padding: 1.5rem;
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .previewContainer {
+    font-size: 1.5rem;
+    padding: 1rem;
+    min-height: 100px;
+  }
+}
+
 .previewEmpty {
   text-align: center;
   padding: 3rem;
@@ -244,6 +311,13 @@
   gap: 1rem;
   justify-content: center;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .controls {
+    gap: 0.5rem;
+  }
 }
 
 .controlButton {
@@ -256,6 +330,13 @@
   font-weight: 600;
   font-size: 1rem;
   transition: background 0.2s;
+}
+
+@media (max-width: 480px) {
+  .controlButton {
+    padding: 0.625rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 .controlButton:hover {
@@ -287,11 +368,26 @@
   overflow: auto;
 }
 
+@media (max-width: 480px) {
+  .codeGenerator {
+    padding: 1rem;
+  }
+}
+
 .codeHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .codeHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .codeHeader h3 {
@@ -310,6 +406,12 @@
   transition: background 0.2s;
 }
 
+@media (max-width: 480px) {
+  .copyButton {
+    width: 100%;
+  }
+}
+
 .copyButton:hover {
   background: var(--ifm-color-success-dark);
 }
@@ -317,6 +419,19 @@
 .tabs {
   display: flex;
   gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .tabs {
+    width: 100%;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    text-align: center;
+  }
 }
 
 .tab {
@@ -348,6 +463,12 @@
   margin: 0;
 }
 
+@media (max-width: 480px) {
+  .codeBlock {
+    padding: 1rem;
+  }
+}
+
 .codeBlock code {
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 0.875rem;
@@ -355,18 +476,39 @@
   color: var(--ifm-font-color-base);
 }
 
+@media (max-width: 480px) {
+  .codeBlock code {
+    font-size: 0.75rem;
+  }
+}
+
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
     .previewContainer {
         font-size: 1.5rem;
-        padding: 1rem;
     }
 }
 
 @media (max-width: 480px) {
     .previewContainer {
         font-size: 1.2rem;
-        padding: 0.75rem;
     }
+}
+/* Additional mobile styles */
+@media (max-width: 480px) {
+  .configPanel h3,
+  .textEditor h3,
+  .previewPanel h3,
+  .codeHeader h3 {
+    font-size: 1.1rem;
+  }
+  
+  .select {
+    font-size: 0.875rem;
+  }
+  
+  .textInput {
+    font-size: 0.875rem;
+  }
 }

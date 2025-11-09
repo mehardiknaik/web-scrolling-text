@@ -58,7 +58,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
     <div className={styles.previewPanel}>
       <h3>👁️ Preview</h3>
 
-      <div className={styles.previewContainer}>
+      <div key={texts.length} className={styles.previewContainer}>
         <ScrollingText
           ref={scrollerRef}
           options={{
