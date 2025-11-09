@@ -2,7 +2,7 @@
 
 A lightweight, customizable text animation library for creating smooth scrolling text effects with support for React, Next.js, Angular, and Vanilla JavaScript.
 
-**[🚀 Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)** • **[🎮 Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)** • **[📚 Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/quick-start)**
+**[🚀 Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)** • **[🎮 Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)** • **[📚 Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)**
 
 https://github.com/user-attachments/assets/87e55d25-2435-4ca6-aaad-ef0fb9d378d7
 
@@ -78,8 +78,8 @@ export default function App() {
 ## 📖 Documentation
 
 ### Getting Started
-- [Installation](https://mehardiknaik.github.io/web-scrolling-text/docs/quick-start)
-- [CDN Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/quick-start/cdn)
+- [Installation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)
+- [CDN Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/intro/cdn)
 
 ### Vanilla JavaScript
 - [Basic Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/basic)
