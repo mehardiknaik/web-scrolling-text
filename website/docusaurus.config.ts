@@ -95,6 +95,11 @@ const config: Config = {
           label: "Tutorial",
         },
         {
+          href: "/playground",
+          position: "left",
+          label: "Playground",
+        },
+        {
           href: "https://github.com/mehardiknaik/web-scrolling-text",
           label: "GitHub",
           position: "right",

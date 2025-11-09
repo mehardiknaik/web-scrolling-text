@@ -1,10 +1,8 @@
 # 🎬 Web Scrolling Text
 
-A lightweight, customizable text animation library for creating smooth scrolling text effects.
+A lightweight, customizable text animation library for creating smooth scrolling text effects with support for React, Next.js, Angular, and Vanilla JavaScript.
 
-**[🚀 Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)**
-
-**[🎮 Playground & Sample](https://mehardiknaik.github.io/web-scrolling-text/example)**
+**[🚀 Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)** • **[🎮 Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)** • **[📚 Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/quick-start)**
 
 https://github.com/user-attachments/assets/87e55d25-2435-4ca6-aaad-ef0fb9d378d7
 
@@ -22,14 +20,15 @@ npm i web-scrolling-text
 <div id="myText"></div>
 <script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
 <script>
-  const scroller = new ScrollingText(document.getElementById("myText"), [
-    "Hello",
-    "World",
-    "👋",
-  ]);
+  const scroller = new ScrollingText(
+    document.getElementById("myText"),
+    ["Hello", "World", "👋"]
+  );
   scroller.start();
 </script>
 ```
+
+[→ View Vanilla JS Docs](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/basic)
 
 ### React
 
@@ -47,6 +46,8 @@ function App() {
 }
 ```
 
+[→ View React Docs](https://mehardiknaik.github.io/web-scrolling-text/docs/react/basic)
+
 ### Next.js
 
 ```tsx
@@ -63,127 +64,82 @@ export default function App() {
 }
 ```
 
-## ⚙️ Configuration
+## ✨ Features
 
-| Option              | Type       | Default | Description                       |
-| ------------------- | ---------- | ------- | --------------------------------- |
-| `interval`          | `number`   | `3000`  | Time between text changes (ms)    |
-| `animationDuration` | `number`   | `1000`  | Animation duration (ms)           |
-| `enterAnimation`    | `string`   | -       | CSS animation for text entry      |
-| `exitAnimation`     | `string`   | -       | CSS animation for text exit       |
-| `loop`              | `boolean`  | `true`  | Loop animation after reaching end |
-| `onStart`           | `function` | -       | Callback when animation starts    |
-| `onStop`            | `function` | -       | Callback when animation stops     |
-| `onReachEnd`        | `function` | -       | Callback when reaching last text  |
-| `onChange`          | `function` | -       | Callback when text changes        |
+- 🎨 **8+ Pre-built Animations** - Fade, bounce, flip, rotate, scale, and more
+- ⚡ **Lightweight** - Minimal bundle size with zero dependencies
+- 🔧 **Highly Customizable** - Control timing, animations, and behavior
+- 📱 **Responsive** - Works seamlessly on all devices
+- 🎯 **TypeScript Support** - Full type definitions included
+- 🌐 **Framework Agnostic** - Use with React, Next.js, Angular, or vanilla JS
+- 🎭 **SSR Compatible** - Works with server-side rendering
+- ♿ **Accessible** - Built with accessibility in mind
 
-### Example with Options
+## 📖 Documentation
 
-**HTML/Vanilla JavaScript:**
+### Getting Started
+- [Installation](https://mehardiknaik.github.io/web-scrolling-text/docs/quick-start)
+- [CDN Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/quick-start/cdn)
 
-```html
-<div id="advancedText"></div>
-<script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
-<script>
-  const scroller = new ScrollingText(
-    document.getElementById("advancedText"),
-    ["First", "Second", "Third"],
-    {
-      interval: 2500,
-      animationDuration: 800,
-      loop: false,
-      onChange: (index) => console.log(`Current text: ${index}`),
-    }
-  );
-  scroller.start();
-</script>
-```
+### Vanilla JavaScript
+- [Basic Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/basic)
+- [Configuration Options](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/options)
+- [Control Methods](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/controls)
+- [Animations](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/animations)
 
-**React:**
+### React
+- [Basic Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/react/basic)
+- [Configuration Options](https://mehardiknaik.github.io/web-scrolling-text/docs/react/options-customization)
+- [Control Methods](https://mehardiknaik.github.io/web-scrolling-text/docs/react/controls)
+- [Global Configuration](https://mehardiknaik.github.io/web-scrolling-text/docs/react/global-configration)
+- [Animations](https://mehardiknaik.github.io/web-scrolling-text/docs/react/animations)
 
-```tsx
-<ScrollingText
-  options={{
-    interval: 2500,
-    animationDuration: 800,
-    loop: false,
-    onChange: (index) => console.log(`Current text: ${index}`),
-  }}
->
-  <div>First</div>
-  <div>Second</div>
-  <div>Third</div>
-</ScrollingText>
-```
+### Additional Resources
+- [API Reference & Types](https://mehardiknaik.github.io/web-scrolling-text/docs/version)
+- [Interactive Playground](https://mehardiknaik.github.io/web-scrolling-text/example)
 
-### Example with Animation
+## 🎯 Quick Examples
 
-**HTML/Vanilla JavaScript:**
-
-```html
-<div id="pluginText"></div>
-<script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>
-<script src="https://unpkg.com/web-scrolling-text/dist/animation/fade.min.js"></script>
-<script>
-  const scroller = new ScrollingText(
-    document.getElementById("pluginText"),
-    ["Fade In", "Fade Out", "Animation"],
-    {
-      ...ScrollingTextAnimation.fade,
-    }
-  );
-  scroller.start();
-</script>
-```
-
-**React:**
+### With Animation
 
 ```tsx
 import ScrollingText from "web-scrolling-text/react";
-import fadeAnimation from "web-scrolling-text/animation/fade";
+import fade from "web-scrolling-text/animation/fade";
 
-function App() {
-  return (
-    <ScrollingText options={{ ...fadeAnimation }}>
-      <div>Fade In</div>
-      <div>Fade Out</div>
-      <div>Animation</div>
-    </ScrollingText>
-  );
-}
+<ScrollingText options={{ ...fade }}>
+  <div>Beautiful</div>
+  <div>Animations</div>
+</ScrollingText>
 ```
 
-## 🎮 Methods
+### With Control Methods
 
-Control your scrolling text programmatically:
+```tsx
+const scrollerRef = useRef();
 
-| Method                | Description                         |
-| --------------------- | ----------------------------------- |
-| `start()`             | ▶️ Start the animation              |
-| `pause()`             | ⏸️ Pause the animation              |
-| `stop()`              | ⏹️ Stop and reset to first text     |
-| `dispose()`           | 🗑️ Clean up and remove all elements |
+<ScrollingText ref={scrollerRef}>
+  <div>Controlled</div>
+  <div>Animation</div>
+</ScrollingText>
 
-### Using Methods
-
-```javascript
-const scroller = new ScrollingText(container, texts);
-
-scroller.start(); // Start animation
-scroller.pause(); // Pause it
-scroller.stop(); // Stop and reset
-scroller.dispose(); // Clean up
+scrollerRef.current?.pause();  // Pause
+scrollerRef.current?.start();  // Resume
 ```
 
-**React Example:** [View interactive demo →](https://mehardiknaik.github.io/web-scrolling-text/react#control)
+[→ See more examples](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)
 
-## 📋 Version Info
+## 🤝 Contributing
 
-```javascript
-import ScrollingText from "web-scrolling-text";
-console.log(ScrollingText.version); // Get current version
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## 📄 License
 
 MIT © [Hardik Naik](https://github.com/mehardiknaik)
+
+## 🔗 Links
+
+- [GitHub Repository](https://github.com/mehardiknaik/web-scrolling-text)
+- [NPM Package](https://www.npmjs.com/package/web-scrolling-text)
+- [Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)
+- [Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)
+- [Playground](https://mehardiknaik.github.io/web-scrolling-text/example)

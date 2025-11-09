@@ -2,9 +2,11 @@
 sidebar_position: 3
 ---
 
-# Controls
+# Control Methods
 
-## Supported Methods
+Control your ScrollingText component programmatically using refs and the available instance methods.
+
+## Available Methods
 
 | Method      | Description                         |
 | ----------- | ----------------------------------- |
@@ -13,42 +15,55 @@ sidebar_position: 3
 | `stop()`    | ⏹️ Stop and reset to first text     |
 | `dispose()` | 🗑️ Clean up and remove all elements |
 
-## Example
+## Using Refs
+
+Access the instance methods by passing a ref to the ScrollingText component:
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs groupId="language">
-  <TabItem value="typescript" label="Typescript" default>
+  <TabItem value="typescript" label="TypeScript" default>
     ```tsx title="App.tsx"
     import React from "react";
-    // highlight-start
     import ScrollingText from "web-scrolling-text/react";
     import { ScrollingType } from "web-scrolling-text";
-    // highlight-end
 
     function App() {
-      // highlight-next-line
-      const ref = React.useRef<ScrollingType>(null);
+      const scrollerRef = React.useRef<ScrollingType>(null);
 
-      // highlight-start
       const handleStart = () => {
-        ref.current?.start();
+        scrollerRef.current?.start();
       };
-      const handleStop = () => {
-        ref.current?.stop();
-      };
+
       const handlePause = () => {
-        ref.current?.pause();
+        scrollerRef.current?.pause();
       };
-      const handleDestroy = () => {
-        ref.current?.dispose();
+
+      const handleStop = () => {
+        scrollerRef.current?.stop();
       };
-      // highlight-end
+
+      const handleDispose = () => {
+        scrollerRef.current?.dispose();
+      };
+
       return (
-        // highlight-next-line
-        <ScrollingText ref={ref}>
-          {["Hello", "World", "How", "Are", "You"]}
-        </ScrollingText>
+        <div>
+          <ScrollingText ref={scrollerRef}>
+            <div>Hello</div>
+            <div>World</div>
+            <div>Control</div>
+            <div>Demo</div>
+          </ScrollingText>
+
+          <div>
+            <button onClick={handleStart}>▶️ Start</button>
+            <button onClick={handlePause}>⏸️ Pause</button>
+            <button onClick={handleStop}>⏹️ Stop</button>
+            <button onClick={handleDispose}>🗑️ Dispose</button>
+          </div>
+        </div>
       );
     }
 
@@ -56,41 +71,265 @@ import TabItem from '@theme/TabItem';
     ```
   </TabItem>
 
-  <TabItem value="javascript" label="Javascript">
-```jsx title="App.jsx"
-import React from "react";
-// highlight-next-line
+  <TabItem value="javascript" label="JavaScript">
+    ```jsx title="App.jsx"
+    import React from "react";
+    import ScrollingText from "web-scrolling-text/react";
+
+    function App() {
+      const scrollerRef = React.useRef();
+
+      const handleStart = () => {
+        scrollerRef.current.start();
+      };
+
+      const handlePause = () => {
+        scrollerRef.current.pause();
+      };
+
+      const handleStop = () => {
+        scrollerRef.current.stop();
+      };
+
+      const handleDispose = () => {
+        scrollerRef.current.dispose();
+      };
+
+      return (
+        <div>
+          <ScrollingText ref={scrollerRef}>
+            <div>Hello</div>
+            <div>World</div>
+            <div>Control</div>
+            <div>Demo</div>
+          </ScrollingText>
+
+          <div>
+            <button onClick={handleStart}>▶️ Start</button>
+            <button onClick={handlePause}>⏸️ Pause</button>
+            <button onClick={handleStop}>⏹️ Stop</button>
+            <button onClick={handleDispose}>🗑️ Dispose</button>
+          </div>
+        </div>
+      );
+    }
+
+    export default App;
+    ```
+  </TabItem>
+</Tabs>
+
+## Method Details
+
+### start()
+
+Starts the scrolling animation. If already running, has no effect.
+
+```tsx
+scrollerRef.current?.start();
+```
+
+:::tip
+The component starts automatically when mounted. You only need to call `start()` after using `pause()` or `stop()`.
+:::
+
+### pause()
+
+Pauses the animation at the current text. Call `start()` to resume.
+
+```tsx
+scrollerRef.current?.pause();
+```
+
+### stop()
+
+Stops the animation and resets to the first text.
+
+```tsx
+scrollerRef.current?.stop();
+```
+
+### dispose()
+
+Completely cleans up the instance and removes all DOM elements.
+
+```tsx
+scrollerRef.current?.dispose();
+```
+
+:::warning
+After calling `dispose()`, the component cannot be reused. The component will need to be remounted.
+:::
+
+## Practical Examples
+
+### Auto-start with Delay
+
+```tsx
+import React, { useEffect, useRef } from "react";
 import ScrollingText from "web-scrolling-text/react";
+import { ScrollingType } from "web-scrolling-text";
 
 function App() {
-  // highlight-next-line
-  const ref = React.useRef();
+  const scrollerRef = useRef<ScrollingType>(null);
 
-// highlight-start
-  const handleStart = () => {
-    ref.current.start();
-  };
-  const handleStop = () => {
-    ref.current.stop();
-  };
-  const handlePause = () => {
-    ref.current.pause();
-  };
-  const handleDestroy = () => {
-    ref.current.dispose();
-  };
-  // highlight-end
+  useEffect(() => {
+    // Start after 2 seconds
+    const timer = setTimeout(() => {
+      scrollerRef.current?.start();
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    // highlight-next-line
-    <ScrollingText ref={ref}>
-      {["Hello", "World", "How", "Are", "You"]}
+    <ScrollingText ref={scrollerRef}>
+      <div>Delayed</div>
+      <div>Start</div>
     </ScrollingText>
   );
 }
-
-export default App;
 ```
-  </TabItem>
-</Tabs>
+
+### Pause on Hover
+
+```tsx
+import React, { useRef } from "react";
+import ScrollingText from "web-scrolling-text/react";
+import { ScrollingType } from "web-scrolling-text";
+
+function App() {
+  const scrollerRef = useRef<ScrollingType>(null);
+
+  return (
+    <div
+      onMouseEnter={() => scrollerRef.current?.pause()}
+      onMouseLeave={() => scrollerRef.current?.start()}
+    >
+      <ScrollingText ref={scrollerRef}>
+        <div>Hover</div>
+        <div>to</div>
+        <div>Pause</div>
+      </ScrollingText>
+    </div>
+  );
+}
+```
+
+### Conditional Control
+
+```tsx
+import React, { useRef, useState } from "react";
+import ScrollingText from "web-scrolling-text/react";
+import { ScrollingType } from "web-scrolling-text";
+
+function App() {
+  const scrollerRef = useRef<ScrollingType>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      scrollerRef.current?.pause();
+    } else {
+      scrollerRef.current?.start();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  return (
+    <div>
+      <ScrollingText ref={scrollerRef}>
+        <div>Toggle</div>
+        <div>Play</div>
+        <div>Pause</div>
+      </ScrollingText>
+
+      <button onClick={togglePlay}>
+        {isPlaying ? '⏸️ Pause' : '▶️ Play'}
+      </button>
+    </div>
+  );
+}
+```
+
+### Cleanup on Unmount
+
+```tsx
+import React, { useRef, useEffect } from "react";
+import ScrollingText from "web-scrolling-text/react";
+import { ScrollingType } from "web-scrolling-text";
+
+function App() {
+  const scrollerRef = useRef<ScrollingType>(null);
+
+  useEffect(() => {
+    return () => {
+      // Cleanup when component unmounts
+      scrollerRef.current?.dispose();
+    };
+  }, []);
+
+  return (
+    <ScrollingText ref={scrollerRef}>
+      <div>Auto</div>
+      <div>Cleanup</div>
+    </ScrollingText>
+  );
+}
+```
+
+### Multiple Instances
+
+```tsx
+import React, { useRef } from "react";
+import ScrollingText from "web-scrolling-text/react";
+import { ScrollingType } from "web-scrolling-text";
+
+function App() {
+  const ref1 = useRef<ScrollingType>(null);
+  const ref2 = useRef<ScrollingType>(null);
+
+  const startAll = () => {
+    ref1.current?.start();
+    ref2.current?.start();
+  };
+
+  const stopAll = () => {
+    ref1.current?.stop();
+    ref2.current?.stop();
+  };
+
+  return (
+    <div>
+      <ScrollingText ref={ref1}>
+        <div>First</div>
+        <div>Instance</div>
+      </ScrollingText>
+
+      <ScrollingText ref={ref2}>
+        <div>Second</div>
+        <div>Instance</div>
+      </ScrollingText>
+
+      <button onClick={startAll}>Start All</button>
+      <button onClick={stopAll}>Stop All</button>
+    </div>
+  );
+}
+```
+
+## Type Reference
+
+When using TypeScript, import the `ScrollingType` for proper typing:
+
+```tsx
+import { ScrollingType } from "web-scrolling-text";
+
+const ref = React.useRef<ScrollingType>(null);
+```
+
+:::tip Interactive Demo
+Try the [React Controls demo](https://mehardiknaik.github.io/web-scrolling-text/react#control) to see these methods in action!
+:::
 
 
