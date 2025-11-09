@@ -164,29 +164,6 @@ function App() {
 export default App;
 ```
 
-## Global Callbacks
-
-Set global event callbacks:
-
-```tsx title="index.tsx"
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import { ScrollingTextProvider } from "web-scrolling-text/react";
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <ScrollingTextProvider
-    options={{
-      interval: 3000,
-      onStart: () => console.log('Global: Animation started'),
-      onChange: (index) => console.log('Global: Index changed to', index),
-      onStop: () => console.log('Global: Animation stopped'),
-    }}
-  >
-    <App />
-  </ScrollingTextProvider>
-);
-```
-
 ## Next.js App Router
 
 For Next.js with the App Router, create a client component wrapper:
@@ -273,13 +250,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       animationDuration: 800,
       
       // Behavior
-      loop: true,
-      
-      // Callbacks
-      onStart: () => console.log('Started'),
-      onChange: (index) => console.log('Changed:', index),
-      onStop: () => console.log('Stopped'),
-      onReachEnd: () => console.log('Reached end'),
+      loop: true
     }}
   >
     <App />
