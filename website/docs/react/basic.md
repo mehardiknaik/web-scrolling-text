@@ -61,6 +61,25 @@ The first element in your children array is rendered on the server side. In the 
 
 ## Using an Array
 
+You can pass an array:
+
+```tsx title="App.tsx"
+import React from "react";
+import ScrollingText from "web-scrolling-text/react";
+
+function App() {
+  const texts = ['Hello', 'World', 'How', 'Are', 'You'];
+  
+  return (
+    <ScrollingText>
+      {texts}
+    </ScrollingText>
+  );
+}
+
+export default App;
+
+```
 You can also pass an array of elements:
 
 ```tsx title="App.tsx"
