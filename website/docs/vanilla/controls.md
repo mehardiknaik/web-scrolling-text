@@ -120,20 +120,6 @@ After calling `dispose()`, the instance cannot be reused. You'll need to create 
 </html>
 ```
 
-## Method Chaining
-
-Some methods return the instance, allowing for method chaining:
-
-```javascript
-const scroller = new ScrollingText(container, texts)
-  .start();
-
-// Or with plugins
-const scroller = new ScrollingText(container, texts)
-  .addPlugins([myPlugin])
-  .start();
-```
-
 ## Practical Use Cases
 
 ### Auto-start after delay

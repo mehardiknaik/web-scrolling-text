@@ -79,7 +79,7 @@ export default function App() {
 
 ### Getting Started
 - [Installation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)
-- [CDN Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/intro/cdn)
+- [CDN Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/intro#cdn-usage)
 
 ### Vanilla JavaScript
 - [Basic Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/basic)
@@ -94,9 +94,16 @@ export default function App() {
 - [Global Configuration](https://mehardiknaik.github.io/web-scrolling-text/docs/react/global-configration)
 - [Animations](https://mehardiknaik.github.io/web-scrolling-text/docs/react/animations)
 
+### Angular
+- [Basic Usage](https://mehardiknaik.github.io/web-scrolling-text/docs/angular/basic)
+- [Configuration Options](https://mehardiknaik.github.io/web-scrolling-text/docs/angular/options)
+- [Control Methods](https://mehardiknaik.github.io/web-scrolling-text/docs/angular/controls)
+- [Animations](https://mehardiknaik.github.io/web-scrolling-text/docs/angular/animations)
+
 ### Additional Resources
 - [API Reference & Types](https://mehardiknaik.github.io/web-scrolling-text/docs/version)
 - [Interactive Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)
+- [Git Examples](https://mehardiknaik.github.io/web-scrolling-text/examples)
 
 ## 🎯 Quick Examples
 
@@ -134,7 +141,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-MIT © [Hardik Naik](https://github.com/mehardiknaik)
+ICS © [Hardik Naik](https://github.com/mehardiknaik)
 
 ## 🔗 Links
 
@@ -143,3 +150,4 @@ MIT © [Hardik Naik](https://github.com/mehardiknaik)
 - [Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)
 - [Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)
 - [Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)
+- [Examples](https://mehardiknaik.github.io/web-scrolling-text/examples)

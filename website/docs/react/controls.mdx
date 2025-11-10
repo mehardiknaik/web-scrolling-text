@@ -163,34 +163,6 @@ After calling `dispose()`, the component cannot be reused. The component will ne
 
 ## Practical Examples
 
-### Auto-start with Delay
-
-```tsx
-import React, { useEffect, useRef } from "react";
-import ScrollingText from "web-scrolling-text/react";
-import { ScrollingType } from "web-scrolling-text";
-
-function App() {
-  const scrollerRef = useRef<ScrollingType>(null);
-
-  useEffect(() => {
-    // Start after 2 seconds
-    const timer = setTimeout(() => {
-      scrollerRef.current?.start();
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <ScrollingText ref={scrollerRef}>
-      <div>Delayed</div>
-      <div>Start</div>
-    </ScrollingText>
-  );
-}
-```
-
 ### Pause on Hover
 
 ```tsx

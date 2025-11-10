@@ -1,4 +1,7 @@
 import React from 'react';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
 import styles from './Playground.module.css';
 
 interface CodeGeneratorProps {
@@ -18,8 +21,6 @@ const CodeGenerator: React.FC<CodeGeneratorProps> = ({
   enterAnimation,
   exitAnimation,
 }) => {
-  const [activeTab, setActiveTab] = React.useState<'react' | 'vanilla'>('react');
-
   const generateReactCode = () => {
     const needsEnterImport = enterAnimation !== 'none';
     const needsExitImport = exitAnimation !== 'none' && exitAnimation !== enterAnimation;
@@ -95,8 +96,75 @@ ${scripts}<script>
 </script>`;
   };
 
-  const copyToClipboard = () => {
-    const code = activeTab === 'react' ? generateReactCode() : generateVanillaCode();
+  const generateAngularCode = () => {
+    const needsAnimation = enterAnimation !== 'none' || exitAnimation !== 'none';
+    const textsArray = texts.map(t => `'${t}'`).join(', ');
+    
+    let animationImports = '';
+    let animationOptions = '';
+    
+    if (needsAnimation) {
+      const animations = new Set<string>();
+      if (enterAnimation !== 'none') animations.add(enterAnimation);
+      if (exitAnimation !== 'none') animations.add(exitAnimation);
+      
+      animationImports = `\n// Animation will be loaded dynamically in ngAfterViewInit`;
+      
+      if (enterAnimation !== 'none') {
+        animationOptions += `\n        enterAnimation: ${enterAnimation}.enterAnimation,`;
+      }
+      if (exitAnimation !== 'none') {
+        animationOptions += `\n        exitAnimation: ${exitAnimation}.exitAnimation,`;
+      }
+    }
+
+    const hasAnimations = enterAnimation !== 'none' || exitAnimation !== 'none';
+    const asyncModifier = hasAnimations ? 'async ' : '';
+    const promiseReturn = hasAnimations ? ': Promise<void>' : ': void';
+
+    let animationLoading = '';
+    if (hasAnimations) {
+      const animations = new Set<string>();
+      if (enterAnimation !== 'none') animations.add(enterAnimation);
+      if (exitAnimation !== 'none') animations.add(exitAnimation);
+      
+      animationLoading = Array.from(animations)
+        .map(anim => `    const ${anim} = await import('web-scrolling-text/animations/${anim}');`)
+        .join('\n') + '\n    ';
+    }
+
+    return `import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import Scrolling from 'web-scrolling-text';${animationImports}
+
+@Component({
+  selector: 'app-scrolling-text',
+  standalone: true,
+  template: \`<div #scrollContainer></div>\`,
+})
+export class ScrollingTextComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef;
+  private scroller?: Scrolling;
+
+  ${asyncModifier}ngAfterViewInit()${promiseReturn} {
+${animationLoading}this.scroller = new Scrolling(
+      this.scrollContainer.nativeElement,
+      [${textsArray}],
+      {
+        interval: ${interval},
+        animationDuration: ${animationDuration},
+        loop: ${loop},${animationOptions}
+      }
+    );
+    this.scroller.start();
+  }
+
+  ngOnDestroy(): void {
+    this.scroller?.dispose();
+  }
+}`;
+  };
+
+  const copyToClipboard = (code: string) => {
     navigator.clipboard.writeText(code);
   };
 
@@ -104,29 +172,48 @@ ${scripts}<script>
     <div className={styles.codeGenerator}>
       <div className={styles.codeHeader}>
         <h3>💻 Generated Code</h3>
-        <button onClick={copyToClipboard} className={styles.copyButton}>
-          📋 Copy
-        </button>
       </div>
 
-      <div className={styles.tabs}>
-        <button
-          className={`${styles.tab} ${activeTab === 'react' ? styles.tabActive : ''}`}
-          onClick={() => setActiveTab('react')}
-        >
-          React
-        </button>
-        <button
-          className={`${styles.tab} ${activeTab === 'vanilla' ? styles.tabActive : ''}`}
-          onClick={() => setActiveTab('vanilla')}
-        >
-          Vanilla JS
-        </button>
-      </div>
+      <Tabs key={"code-generator"}>
+        <TabItem value="react" label="React" default>
+          <CodeBlock language="tsx" showLineNumbers>
+            {generateReactCode()}
+          </CodeBlock>
+          <button 
+            onClick={() => copyToClipboard(generateReactCode())} 
+            className={styles.copyButton}
+            style={{ marginTop: '10px' }}
+          >
+            📋 Copy React Code
+          </button>
+        </TabItem>
 
-      <pre className={styles.codeBlock}>
-        <code>{activeTab === 'react' ? generateReactCode() : generateVanillaCode()}</code>
-      </pre>
+        <TabItem value="vanilla" label="Vanilla JS">
+          <CodeBlock language="html" showLineNumbers>
+            {generateVanillaCode()}
+          </CodeBlock>
+          <button 
+            onClick={() => copyToClipboard(generateVanillaCode())} 
+            className={styles.copyButton}
+            style={{ marginTop: '10px' }}
+          >
+            📋 Copy Vanilla JS Code
+          </button>
+        </TabItem>
+
+        <TabItem value="angular" label="Angular">
+          <CodeBlock language="typescript" showLineNumbers>
+            {generateAngularCode()}
+          </CodeBlock>
+          <button 
+            onClick={() => copyToClipboard(generateAngularCode())} 
+            className={styles.copyButton}
+            style={{ marginTop: '10px' }}
+          >
+            📋 Copy Angular Code
+          </button>
+        </TabItem>
+      </Tabs>
     </div>
   );
 };
