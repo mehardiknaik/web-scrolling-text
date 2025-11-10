@@ -7,11 +7,11 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import ScrollingText from "web-scrolling-text/react";
 import fade from "web-scrolling-text/animation/fade";
+import AnimatedBackground from "@site/src/components/AnimatedBackground";
 
 import styles from "./index.module.css";
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
   
   const heroWords = [
     "Engaging🎯",
@@ -23,7 +23,8 @@ function HomepageHeader() {
 
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
+      <AnimatedBackground />
+      <div className={clsx("container", styles.container)}>
         <Heading as="h1" className={clsx("hero__title", styles.heroTitle)}>
           Create{" "}
           <ScrollingText
