@@ -8,12 +8,13 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import ScrollingText from "web-scrolling-text/react";
 import fade from "web-scrolling-text/animation/fade";
-import AnimatedBackground from "@site/src/components/AnimatedBackground";
+
+const AnimatedBackground = React.lazy(() => import("@site/src/components/AnimatedBackground"));
 
 import styles from "./index.module.css";
 
 function HomepageHeader() {
-  const [pattern, setPattern] = React.useState<number>(1);
+  const [pattern, setPattern] = React.useState<number>(0);
 
   const heroWords = [
     "Engaging🎯",
@@ -27,7 +28,7 @@ function HomepageHeader() {
   ];
 
   const handlePatternChange = (index: number) => {
-    setPattern((Math.floor(index / 2) % 4) + 1);
+    setPattern(Math.floor(index / 2));
   }
 
   return (
