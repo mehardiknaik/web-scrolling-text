@@ -2,6 +2,7 @@ import animation1 from './animation1';
 import animation2 from './animation2';
 import animation3 from './animation3';
 import animation4 from './animation4';
+import animation5 from './animation5';
 import type { Animation } from './types';
 
 /**
@@ -15,10 +16,11 @@ import type { Animation } from './types';
  * The animation will automatically be included in the rotation!
  */
 export const animations: Animation[] = [
-    animation2,
     animation1,
+    animation2,
     animation3,
     animation4,
+    animation5,
 ];
 
 /**

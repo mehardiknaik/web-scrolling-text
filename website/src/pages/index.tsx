@@ -15,6 +15,7 @@ import styles from "./index.module.css";
 
 function HomepageHeader() {
   const [pattern, setPattern] = React.useState<number>(0);
+  const changeCounter = React.useRef<number>(0);
 
   const heroWords = [
     "Engaging🎯",
@@ -22,13 +23,13 @@ function HomepageHeader() {
     "Smooth🚀",
     "Modern💫",
     "Dynamic🎨",
-    "Lightweight📦",
-    "Responsive📱",
-    "Customizable🎨",
   ];
 
   const handlePatternChange = (index: number) => {
-    setPattern(Math.floor(index / 2));
+    changeCounter.current += 1;
+    if (changeCounter.current % 2 === 0) {
+      setPattern((prev) => (prev + 1) % 10);
+    }
   }
 
   return (
