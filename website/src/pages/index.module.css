@@ -8,7 +8,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  min-height: 70vh;
 }
 
 .container {
@@ -45,11 +45,11 @@
   .heroBanner {
     padding: 4rem 2rem 3rem;
   }
-  
+
   .heroTitle {
     font-size: 2.5rem;
   }
-  
+
   .heroSubtitle {
     font-size: 1.1rem;
   }
@@ -59,7 +59,7 @@
   .heroTitle {
     font-size: 2rem;
   }
-  
+
   .heroSubtitle {
     font-size: 1rem;
   }
@@ -72,15 +72,6 @@
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 2rem;
-}
-
-.secondaryButton {
-  border-color: white !important;
-  color: white !important;
-}
-
-.secondaryButton:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .quickInstall {
@@ -102,7 +93,7 @@
 /* Stats Section */
 .statsSection {
   padding: 3rem 0;
-  background: var(--ifm-background-surface-color);
+  /* background: var(--ifm-background-surface-color); */
 }
 
 .statsGrid {
@@ -240,26 +231,26 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
-  
+
   .showcaseTitle,
   .sectionTitle {
     font-size: 2rem;
   }
-  
+
   .codeExample {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-  
+
   .codeBlock {
     padding: 1.5rem;
   }
-  
+
   .codeBlock code {
     font-size: 0.85rem;
   }
@@ -269,7 +260,7 @@
   .statsGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .statNumber {
     font-size: 2.5rem;
   }

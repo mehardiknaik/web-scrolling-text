@@ -1,3 +1,4 @@
+import React from "react";
 import type { ReactNode } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
@@ -12,18 +13,26 @@ import AnimatedBackground from "@site/src/components/AnimatedBackground";
 import styles from "./index.module.css";
 
 function HomepageHeader() {
-  
+  const [pattern, setPattern] = React.useState<number>(1);
+
   const heroWords = [
     "Engaging🎯",
     "Beautiful✨",
     "Smooth🚀",
     "Modern💫",
     "Dynamic🎨",
+    "Lightweight📦",
+    "Responsive📱",
+    "Customizable🎨",
   ];
 
+  const handlePatternChange = (index: number) => {
+    setPattern((Math.floor(index / 2) % 4) + 1);
+  }
+
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <AnimatedBackground />
+    <header className={clsx("hero", styles.heroBanner)}>
+      <AnimatedBackground pattern={pattern as any} />
       <div className={clsx("container", styles.container)}>
         <Heading as="h1" className={clsx("hero__title", styles.heroTitle)}>
           Create{" "}
@@ -32,6 +41,7 @@ function HomepageHeader() {
               ...fade,
               interval: 2500,
               animationDuration: 800,
+              onChange: handlePatternChange,
             }}
           >
             {heroWords.map((word, index) => (
@@ -53,7 +63,7 @@ function HomepageHeader() {
             Get Started - 5min ⏱️
           </Link>
           <Link
-            className={clsx("button button--outline button--lg", styles.secondaryButton)}
+            className={clsx("button button--outline button--lg")}
             to="/playground"
           >
             Try Playground 🎮
@@ -74,7 +84,7 @@ function FeatureShowcase() {
         <Heading as="h2" className={styles.showcaseTitle}>
           Why Choose Web Scrolling Text?
         </Heading>
-        
+
         <div className={styles.showcaseGrid}>
           <div className={styles.showcaseCard}>
             <div className={styles.showcaseIcon}>⚡</div>
@@ -127,7 +137,7 @@ function CodeExample() {
         <p className={styles.sectionSubtitle}>
           Get started in seconds with just a few lines of code
         </p>
-        
+
         <div className={styles.codeExample}>
           <div className={styles.codeTab}>React Example</div>
           <pre className={styles.codeBlock}>
