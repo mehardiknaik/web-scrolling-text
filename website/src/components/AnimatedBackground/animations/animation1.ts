@@ -8,7 +8,7 @@ const animation1: Animation = {
     name: 'Particle Burst',
 
     calculateTarget: (context: AnimationContext): AnimationTarget => {
-        const { canvasWidth, canvasHeight, centerX, centerY, index, totalParticles } = context;
+        const { canvasWidth, canvasHeight, index, totalParticles } = context;
 
         const ringCount = 8;
         const particlesPerRing = Math.floor(totalParticles / ringCount);
@@ -20,7 +20,7 @@ const animation1: Animation = {
         const ringSpacing = Math.min(canvasWidth, canvasHeight) * 0.06;
         const distance = baseDistance + (ringIndex * ringSpacing);
 
-        // Add spiral offset for more dynamic look
+        // Add spiral offset for more dynamic look - this is the INITIAL angle only
         const spiralOffset = ringIndex * 0.3;
         const angle = angleInRing + spiralOffset;
 
@@ -37,11 +37,16 @@ const animation1: Animation = {
     },
 
     applyMotion: (context: AnimationMotionContext): void => {
-        const { particle, target, centerX, centerY, particleIndex } = context;
+        const { particle, target, centerX, centerY, particleIndex, totalParticles } = context;
         const time = Date.now() * 0.001;
 
+        // Calculate which ring this particle belongs to
+        const ringCount = 8;
+        const particlesPerRing = Math.floor(totalParticles / ringCount);
+        const ringIndex = Math.floor(particleIndex / particlesPerRing);
+
         // Rotating motion - faster rotation for inner rings
-        const rotationSpeed = 0.015 / (1 + target.distance * 0.002);
+        const rotationSpeed = 0.02 / (1 + ringIndex * 0.3);
         particle.angle += rotationSpeed;
 
         // Pulsating distance - creates breathing effect
@@ -54,7 +59,7 @@ const animation1: Animation = {
         const wave1 = Math.sin(time * 0.5 + particle.angle * 3) * 10;
         const wave2 = Math.cos(time * 0.7 + particle.angle * 2) * 8;
 
-        // Calculate dynamic target position
+        // Calculate dynamic target position using the particle's CURRENT angle (which we just rotated)
         const burstX = centerX + Math.cos(particle.angle) * (dynamicDistance + wave1);
         const burstY = centerY + Math.sin(particle.angle) * (dynamicDistance + wave2);
 

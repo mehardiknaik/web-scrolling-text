@@ -33,7 +33,7 @@ function HomepageHeader() {
   }
 
   return (
-    <header className={clsx("hero", styles.heroBanner)}>
+    <header className={clsx(styles.heroBanner)}>
       <AnimatedBackground pattern={pattern as any} />
       <div className={clsx("container", styles.container)}>
         <Heading as="h1" className={clsx("hero__title", styles.heroTitle)}>
@@ -59,13 +59,13 @@ function HomepageHeader() {
         </p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
+            className="button button--primary button--lg"
             to="/docs/intro"
           >
             Get Started - 5min ⏱️
           </Link>
           <Link
-            className={clsx("button button--outline button--lg")}
+            className={clsx("button button--secondary button--lg")}
             to="/playground"
           >
             Try Playground 🎮
