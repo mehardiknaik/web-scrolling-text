@@ -11,6 +11,7 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
   const particlesRef = useRef<Particle[]>([]);
   const animationFrameRef = useRef<number | null>(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
+  const isVisibleRef = useRef(true);
 
   // Normalize pattern to cycle through available animations
   const normalizedPattern = pattern % animations.length;
@@ -81,6 +82,27 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
     };
     window.addEventListener('mousemove', handleMouseMove);
 
+    // Visibility observer to pause animation when out of view
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: '0px',
+      threshold: 0.1, // trigger when at least 10% is visible
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        isVisibleRef.current = entry.isIntersecting;
+
+        // Resume animation if it became visible and was paused
+        if (entry.isIntersecting && !animationFrameRef.current) {
+          animate();
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    observer.observe(canvas);
+
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -143,6 +165,13 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
         particle.size += (target.size - particle.size) * 0.015;
         particle.opacity += (target.opacity - particle.opacity) * 0.01;
 
+        // Smoothly transition angle, accounting for circular wrapping
+        let angleDiff = target.angle - particle.angle;
+        // Normalize angle difference to [-π, π] for shortest path
+        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+        particle.angle += angleDiff * 0.008;
+
         // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
@@ -179,7 +208,12 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
         }
       });
 
-      animationFrameRef.current = requestAnimationFrame(animate);
+      // Only continue animation if canvas is visible
+      if (isVisibleRef.current) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+      } else {
+        animationFrameRef.current = null;
+      }
     };
 
     animate();
@@ -188,6 +222,7 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
+      observer.disconnect();
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }

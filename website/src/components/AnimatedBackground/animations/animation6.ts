@@ -26,8 +26,8 @@ const animation6: Animation = {
         const orbitRadius = minOrbit + safeRingIndex * orbitStep;
 
         // Ring size (radius of the circle of dots)
-        // Make them slightly larger so dots have space
-        const ringRadius = 40 + safeRingIndex * 5;
+        // Make them much larger so dots have significant space between them
+        const ringRadius = 80 + safeRingIndex * 15;
 
         // Particle position on the ring
         const particleInRingIndex = index % particlesPerRing;
@@ -69,7 +69,7 @@ const animation6: Animation = {
         const ringCenterY = centerY + Math.sin(currentOrbitAngle) * orbitRadius;
 
         // 2. Calculate particle position on the ring
-        const ringRadius = 40 + safeRingIndex * 5;
+        const ringRadius = 80 + safeRingIndex * 15;
 
         // Ring rotation
         const ringRotationSpeed = 0.5;
