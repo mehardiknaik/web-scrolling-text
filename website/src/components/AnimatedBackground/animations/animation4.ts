@@ -2,7 +2,7 @@ import type { Animation, AnimationContext, AnimationTarget, AnimationMotionConte
 
 /**
  * Animation 4: Spiral Galaxy
- * Spiral arms with flowing wave motion
+ * Multiple parallel spiral arms with well-separated dots
  */
 const animation4: Animation = {
     name: 'Spiral Galaxy',
@@ -10,33 +10,67 @@ const animation4: Animation = {
     calculateTarget: (context: AnimationContext): AnimationTarget => {
         const { canvasWidth, canvasHeight, index, totalParticles } = context;
 
-        const baseAngle = (index / totalParticles) * Math.PI * 2;
-        const spiralArm = index % 3;
-        const armAngle = baseAngle + (spiralArm * Math.PI * 2 / 3);
-        const distance = Math.pow((index % (totalParticles / 3)) / (totalParticles / 3), 0.5) * Math.min(canvasWidth, canvasHeight) * 0.45;
-        const spiralTightness = 0.003;
-        const angle = armAngle + distance * spiralTightness;
-        const hue = 220 + (index % 60);
-        const size = 1 + ((index % 30) / 10);
-        const opacity = 0.2 + ((index % 40) / 100);
+        // Use ALL particles - distribute across MORE arms for better spreading
+        const numArms = 8; // More arms = better distribution
+        const particlesPerArm = Math.floor(totalParticles / numArms);
+        const armIndex = Math.floor(index / particlesPerArm);
+        const safeArmIndex = Math.min(armIndex, numArms - 1);
+        const positionInArm = index % particlesPerArm;
+        const normalizedPosition = positionInArm / particlesPerArm;
 
-        return { angle, distance, hue, size, opacity };
+        // Base angle for this arm (evenly distribute arms around the circle)
+        const armBaseAngle = (safeArmIndex * Math.PI * 2) / numArms;
+
+        // Distance from center - grows as we move along the arm
+        const minDistance = Math.min(canvasWidth, canvasHeight) * 0.08;
+        const maxDistance = Math.min(canvasWidth, canvasHeight) * 0.45;
+        const distance = minDistance + Math.pow(normalizedPosition, 0.9) * (maxDistance - minDistance);
+
+        // Spiral angle - combines base arm angle with spiral effect
+        const spiralTightness = 0.001; // Very loose spiral
+        const angle = armBaseAngle + (distance * spiralTightness);
+
+        // Add radial offset to spread dots perpendicular to the spiral
+        // This prevents cluttering by spreading dots outward from the spiral line
+        const radialOffset = ((positionInArm % 5) - 2) * 8; // Spread dots ±16 pixels from spiral line
+        const offsetDistance = distance + radialOffset;
+
+        // Color gradient - different base color per arm
+        const baseHue = 180 + (safeArmIndex * 25);
+        const hue = (baseHue + (normalizedPosition * 60)) % 360;
+
+        // Size variation
+        const size = 1.5 + ((positionInArm % 10) / 10) * 1.5;
+
+        // Opacity variation
+        const opacity = 0.3 + (normalizedPosition * 0.4) + ((positionInArm % 8) / 20);
+
+        return { angle, distance: offsetDistance, hue, size, opacity };
     },
 
     applyMotion: (context: AnimationMotionContext): void => {
-        const { particle, targetX, targetY } = context;
+        const { particle, targetX, targetY, particleIndex, totalParticles } = context;
+        const time = Date.now() * 0.001;
 
-        // Spiral Galaxy - flowing wave motion
-        const waveSpeed = 0.001;
-        const waveTime = Date.now() * waveSpeed;
-        const waveAmplitude = 15;
-        const waveFrequency = 0.02;
-        const waveX = Math.sin(waveTime + targetY * waveFrequency) * waveAmplitude;
-        const waveY = Math.cos(waveTime + targetX * waveFrequency) * waveAmplitude;
-        const flowX = targetX + waveX;
-        const flowY = targetY + waveY;
-        particle.vx += (flowX - particle.x) * 0.004;
-        particle.vy += (flowY - particle.y) * 0.004;
+        // Calculate position in arm for wave effects
+        const numArms = 4;
+        const particlesPerArm = Math.floor(totalParticles / numArms);
+        const positionInArm = Math.floor(particleIndex / numArms);
+        const normalizedPosition = positionInArm / particlesPerArm;
+
+        // Flowing wave motion along the spiral
+        const waveSpeed = 0.8;
+        const waveAmplitude = 12;
+        const waveFrequency = 3;
+        const wave = Math.sin(time * waveSpeed + normalizedPosition * Math.PI * waveFrequency) * waveAmplitude;
+
+        const flowX = targetX + Math.cos(particle.angle + Math.PI / 2) * wave;
+        const flowY = targetY + Math.sin(particle.angle + Math.PI / 2) * wave;
+
+        // Gentle pull towards target with wave offset
+        const pullStrength = 0.005;
+        particle.vx += (flowX - particle.x) * pullStrength;
+        particle.vy += (flowY - particle.y) * pullStrength;
     },
 };
 

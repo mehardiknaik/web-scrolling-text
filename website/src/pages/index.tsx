@@ -28,7 +28,7 @@ function HomepageHeader() {
   const handlePatternChange = (index: number) => {
     changeCounter.current += 1;
     if (changeCounter.current % 2 === 0) {
-      setPattern((prev) => (prev + 1) % 10);
+      setPattern((prev) => (prev + 1) % 100);
     }
   }
 

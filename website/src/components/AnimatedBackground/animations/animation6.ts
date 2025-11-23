@@ -78,10 +78,22 @@ const animation6: Animation = {
         const targetX = ringCenterX + Math.cos(currentAngleOnRing) * ringRadius;
         const targetY = ringCenterY + Math.sin(currentAngleOnRing) * ringRadius;
 
-        // Smooth movement
-        const pullStrength = 0.08;
-        particle.vx += (targetX - particle.x) * pullStrength;
-        particle.vy += (targetY - particle.y) * pullStrength;
+        // Smooth movement with adaptive pull strength
+        // Use weaker pull when far from target for smoother transitions
+        const dx = targetX - particle.x;
+        const dy = targetY - particle.y;
+        const distanceToTarget = Math.sqrt(dx * dx + dy * dy);
+
+        // Adaptive pull: weaker when far (0.02), stronger when close (0.05)
+        // This makes transitions from other animations much smoother
+        const basePullStrength = 0.02;
+        const maxPullStrength = 0.05;
+        const adaptivePull = distanceToTarget > 200
+            ? basePullStrength
+            : basePullStrength + (maxPullStrength - basePullStrength) * (1 - distanceToTarget / 200);
+
+        particle.vx += dx * adaptivePull;
+        particle.vy += dy * adaptivePull;
     },
 };
 
