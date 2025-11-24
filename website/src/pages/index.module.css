@@ -128,51 +128,155 @@
 
 /* Showcase Section */
 .showcase {
-  padding: 4rem 0;
-  background: var(--ifm-background-color);
+  padding: 5rem 0;
+  background: var(--ifm-background-surface-color);
+  position: relative;
 }
 
 .showcaseTitle {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-size: 2.75rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.showcaseSubtitle {
+  text-align: center;
+  font-size: 1.15rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 3.5rem;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .showcaseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .showcaseCard {
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   background: var(--ifm-card-background-color);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 20px;
+  border: 2px solid var(--ifm-color-emphasis-100);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.showcaseCard::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(var(--ifm-color-primary-rgb), 0.05), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .showcaseCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+.showcaseCard:hover::after {
+  opacity: 1;
+}
+
+.showcaseIconWrapper {
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
 }
 
 .showcaseIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 4rem;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
-.showcaseCard h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--ifm-color-primary);
+.showcaseCard:hover .showcaseIcon {
+  transform: scale(1.2) rotate(10deg);
 }
 
-.showcaseCard p {
+.showcaseCardTitle {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 600;
+}
+
+.showcaseCardDescription {
   color: var(--ifm-color-emphasis-700);
-  line-height: 1.6;
+  line-height: 1.75;
   margin: 0;
+  font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 996px) {
+  .showcase {
+    padding: 4rem 0;
+  }
+
+  .showcaseTitle {
+    font-size: 2.25rem;
+  }
+
+  .showcaseSubtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .showcaseGrid {
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .showcaseCard {
+    padding: 2rem 1.75rem;
+  }
+
+  .showcaseIcon {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .showcase {
+    padding: 3rem 0;
+  }
+
+  .showcaseTitle {
+    font-size: 2rem;
+  }
+
+  .showcaseGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .showcaseCard {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .showcaseIcon {
+    font-size: 3rem;
+  }
+
+  .showcaseCardTitle {
+    font-size: 1.4rem;
+  }
 }
 
 /* Platforms Section */
@@ -182,6 +286,64 @@
   overflow-x: clip;
   max-width: 100vw;
   box-sizing: border-box;
+  position: relative;
+  transition: background 0.6s ease;
+}
+
+/* Gradient overlays for each platform - very subtle */
+.platformsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* React - Cyan/Blue gradient */
+.platformsSection[data-active-platform="0"]::before {
+  background: radial-gradient(ellipse at center, rgba(97, 218, 251, 0.15), transparent 60%);
+  opacity: 1;
+  animation: pulseGradient 4s ease-in-out infinite;
+}
+
+/* Vanilla JS - Yellow gradient */
+.platformsSection[data-active-platform="1"]::before {
+  background: radial-gradient(ellipse at center, rgba(247, 223, 30, 0.15), transparent 60%);
+  opacity: 1;
+  animation: pulseGradient 4s ease-in-out infinite;
+}
+
+/* Angular - Red gradient */
+.platformsSection[data-active-platform="2"]::before {
+  background: radial-gradient(ellipse at center, rgba(221, 0, 49, 0.15), transparent 60%);
+  opacity: 1;
+  animation: pulseGradient 4s ease-in-out infinite;
+}
+
+/* Pulsing animation for gradient */
+@keyframes pulseGradient {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+}
+
+/* Ensure content stays above gradient */
+.platformsSection>* {
+  position: relative;
+  z-index: 1;
 }
 
 .sectionTitle {

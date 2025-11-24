@@ -1,11 +1,144 @@
-.features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
-  width: 100%;
+.useCases {
+  padding: 5rem 0;
+  background: var(--ifm-background-color);
 }
 
-.featureSvg {
-  height: 200px;
-  width: 200px;
+.useCasesTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-emphasis-900);
+}
+
+.useCasesSubtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.useCaseCol {
+  margin-bottom: 2rem;
+}
+
+.useCaseCard {
+  height: 100%;
+  padding: 0;
+  background: var(--ifm-card-background-color);
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.useCaseCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+.useCaseCategory {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
+  color: white;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.useCaseTitle {
+  font-size: 1.4rem;
+  margin: 1.5rem 1.5rem 1rem;
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 600;
+}
+
+.useCaseDescription {
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.7;
+  margin: 0 1.5rem 1.5rem;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.useCaseExample {
+  background: var(--ifm-color-emphasis-100);
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  margin-top: auto;
+}
+
+.exampleLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.exampleText {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 996px) {
+  .useCases {
+    padding: 4rem 0;
+  }
+
+  .useCasesTitle {
+    font-size: 2rem;
+  }
+
+  .useCasesSubtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .useCaseCard {
+    padding: 0;
+  }
+
+  .useCaseTitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .useCases {
+    padding: 3rem 0;
+  }
+
+  .useCasesTitle {
+    font-size: 1.75rem;
+  }
+
+  .useCaseTitle {
+    font-size: 1.25rem;
+    margin: 1.25rem 1.25rem 0.75rem;
+  }
+
+  .useCaseDescription {
+    margin: 0 1.25rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .useCaseExample {
+    padding: 0.875rem 1.25rem;
+  }
+
+  .exampleText {
+    font-size: 0.85rem;
+  }
 }

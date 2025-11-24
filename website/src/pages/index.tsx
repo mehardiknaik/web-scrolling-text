@@ -80,55 +80,70 @@ function HomepageHeader() {
 }
 
 function FeatureShowcase() {
+  const features = [
+    {
+      icon: "⚡",
+      title: "Lightning Fast",
+      description: "Optimized for performance with smooth 60fps animations. Only ~3KB gzipped - smaller than a single image.",
+      color: "primary"
+    },
+    {
+      icon: "🎨",
+      title: "8+ Animations",
+      description: "Fade, bounce, flip, rotate, scale, hinge, and more. Mix and match enter/exit animations for endless possibilities.",
+      color: "success"
+    },
+    {
+      icon: "🔧",
+      title: "Highly Customizable",
+      description: "Fine-tune timing, duration, loops, and callbacks. Or create your own custom CSS animations.",
+      color: "info"
+    },
+    {
+      icon: "📱",
+      title: "Responsive & Accessible",
+      description: "Works flawlessly on all devices and screen sizes. Built with accessibility best practices in mind.",
+      color: "warning"
+    },
+    {
+      icon: "🔷",
+      title: "TypeScript First",
+      description: "Full TypeScript support with complete type definitions. Enjoy autocomplete and type safety everywhere.",
+      color: "danger"
+    },
+    {
+      icon: "🌐",
+      title: "Framework Agnostic",
+      description: "Use with React, Next.js, Angular, Vue, or vanilla JavaScript. One API, unlimited possibilities.",
+      color: "secondary"
+    },
+  ];
+
   return (
     <section className={styles.showcase}>
       <div className="container">
         <Heading as="h2" className={styles.showcaseTitle}>
           Why Choose Web Scrolling Text?
         </Heading>
+        <p className={styles.showcaseSubtitle}>
+          Everything you need to create stunning text animations
+        </p>
 
         <div className={styles.showcaseGrid}>
-          <div className={styles.showcaseCard}>
-            <div className={styles.showcaseIcon}>⚡</div>
-            <h3>Lightning Fast</h3>
-            <p>Optimized performance with minimal bundle size. Only ~3KB gzipped for core functionality.</p>
-          </div>
-
-          <div className={styles.showcaseCard}>
-            <div className={styles.showcaseIcon}>🎨</div>
-            <h3>8 Pre-built Animations</h3>
-            <p>Fade, bounce, flip, rotate, scale, hinge, and more. Mix and match enter/exit animations.</p>
-          </div>
-
-          <div className={styles.showcaseCard}>
-            <div className={styles.showcaseIcon}>🔧</div>
-            <h3>Fully Customizable</h3>
-            <p>Control timing, duration, loops, and callbacks. Use custom CSS animations if needed.</p>
-          </div>
-
-          <div className={styles.showcaseCard}>
-            <div className={styles.showcaseIcon}>📱</div>
-            <h3>Responsive & Accessible</h3>
-            <p>Works perfectly on all devices and screen sizes. Built with accessibility in mind.</p>
-          </div>
-
-          <div className={styles.showcaseCard}>
-            <div className={styles.showcaseIcon}>🔷</div>
-            <h3>TypeScript Support</h3>
-            <p>Full TypeScript definitions included. Get autocomplete and type safety out of the box.</p>
-          </div>
-
-          <div className={styles.showcaseCard}>
-            <div className={styles.showcaseIcon}>🌐</div>
-            <h3>Framework Agnostic</h3>
-            <p>Use with React, Next.js, Angular, Vue, or vanilla JavaScript. Your choice.</p>
-          </div>
+          {features.map((feature, idx) => (
+            <div key={idx} className={styles.showcaseCard}>
+              <div className={styles.showcaseIconWrapper}>
+                <div className={styles.showcaseIcon}>{feature.icon}</div>
+              </div>
+              <h3 className={styles.showcaseCardTitle}>{feature.title}</h3>
+              <p className={styles.showcaseCardDescription}>{feature.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-
 function PlatformsSection() {
   const [activePlatform, setActivePlatform] = React.useState<number>(0);
   const platformRefs = React.useRef<(HTMLDivElement | null)[]>([]);
@@ -236,7 +251,7 @@ export class AppComponent {
   }, []);
 
   return (
-    <section className={styles.platformsSection}>
+    <section className={styles.platformsSection} data-active-platform={activePlatform}>
       <div className="container">
         <Heading as="h2" className={styles.sectionTitle}>
           Works With All Platforms
