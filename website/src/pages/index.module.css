@@ -175,8 +175,8 @@
   margin: 0;
 }
 
-/* Code Section */
-.codeSection {
+/* Platforms Section */
+.platformsSection {
   padding: 4rem 0;
   background: var(--ifm-background-surface-color);
 }
@@ -194,34 +194,267 @@
   margin-bottom: 3rem;
 }
 
-.codeExample {
-  max-width: 700px;
+/* Two Column Grid */
+.platformsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1200px;
   margin: 0 auto 3rem;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  align-items: start;
 }
 
-.codeTab {
-  background: var(--ifm-color-emphasis-200);
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  color: var(--ifm-color-emphasis-800);
-  border-bottom: 2px solid var(--ifm-color-primary);
+/* Left Column - Scrollable Platform Cards */
+.platformsLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.codeBlock {
-  background: var(--ifm-code-background);
+.platformCard {
   padding: 2rem;
-  margin: 0;
-  overflow-x: auto;
+  background: var(--ifm-card-background-color);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  min-height: 300px;
 }
 
-.codeBlock code {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+.platformCardActive {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateX(4px);
+}
+
+.platformHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.platformIcon {
+  font-size: 2.5rem;
+}
+
+.platformTitle {
+  font-size: 1.75rem;
+  margin: 0;
+  color: var(--ifm-color-primary);
+}
+
+.platformDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1.5rem;
+}
+
+.platformFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.platformFeatures li {
   font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--ifm-font-color-base);
+  color: var(--ifm-color-emphasis-800);
+  padding-left: 0.5rem;
+}
+
+/* Right Column - Sticky Code Preview */
+.platformsRight {
+  position: sticky;
+  top: 70px
+}
+
+.codePreviewSticky {
+  position: sticky;
+  top: 100px;
+}
+
+/* VS Code Window Chrome */
+.vsCodeWindow {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: #1e1e1e;
+}
+
+/* macOS Title Bar */
+.vsCodeTitleBar {
+  background: #323233;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-bottom: 1px solid #1e1e1e;
+  position: relative;
+}
+
+.trafficLights {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  left: 12px;
+}
+
+.trafficLight {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.vsCodeTitle {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  color: #cccccc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* VS Code Tab Bar */
+.vsCodeTabBar {
+  background: #252526;
+  display: flex;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.vsCodeTab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #1e1e1e;
+  border-right: 1px solid #252526;
+  color: #ffffff;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+}
+
+.vsCodeTab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #007acc;
+}
+
+.vsCodeTabIcon {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  font-weight: 600;
+  color: #4fc3f7;
+}
+
+.vsCodeTabName {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.codeExampleContainer {
+  position: relative;
+  min-height: 450px;
+  background: #1e1e1e;
+  overflow: hidden;
+}
+
+.codeExample {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  pointer-events: none;
+}
+
+.codeExampleActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile Code Block - Hidden on desktop, shown on mobile */
+.mobileCodeBlock {
+  display: none;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.mobileCodeBlock .codeExampleContainer {
+  min-height: auto;
+}
+
+.mobileCodeBlock .codeExample {
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* CodeBlock Wrapper - Styles for Docusaurus CodeBlock component */
+.codeBlockWrapper {
+  background: #1e1e1e !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Force dark theme on wrapper */
+.codeBlockWrapper[data-theme="dark"],
+html[data-theme="light"] .codeBlockWrapper[data-theme="dark"] {
+  background: #1e1e1e !important;
+  color-scheme: dark;
+}
+
+/* Override Docusaurus CodeBlock default styles - Force dark theme */
+.codeBlockWrapper :global(.theme-code-block),
+html[data-theme="light"] .codeBlockWrapper :global(.theme-code-block) {
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+  background: #1e1e1e !important;
+}
+
+.codeBlockWrapper :global(.prism-code),
+html[data-theme="light"] .codeBlockWrapper :global(.prism-code) {
+  background: #1e1e1e !important;
+  margin: 0;
+  padding: 20px 24px;
+  border-radius: 0;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #d4d4d4 !important;
+}
+
+.codeBlockWrapper :global(pre),
+html[data-theme="light"] .codeBlockWrapper :global(pre) {
+  background: #1e1e1e !important;
+  margin: 0;
+  border-radius: 0;
+}
+
+.codeBlockWrapper :global(code),
+html[data-theme="light"] .codeBlockWrapper :global(code) {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+}
+
+S
+
+/* Mobile CodeBlock styling */
+.mobileCodeBlock .codeBlockWrapper :global(.prism-code) {
+  padding: 16px;
+  font-size: 13px;
 }
 
 .ctaButtons {
@@ -229,9 +462,27 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 /* Mobile Responsive */
+@media screen and (max-width: 996px) {
+
+  /* Tablet adjustments */
+  .platformsGrid {
+    gap: 2rem;
+  }
+
+  .platformCard {
+    padding: 1.75rem;
+  }
+
+  .codePreviewSticky {
+    top: 80px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .showcaseGrid {
     grid-template-columns: 1fr;
@@ -248,17 +499,123 @@
     font-size: 2rem;
   }
 
-  .codeExample {
-    margin-left: 1rem;
-    margin-right: 1rem;
+  .sectionSubtitle {
+    font-size: 1rem;
+    padding: 0 1rem;
   }
 
-  .codeBlock {
+  /* Stack platforms grid on mobile */
+  .platformsGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .platformCard {
+    min-height: auto;
     padding: 1.5rem;
   }
 
-  .codeBlock code {
-    font-size: 0.85rem;
+  .platformTitle {
+    font-size: 1.5rem;
+  }
+
+  .platformIcon {
+    font-size: 2rem;
+  }
+
+  .platformDescription {
+    font-size: 0.95rem;
+  }
+
+  .platformFeatures li {
+    font-size: 0.9rem;
+  }
+
+  /* Hide desktop sticky code preview on mobile */
+  .platformsRight {
+    display: none;
+  }
+
+  /* Show mobile code blocks */
+  .mobileCodeBlock {
+    display: block;
+  }
+
+  /* VS Code styling for mobile */
+  .mobileCodeBlock .vsCodeWindow {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    background: #1e1e1e;
+  }
+
+  .mobileCodeBlock .vsCodeTitleBar {
+    background: #323233;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .mobileCodeBlock .trafficLights {
+    display: flex;
+    gap: 6px;
+  }
+
+  .mobileCodeBlock .trafficLight {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .mobileCodeBlock .vsCodeTitle {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    color: #cccccc;
+    margin-left: 40px;
+  }
+
+  .mobileCodeBlock .vsCodeTabBar {
+    background: #252526;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .mobileCodeBlock .vsCodeTab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: #1e1e1e;
+    font-size: 12px;
+  }
+
+  .mobileCodeBlock .vsCodeTabIcon {
+    font-size: 12px;
+  }
+
+  .mobileCodeBlock .codeExampleContainer {
+    min-height: 300px;
+    background: #1e1e1e;
+  }
+
+  .mobileCodeBlock .codeBlock {
+    padding: 16px;
+    background: #1e1e1e;
+  }
+
+  .mobileCodeBlock .codeBlock code {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #d4d4d4;
+  }
+
+  .ctaButtons {
+    padding: 0 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -269,5 +626,72 @@
 
   .statNumber {
     font-size: 2.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 0.95rem;
+  }
+
+  .platformCard {
+    padding: 1.25rem;
+  }
+
+  .platformHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .platformTitle {
+    font-size: 1.35rem;
+  }
+
+  .platformIcon {
+    font-size: 1.75rem;
+  }
+
+  .platformDescription {
+    font-size: 0.9rem;
+  }
+
+  .platformFeatures li {
+    font-size: 0.85rem;
+  }
+
+  .mobileCodeBlock .vsCodeTitleBar {
+    height: 28px;
+    padding: 0 8px;
+  }
+
+  .mobileCodeBlock .trafficLight {
+    width: 8px;
+    height: 8px;
+  }
+
+  .mobileCodeBlock .vsCodeTitle {
+    font-size: 11px;
+  }
+
+  .mobileCodeBlock .vsCodeTab {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .mobileCodeBlock .codeBlockWrapper :global(.prism-code) {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ctaButtons .button {
+    width: 100%;
   }
 }
