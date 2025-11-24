@@ -179,6 +179,9 @@
 .platformsSection {
   padding: 4rem 0;
   background: var(--ifm-background-surface-color);
+  overflow-x: clip;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .sectionTitle {
@@ -202,6 +205,8 @@
   max-width: 1200px;
   margin: 0 auto 3rem;
   align-items: start;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Left Column - Scrollable Platform Cards */
@@ -268,12 +273,14 @@
 /* Right Column - Sticky Code Preview */
 .platformsRight {
   position: sticky;
-  top: 70px
+  top: 80px;
+  align-self: start;
+  height: fit-content;
+  max-height: calc(100vh - 100px);
 }
 
 .codePreviewSticky {
-  position: sticky;
-  top: 100px;
+  width: 100%;
 }
 
 /* VS Code Window Chrome */
@@ -282,6 +289,8 @@
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   background: #1e1e1e;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* macOS Title Bar */
@@ -366,7 +375,10 @@
   position: relative;
   min-height: 450px;
   background: #1e1e1e;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .codeExample {
@@ -389,6 +401,9 @@
   display: none;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .mobileCodeBlock .codeExampleContainer {
@@ -396,63 +411,36 @@
 }
 
 .mobileCodeBlock .codeExample {
-  position: static;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* CodeBlock Wrapper - Styles for Docusaurus CodeBlock component */
-.codeBlockWrapper {
+/* Code Block Styling */
+.codeBlock {
   background: #1e1e1e !important;
-  margin: 0;
-  padding: 0;
-}
-
-/* Force dark theme on wrapper */
-.codeBlockWrapper[data-theme="dark"],
-html[data-theme="light"] .codeBlockWrapper[data-theme="dark"] {
-  background: #1e1e1e !important;
-  color-scheme: dark;
-}
-
-/* Override Docusaurus CodeBlock default styles - Force dark theme */
-.codeBlockWrapper :global(.theme-code-block),
-html[data-theme="light"] .codeBlockWrapper :global(.theme-code-block) {
-  margin: 0;
-  box-shadow: none;
-  border-radius: 0;
-  background: #1e1e1e !important;
-}
-
-.codeBlockWrapper :global(.prism-code),
-html[data-theme="light"] .codeBlockWrapper :global(.prism-code) {
-  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
   margin: 0;
   padding: 20px 24px;
-  border-radius: 0;
   font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.6;
-  color: #d4d4d4 !important;
-}
-
-.codeBlockWrapper :global(pre),
-html[data-theme="light"] .codeBlockWrapper :global(pre) {
-  background: #1e1e1e !important;
-  margin: 0;
+  overflow-x: auto;
+  white-space: pre;
   border-radius: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-.codeBlockWrapper :global(code),
-html[data-theme="light"] .codeBlockWrapper :global(code) {
-  background: #1e1e1e !important;
-  color: #d4d4d4 !important;
+.codeBlock code {
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
 }
 
-S
-
-/* Mobile CodeBlock styling */
-.mobileCodeBlock .codeBlockWrapper :global(.prism-code) {
+/* Mobile Code Block styling */
+.mobileCodeBlock .codeBlock {
   padding: 16px;
   font-size: 13px;
 }
@@ -509,11 +497,15 @@ S
     grid-template-columns: 1fr;
     gap: 2rem;
     padding: 0 1rem;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .platformCard {
     min-height: auto;
     padding: 1.5rem;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .platformTitle {
@@ -548,6 +540,8 @@ S
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     background: #1e1e1e;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .mobileCodeBlock .vsCodeTitleBar {
@@ -599,6 +593,8 @@ S
   .mobileCodeBlock .codeExampleContainer {
     min-height: 300px;
     background: #1e1e1e;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .mobileCodeBlock .codeBlock {
@@ -681,7 +677,7 @@ S
     font-size: 11px;
   }
 
-  .mobileCodeBlock .codeBlockWrapper :global(.prism-code) {
+  .mobileCodeBlock .codeBlock {
     padding: 12px;
     font-size: 12px;
   }

@@ -8,7 +8,6 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import ScrollingText from "web-scrolling-text/react";
 import fade from "web-scrolling-text/animation/fade";
-import CodeBlock from '@theme/CodeBlock';
 
 const AnimatedBackground = React.lazy(() => import("@site/src/components/AnimatedBackground"));
 
@@ -303,17 +302,9 @@ export class AppComponent {
                       {/* Code Editor Area */}
                       <div className={styles.codeExampleContainer}>
                         <div className={styles.codeExample}>
-                          <div className={styles.codeBlockWrapper} data-theme="dark">
-                            <CodeBlock
-                              language={
-                                platform.name === "React" ? "jsx" :
-                                  platform.name === "Angular" ? "typescript" :
-                                    "javascript"
-                              }
-                            >
-                              {platform.code}
-                            </CodeBlock>
-                          </div>
+                          <pre className={styles.codeBlock}>
+                            <code>{platform.code}</code>
+                          </pre>
                         </div>
                       </div>
                     </div>
@@ -366,17 +357,9 @@ export class AppComponent {
                       className={`${styles.codeExample} ${activePlatform === index ? styles.codeExampleActive : ""
                         }`}
                     >
-                      <div className={styles.codeBlockWrapper} data-theme="dark">
-                        <CodeBlock
-                          language={
-                            platform.name === "React" ? "jsx" :
-                              platform.name === "Angular" ? "typescript" :
-                                "javascript"
-                          }
-                        >
-                          {platform.code}
-                        </CodeBlock>
-                      </div>
+                      <pre className={styles.codeBlock}>
+                        <code>{platform.code}</code>
+                      </pre>
                     </div>
                   ))}
                 </div>
