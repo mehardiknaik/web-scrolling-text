@@ -236,8 +236,8 @@ export class AppComponent {
           });
         },
         {
-          threshold: 0.6,
-          rootMargin: "-20% 0px -20% 0px"
+          threshold: window.innerWidth < 768 ? 0.2 : 0.6,
+          rootMargin: window.innerWidth < 768 ? "-10% 0px -10% 0px" : "-20% 0px -20% 0px"
         }
       );
 
