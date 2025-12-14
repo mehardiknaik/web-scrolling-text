@@ -2,7 +2,7 @@ import React from 'react';
 import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
-import styles from './styles.module.css';
+import styles from './HomepageFeatures.module.css';
 
 type UseCaseItem = {
   title: string;

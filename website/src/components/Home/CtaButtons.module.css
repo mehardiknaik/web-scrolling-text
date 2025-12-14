@@ -1,0 +1,16 @@
+.ctaButtons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+    .ctaButtons {
+        padding: 0 1rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+}

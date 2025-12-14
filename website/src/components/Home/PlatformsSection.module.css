@@ -1,0 +1,462 @@
+.platformsSection {
+    padding: 4rem 0;
+    background: var(--ifm-background-surface-color);
+    overflow-x: clip;
+    max-width: 100vw;
+    box-sizing: border-box;
+    position: relative;
+    transition: background 0.6s ease;
+}
+
+.platformsSection::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.platformsSection[data-active-platform="0"]::before {
+    background: radial-gradient(ellipse at center, rgba(97, 218, 251, 0.15), transparent 60%);
+    opacity: 1;
+    animation: pulseGradient 4s ease-in-out infinite;
+}
+
+.platformsSection[data-active-platform="1"]::before {
+    background: radial-gradient(ellipse at center, rgba(247, 223, 30, 0.15), transparent 60%);
+    opacity: 1;
+    animation: pulseGradient 4s ease-in-out infinite;
+}
+
+.platformsSection[data-active-platform="2"]::before {
+    background: radial-gradient(ellipse at center, rgba(221, 0, 49, 0.15), transparent 60%);
+    opacity: 1;
+    animation: pulseGradient 4s ease-in-out infinite;
+}
+
+@keyframes pulseGradient {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+    }
+}
+
+.platformsSection>* {
+    position: relative;
+    z-index: 1;
+}
+
+.sectionTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.sectionSubtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--ifm-color-emphasis-700);
+    margin-bottom: 3rem;
+}
+
+.platformsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.platformsLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.platformCard {
+    padding: 2rem;
+    background: var(--ifm-card-background-color);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    min-height: 300px;
+}
+
+.platformCardActive {
+    border-color: var(--ifm-color-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateX(4px);
+}
+
+.platformHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.platformIcon {
+    font-size: 2.5rem;
+}
+
+.platformTitle {
+    font-size: 1.75rem;
+    margin: 0;
+    color: var(--ifm-color-primary);
+}
+
+.platformDescription {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ifm-color-emphasis-700);
+    margin-bottom: 1.5rem;
+}
+
+.platformFeatures {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.platformFeatures li {
+    font-size: 0.95rem;
+    color: var(--ifm-color-emphasis-800);
+    padding-left: 0.5rem;
+}
+
+.platformsRight {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    height: fit-content;
+    max-height: calc(100vh - 100px);
+}
+
+.codePreviewSticky {
+    width: 100%;
+}
+
+.vsCodeWindow {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background: #1e1e1e;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.vsCodeTitleBar {
+    background: #323233;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    border-bottom: 1px solid #1e1e1e;
+    position: relative;
+}
+
+.trafficLights {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    left: 12px;
+}
+
+.trafficLight {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.vsCodeTitle {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    color: #cccccc;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.vsCodeTabBar {
+    background: #252526;
+    display: flex;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.vsCodeTab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #1e1e1e;
+    border-right: 1px solid #252526;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    position: relative;
+}
+
+.vsCodeTab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #007acc;
+}
+
+.vsCodeTabIcon {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    font-weight: 600;
+    color: #4fc3f7;
+}
+
+.vsCodeTabName {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+.codeExampleContainer {
+    position: relative;
+    min-height: 450px;
+    background: #1e1e1e;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.codeExample {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none;
+}
+
+.codeExampleActive {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mobileCodeBlock {
+    display: none;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mobileCodeBlock .codeExampleContainer {
+    min-height: auto;
+}
+
+.mobileCodeBlock .codeExample {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.codeBlock {
+    background: #1e1e1e !important;
+    color: #d4d4d4 !important;
+    margin: 0;
+    padding: 20px 24px;
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+    border-radius: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.codeBlock code {
+    background: transparent !important;
+    color: inherit !important;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+}
+
+.mobileCodeBlock .codeBlock {
+    padding: 16px;
+    font-size: 13px;
+}
+
+@media screen and (max-width: 996px) {
+    .platformsGrid {
+        gap: 2rem;
+    }
+
+    .platformCard {
+        padding: 1.75rem;
+    }
+
+    .codePreviewSticky {
+        top: 80px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sectionTitle {
+        font-size: 2rem;
+    }
+
+    .sectionSubtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .platformsGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .platformCard {
+        min-height: auto;
+        padding: 1.5rem;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .platformTitle {
+        font-size: 1.5rem;
+    }
+
+    .platformIcon {
+        font-size: 2rem;
+    }
+
+    .platformDescription {
+        font-size: 0.95rem;
+    }
+
+    .platformFeatures li {
+        font-size: 0.9rem;
+    }
+
+    .platformsRight {
+        display: none;
+    }
+
+    .mobileCodeBlock {
+        display: block;
+    }
+
+    .mobileCodeBlock .vsCodeWindow {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        background: #1e1e1e;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .mobileCodeBlock .vsCodeTitleBar {
+        background: #323233;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        border-bottom: 1px solid #1e1e1e;
+    }
+
+    .mobileCodeBlock .trafficLights {
+        display: flex;
+        gap: 6px;
+    }
+
+    .mobileCodeBlock .trafficLight {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    .mobileCodeBlock .vsCodeTitle {
+        flex: 1;
+        text-align: center;
+        font-size: 12px;
+        color: #cccccc;
+        margin-left: 40px;
+    }
+
+    .mobileCodeBlock .vsCodeTabBar {
+        background: #252526;
+        border-bottom: 1px solid #1e1e1e;
+    }
+
+    .mobileCodeBlock .vsCodeTab {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        background: #1e1e1e;
+        font-size: 12px;
+    }
+
+    .mobileCodeBlock .vsCodeTabIcon {
+        font-size: 12px;
+    }
+
+    .mobileCodeBlock .codeExampleContainer {
+        min-height: 300px;
+        background: #1e1e1e;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .mobileCodeBlock .codeBlock {
+        padding: 16px;
+        background: #1e1e1e;
+    }
+
+    .mobileCodeBlock .codeBlock code {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #d4d4d4;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sectionTitle {
+        font-size: 1.75rem;
+    }
+
+    .sectionSubtitle {
+        font-size: 0.95rem;
+    }
+
+    .platformCard {
+        padding: 1.25rem;
+    }
+}
