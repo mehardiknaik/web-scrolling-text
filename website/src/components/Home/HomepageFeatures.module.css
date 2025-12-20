@@ -54,7 +54,7 @@
 
 .cardWrapper {
   width: 400px;
-  height: 500px;
+  height: 100%;
   flex-shrink: 0;
   perspective: 1000px;
   /* We will animate opacity and transform via JS */
