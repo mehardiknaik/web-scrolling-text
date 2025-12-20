@@ -2,7 +2,7 @@ import React from "react";
 import ScrollingText from "web-scrolling-text/react";
 import { ScrollingType } from "web-scrolling-text";
 import style from "./App.module.css";
-import animation from "web-scrolling-text/animation/rubberBand";
+import animation from "web-scrolling-text/animation/swing";
 
 function App() {
   const ref = React.useRef<ScrollingType>(null);

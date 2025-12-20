@@ -15,4 +15,5 @@ export const ANIMATIONS: AnimationDef[] = [
     { name: 'cinematic', label: 'Cinematic', description: 'Cinematic entrance effect' },
     { name: 'glitch', label: 'Glitch', description: 'Glitch effect' },
     { name: 'rubberBand', label: 'Rubber Band', description: 'Rubber band effect' },
+    { name: 'swing', label: 'Swing', description: 'Swing effect' },
 ];
