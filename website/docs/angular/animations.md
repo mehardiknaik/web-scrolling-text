@@ -16,7 +16,6 @@ The library includes these pre-built animation modules:
 - **rotate** - Rotation animation
 - **scaleIn** - Scale up entrance
 - **scaleOut** - Scale down exit
-- **hinge** - Hinge-like rotation (exit only)
 - **zoomInDown** - Zoom in from top
 
 ## Basic Usage
@@ -162,27 +161,6 @@ async ngAfterViewInit(): Promise<void> {
     {
       enterAnimation: scaleOut.enterAnimation,
       exitAnimation: scaleOut.exitAnimation
-    }
-  );
-  this.scroller.start();
-}
-```
-
-### Hinge Animation
-
-The hinge animation only provides an exit animation:
-
-```typescript
-async ngAfterViewInit(): Promise<void> {
-  const hinge = await import('web-scrolling-text/animations/hinge');
-  const fade = await import('web-scrolling-text/animations/fade');
-  
-  this.scroller = new Scrolling(
-    this.scrollContainer.nativeElement,
-    ['Hinge', 'Effect'],
-    {
-      enterAnimation: fade.enterAnimation,  // Use another animation for enter
-      exitAnimation: hinge.exitAnimation     // Hinge only for exit
     }
   );
   this.scroller.start();
@@ -387,8 +365,4 @@ export class AnimationDemoComponent implements AfterViewInit, OnDestroy {
 
 :::tip Performance
 Dynamic imports help reduce the initial bundle size by loading animations only when needed.
-:::
-
-:::info Hinge Animation
-The hinge animation only provides an `exitAnimation`. Combine it with another animation's `enterAnimation` for the complete effect.
 :::

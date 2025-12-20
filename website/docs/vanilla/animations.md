@@ -129,18 +129,6 @@ Include the animation module after the main library:
 </script>
 ```
 
-### Hinge Animation
-
-```html
-<script src="https://unpkg.com/web-scrolling-text/dist/animation/hinge.min.js"></script>
-<script>
-  const scroller = new ScrollingText(container, texts, {
-    ...ScrollingTextAnimation.hinge
-  });
-  scroller.start();
-</script>
-```
-
 ### Zoom In Down Animation
 
 ```html
@@ -227,9 +215,6 @@ Combine animations with custom durations:
 
 <!-- Scale Out -->
 <script src="https://unpkg.com/web-scrolling-text/dist/animation/scaleOut.min.js"></script>
-
-<!-- Hinge -->
-<script src="https://unpkg.com/web-scrolling-text/dist/animation/hinge.min.js"></script>
 
 <!-- Zoom In Down -->
 <script src="https://unpkg.com/web-scrolling-text/dist/animation/zoomInDown.min.js"></script>

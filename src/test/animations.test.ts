@@ -8,7 +8,6 @@ import flip from '../animation/flip';
 import rotate from '../animation/rotate';
 import scaleIn from '../animation/scaleIn';
 import scaleOut from '../animation/scaleOut';
-import hinge from '../animation/hinge';
 import zoomInDown from '../animation/zoomInDown';
 
 describe('Animation Modules', () => {
@@ -90,68 +89,55 @@ describe('Animation Modules', () => {
     });
   });
 
-  describe('Hinge Animation', () => {
-    test('should export animation configuration', () => {
-      expect(hinge).toBeDefined();
-      expect(hinge).toHaveProperty('exitAnimation');
-    });
+});
 
-    test('should have string animation value for exit', () => {
-      expect(typeof hinge.exitAnimation).toBe('string');
-    });
+describe('ZoomInDown Animation', () => {
+  test('should export animation configuration', () => {
+    expect(zoomInDown).toBeDefined();
+    expect(zoomInDown).toHaveProperty('enterAnimation');
+    expect(zoomInDown).toHaveProperty('exitAnimation');
+  });
 
-    test('should only have exit animation (hinge is exit-only)', () => {
-      expect(hinge).not.toHaveProperty('enterAnimation');
+  test('should have string animation values', () => {
+    expect(typeof zoomInDown.enterAnimation).toBe('string');
+    expect(typeof zoomInDown.exitAnimation).toBe('string');
+  });
+});
+
+describe('All Animations', () => {
+  const animations = [fade, bounce, flip, rotate, scaleIn, scaleOut, zoomInDown];
+
+  test('should all be defined objects', () => {
+    animations.forEach(animation => {
+      expect(animation).toBeDefined();
+      expect(typeof animation).toBe('object');
     });
   });
 
-  describe('ZoomInDown Animation', () => {
-    test('should export animation configuration', () => {
-      expect(zoomInDown).toBeDefined();
-      expect(zoomInDown).toHaveProperty('enterAnimation');
-      expect(zoomInDown).toHaveProperty('exitAnimation');
-    });
-
-    test('should have string animation values', () => {
-      expect(typeof zoomInDown.enterAnimation).toBe('string');
-      expect(typeof zoomInDown.exitAnimation).toBe('string');
+  test('should all have exitAnimation', () => {
+    animations.forEach(animation => {
+      expect(animation).toHaveProperty('exitAnimation');
+      expect(typeof animation.exitAnimation).toBe('string');
     });
   });
 
-  describe('All Animations', () => {
-    const animations = [fade, bounce, flip, rotate, scaleIn, scaleOut, hinge, zoomInDown];
+  test('should have exit animation names', () => {
+    const exitAnimations = animations.map(a => a.exitAnimation);
 
-    test('should all be defined objects', () => {
-      animations.forEach(animation => {
-        expect(animation).toBeDefined();
-        expect(typeof animation).toBe('object');
-      });
-    });
-
-    test('should all have exitAnimation', () => {
-      animations.forEach(animation => {
-        expect(animation).toHaveProperty('exitAnimation');
-        expect(typeof animation.exitAnimation).toBe('string');
-      });
-    });
-
-    test('should have exit animation names', () => {
-      const exitAnimations = animations.map(a => a.exitAnimation);
-      
-      exitAnimations.forEach(anim => {
-        expect(typeof anim).toBe('string');
-        expect(anim).toBeTruthy();
-      });
-    });
-
-    test('animations with enterAnimation should have enter animation names', () => {
-      const animationsWithEnter = animations.filter(a => 'enterAnimation' in a);
-      const enterAnimations = animationsWithEnter.map(a => (a as any).enterAnimation);
-      
-      enterAnimations.forEach(anim => {
-        expect(typeof anim).toBe('string');
-        expect(anim).toBeTruthy();
-      });
+    exitAnimations.forEach(anim => {
+      expect(typeof anim).toBe('string');
+      expect(anim).toBeTruthy();
     });
   });
+
+  test('animations with enterAnimation should have enter animation names', () => {
+    const animationsWithEnter = animations.filter(a => 'enterAnimation' in a);
+    const enterAnimations = animationsWithEnter.map(a => (a as any).enterAnimation);
+
+    enterAnimations.forEach(anim => {
+      expect(typeof anim).toBe('string');
+      expect(anim).toBeTruthy();
+    });
+  });
+});
 });

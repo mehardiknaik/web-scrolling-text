@@ -72,7 +72,6 @@ All animations are dynamically imported from the `web-scrolling-text/animation/*
 - `rotate` - Rotation effect
 - `scaleIn` - Scale in animation
 - `scaleOut` - Scale out animation
-- `hinge` - Hinge effect
 - `zoomInDown` - Zoom in from top
 
 ## Responsive Design

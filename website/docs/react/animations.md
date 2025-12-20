@@ -16,7 +16,6 @@ The library includes these pre-built animation modules:
 - **rotate** - Rotation animation
 - **scaleIn** - Scale up entrance
 - **scaleOut** - Scale down exit
-- **hinge** - Hinge-like rotation
 - **zoomInDown** - Zoom in from top
 
 ## Basic Usage
@@ -106,17 +105,6 @@ import scaleOut from "web-scrolling-text/animation/scaleOut";
 <ScrollingText options={scaleOut}>
   <div>Scale</div>
   <div>Out</div>
-</ScrollingText>
-```
-
-### Hinge Animation
-
-```tsx
-import hinge from "web-scrolling-text/animation/hinge";
-
-<ScrollingText options={hinge}>
-  <div>Hinge</div>
-  <div>Effect</div>
 </ScrollingText>
 ```
 
@@ -329,6 +317,5 @@ import flip from "web-scrolling-text/animation/flip";
 import rotate from "web-scrolling-text/animation/rotate";
 import scaleIn from "web-scrolling-text/animation/scaleIn";
 import scaleOut from "web-scrolling-text/animation/scaleOut";
-import hinge from "web-scrolling-text/animation/hinge";
 import zoomInDown from "web-scrolling-text/animation/zoomInDown";
 ```

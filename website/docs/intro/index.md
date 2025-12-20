@@ -181,9 +181,6 @@ Include animation modules alongside the main library:
 <!-- Scale Out -->
 <script src="https://unpkg.com/web-scrolling-text/dist/animation/scaleOut.min.js"></script>
 
-<!-- Hinge -->
-<script src="https://unpkg.com/web-scrolling-text/dist/animation/hinge.min.js"></script>
-
 <!-- Zoom In Down -->
 <script src="https://unpkg.com/web-scrolling-text/dist/animation/zoomInDown.min.js"></script>
 ```

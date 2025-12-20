@@ -185,7 +185,6 @@ import flip from "web-scrolling-text/animation/flip";
 import rotate from "web-scrolling-text/animation/rotate";
 import scaleIn from "web-scrolling-text/animation/scaleIn";
 import scaleOut from "web-scrolling-text/animation/scaleOut";
-import hinge from "web-scrolling-text/animation/hinge";
 import zoomInDown from "web-scrolling-text/animation/zoomInDown";
 
 // Each animation exports an object with enterAnimation and exitAnimation

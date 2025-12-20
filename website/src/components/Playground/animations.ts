@@ -5,7 +5,6 @@ import flip from 'web-scrolling-text/animation/flip';
 import rotate from 'web-scrolling-text/animation/rotate';
 import scaleIn from 'web-scrolling-text/animation/scaleIn';
 import scaleOut from 'web-scrolling-text/animation/scaleOut';
-// import hinge from 'web-scrolling-text/animation/hinge';
 import zoomInDown from 'web-scrolling-text/animation/zoomInDown';
 
 // Animation configuration type
@@ -24,7 +23,6 @@ const animationMap: Record<string, { enterAnimation?: string; exitAnimation?: st
   rotate,
   scaleIn,
   scaleOut,
-  // hinge,
   zoomInDown,
 };
 
@@ -37,7 +35,6 @@ export const animations: AnimationOption[] = [
   { value: 'rotate', label: 'Rotate', ...animationMap.rotate },
   { value: 'scaleIn', label: 'Scale In', ...animationMap.scaleIn },
   { value: 'scaleOut', label: 'Scale Out', ...animationMap.scaleOut },
-  // { value: 'hinge', label: 'Hinge', ...animationMap.hinge },
   { value: 'zoomInDown', label: 'Zoom In Down', ...animationMap.zoomInDown },
 ];
 

@@ -13,7 +13,7 @@ export default function FeatureShowcase() {
         {
             icon: "🎨",
             title: "8+ Animations",
-            description: "Fade, bounce, flip, rotate, scale, hinge, and more. Mix and match enter/exit animations for endless possibilities.",
+            description: "Fade, bounce, flip, rotate, scale, and more. Mix and match enter/exit animations for endless possibilities.",
             color: "success"
         },
         {
