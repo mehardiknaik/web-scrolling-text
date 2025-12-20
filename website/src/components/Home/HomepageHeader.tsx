@@ -3,7 +3,7 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import Heading from "@theme/Heading";
 import ScrollingText from "web-scrolling-text/react";
-import fade from "web-scrolling-text/animation/fade";
+import fade from "web-scrolling-text/animation/cinematic";
 import styles from "./HomepageHeader.module.css";
 
 const AnimatedBackground = React.lazy(() => import("@site/src/components/AnimatedBackground"));
