@@ -71,7 +71,7 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({
           className={styles.select}
         >
           {animations
-            .filter((anim) => anim.enterAnimation)
+            .filter((anim) => anim.hasEnter || anim.value === 'none')
             .map((anim) => (
               <option key={anim.value} value={anim.value}>
                 {anim.label}
@@ -89,7 +89,7 @@ const ConfigPanel: React.FC<ConfigPanelProps> = ({
           className={styles.select}
         >
           {animations
-            .filter((anim) => anim.exitAnimation)
+            .filter((anim) => anim.hasExit || anim.value === 'none')
             .map((anim) => (
               <option key={anim.value} value={anim.value}>
                 {anim.label}

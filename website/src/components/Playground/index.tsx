@@ -20,9 +20,26 @@ const PlaygroundComponent: React.FC = () => {
   const [exitAnimation, setExitAnimation] = React.useState('none');
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
+  const [animationConfig, setAnimationConfig] = React.useState({});
+
   // Get animation config based on selected enter and exit animations
-  const animationConfig = React.useMemo(() => {
-    return getAnimationConfig(enterAnimation, exitAnimation);
+  React.useEffect(() => {
+    let mounted = true;
+
+    const loadConfig = async () => {
+      console.log('Loading animation config...');
+      const config = await getAnimationConfig(enterAnimation, exitAnimation);
+      if (mounted) {
+        console.log('Setting animation config:', config);
+        setAnimationConfig(config);
+      }
+    };
+
+    loadConfig();
+
+    return () => {
+      mounted = false;
+    };
   }, [enterAnimation, exitAnimation]);
 
   return (
@@ -40,12 +57,12 @@ const PlaygroundComponent: React.FC = () => {
           onEnterAnimationChange={setEnterAnimation}
           onExitAnimationChange={setExitAnimation}
         />
-        
+
         <TextEditor
           texts={texts}
           onTextsChange={setTexts}
         />
-        
+
         <PreviewPanel
           texts={texts}
           interval={interval}
@@ -55,7 +72,7 @@ const PlaygroundComponent: React.FC = () => {
           currentIndex={currentIndex}
           onCurrentIndexChange={setCurrentIndex}
         />
-        
+
         <CodeGenerator
           texts={texts}
           interval={interval}

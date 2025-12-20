@@ -1,64 +1,66 @@
-// Import all animations statically
-import fade from 'web-scrolling-text/animation/fade';
-import bounce from 'web-scrolling-text/animation/bounce';
-import flip from 'web-scrolling-text/animation/flip';
-import rotate from 'web-scrolling-text/animation/rotate';
-import scaleIn from 'web-scrolling-text/animation/scaleIn';
-import scaleOut from 'web-scrolling-text/animation/scaleOut';
-import zoomInDown from 'web-scrolling-text/animation/zoomInDown';
-
 // Animation configuration type
 export interface AnimationOption {
   value: string;
   label: string;
-  enterAnimation?: string;
-  exitAnimation?: string;
+  hasEnter?: boolean;
+  hasExit?: boolean;
 }
-
-// Extract individual animation strings from imported configs
-const animationMap: Record<string, { enterAnimation?: string; exitAnimation?: string }> = {
-  fade,
-  bounce,
-  flip,
-  rotate,
-  scaleIn,
-  scaleOut,
-  zoomInDown,
-};
 
 // Available animations for dropdowns
 export const animations: AnimationOption[] = [
   { value: 'none', label: 'None (Default)' },
-  { value: 'fade', label: 'Fade', ...animationMap.fade },
-  { value: 'bounce', label: 'Bounce', ...animationMap.bounce },
-  { value: 'flip', label: 'Flip', ...animationMap.flip },
-  { value: 'rotate', label: 'Rotate', ...animationMap.rotate },
-  { value: 'scaleIn', label: 'Scale In', ...animationMap.scaleIn },
-  { value: 'scaleOut', label: 'Scale Out', ...animationMap.scaleOut },
-  { value: 'zoomInDown', label: 'Zoom In Down', ...animationMap.zoomInDown },
+  { value: 'fade', label: 'Fade', hasEnter: true, hasExit: true },
+  { value: 'bounce', label: 'Bounce', hasEnter: true, hasExit: true },
+  { value: 'flip', label: 'Flip', hasEnter: true, hasExit: true },
+  { value: 'rotate', label: 'Rotate', hasEnter: true, hasExit: true },
+  { value: 'scaleIn', label: 'Scale In', hasEnter: true, hasExit: true },
+  { value: 'scaleOut', label: 'Scale Out', hasEnter: true, hasExit: true },
+  { value: 'zoomInDown', label: 'Zoom In Down', hasEnter: true, hasExit: true },
+  { value: 'cinematic', label: 'Cinematic', hasEnter: true, hasExit: true },
+  { value: 'glitch', label: 'Glitch', hasEnter: true, hasExit: true },
 ];
 
+// Map of animation names to their dynamic import functions
+const animationLoaders: Record<string, () => Promise<any>> = {
+  fade: () => import('web-scrolling-text/animation/fade'),
+  bounce: () => import('web-scrolling-text/animation/bounce'),
+  flip: () => import('web-scrolling-text/animation/flip'),
+  rotate: () => import('web-scrolling-text/animation/rotate'),
+  scaleIn: () => import('web-scrolling-text/animation/scaleIn'),
+  scaleOut: () => import('web-scrolling-text/animation/scaleOut'),
+  zoomInDown: () => import('web-scrolling-text/animation/zoomInDown'),
+  cinematic: () => import('web-scrolling-text/animation/cinematic'),
+  glitch: () => import('web-scrolling-text/animation/glitch'),
+};
 
-// Helper function to get animation strings by name
-export const getAnimationByName = (animationName: string): { enterAnimation?: string; exitAnimation?: string } => {
-  const animation = animations.find(anim => anim.value === animationName);
-  if (!animation || animationName === 'none') {
+// Helper function to load animation dynamically
+const loadAnimation = async (name: string) => {
+  console.log(`Loading animation: ${name}`);
+  if (name === 'none' || !animationLoaders[name]) return {};
+
+  try {
+    // Dynamic import using the loader map
+    const module = await animationLoaders[name]();
+    console.log(`Loaded module for ${name}:`, module);
+    return module.default || module;
+  } catch (error) {
+    console.error(`Failed to load animation: ${name}`, error);
     return {};
   }
-  return {
-    enterAnimation: animation.enterAnimation,
-    exitAnimation: animation.exitAnimation,
-  };
 };
 
 // Helper function to build config from separate enter/exit animations
-export const getAnimationConfig = (enterAnim: string, exitAnim: string) => {
+export const getAnimationConfig = async (enterAnim: string, exitAnim: string) => {
+  console.log(`Getting config for enter: ${enterAnim}, exit: ${exitAnim}`);
+  const [enterConfig, exitConfig] = await Promise.all([
+    loadAnimation(enterAnim),
+    loadAnimation(exitAnim)
+  ]);
 
-  const enterConfig = getAnimationByName(enterAnim);
-  const exitConfig = getAnimationByName(exitAnim);
-
-  return {
+  const config = {
     enterAnimation: enterConfig.enterAnimation,
     exitAnimation: exitConfig.exitAnimation,
   };
+  console.log('Generated config:', config);
+  return config;
 };

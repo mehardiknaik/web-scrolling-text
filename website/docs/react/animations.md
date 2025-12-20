@@ -109,15 +109,37 @@ import scaleOut from "web-scrolling-text/animation/scaleOut";
 ```
 
 ### Zoom In Down Animation
-
-```tsx
-import zoomInDown from "web-scrolling-text/animation/zoomInDown";
-
-<ScrollingText options={zoomInDown}>
-  <div>Zoom</div>
-  <div>In</div>
-</ScrollingText>
-```
+ 
+ ```tsx
+ import zoomInDown from "web-scrolling-text/animation/zoomInDown";
+ 
+ <ScrollingText options={zoomInDown}>
+   <div>Zoom</div>
+   <div>In</div>
+ </ScrollingText>
+ ```
+ 
+ ### Cinematic Animation
+ 
+ ```tsx
+ import cinematic from "web-scrolling-text/animation/cinematic";
+ 
+ <ScrollingText options={cinematic}>
+   <div>Cinematic</div>
+   <div>Effect</div>
+ </ScrollingText>
+ ```
+ 
+ ### Glitch Animation
+ 
+ ```tsx
+ import glitch from "web-scrolling-text/animation/glitch";
+ 
+ <ScrollingText options={glitch}>
+   <div>Glitch</div>
+   <div>Effect</div>
+ </ScrollingText>
+ ```
 
 ## Mixing Enter and Exit Animations
 
