@@ -19,6 +19,7 @@ export const animations: AnimationOption[] = [
   { value: 'cinematic', label: 'Cinematic', hasEnter: true, hasExit: true },
   { value: 'glitch', label: 'Glitch', hasEnter: true, hasExit: true },
   { value: 'swing', label: 'Swing', hasEnter: true, hasExit: true },
+  { value: 'rubberBand', label: 'Rubber Band', hasEnter: true, hasExit: true },
 ];
 
 // Map of animation names to their dynamic import functions
@@ -33,6 +34,7 @@ const animationLoaders: Record<string, () => Promise<any>> = {
   cinematic: () => import('web-scrolling-text/animation/cinematic'),
   glitch: () => import('web-scrolling-text/animation/glitch'),
   swing: () => import('web-scrolling-text/animation/swing'),
+  rubberBand: () => import('web-scrolling-text/animation/rubberBand'),
 };
 
 // Helper function to load animation dynamically

@@ -145,7 +145,7 @@ class ScrollingType {
 - **Package Name:** `web-scrolling-text`
 - **GitHub:** [mehardiknaik/web-scrolling-text](https://github.com/mehardiknaik/web-scrolling-text)
 - **NPM:** [web-scrolling-text](https://www.npmjs.com/package/web-scrolling-text)
-- **License:** ISC
+- **License:** MIT
 - **Author:** Hardik Naik
 
 ## Available Exports

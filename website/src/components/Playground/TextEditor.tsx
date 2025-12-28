@@ -29,7 +29,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ texts, onTextsChange }) => {
   return (
     <div className={styles.textEditor}>
       <h3>📝 Text Items</h3>
-      
+
       <div className={styles.inputGroup}>
         <input
           type="text"
@@ -47,7 +47,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ texts, onTextsChange }) => {
       <div className={styles.textList}>
         {texts.map((text, index) => (
           <div key={index} className={styles.textItem}>
-            <span className={styles.textIndex}>{index + 1}</span>
+            <span className={styles.textIndex}>{index}</span>
             <span className={styles.textContent}>{text}</span>
             <button
               onClick={() => handleRemoveText(index)}

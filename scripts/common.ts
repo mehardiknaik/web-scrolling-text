@@ -32,11 +32,11 @@ export const tsPlugin = typescript({
   exclude: ["*.config.ts"],
 });
 
-export const banner=banner2(
-  (a,b) => {
-    const moduleName=b.dir?.includes("modules")?`-${a.name}`:""
-    return`/**
-* ScrollingText${moduleName} v${pkg.version}
+export const banner = banner2(
+  (a, b) => {
+    const animationName = b.dir?.includes("animation") ? `-${a.name}` : ""
+    return `/**
+* ScrollingText${animationName} v${pkg.version}
 * build on ${new Date().toUTCString()}
 * (c) ${new Date().getFullYear()} ${pkg.author}
 * Released under the ${pkg.license} License.
@@ -44,6 +44,6 @@ export const banner=banner2(
 `},
 )
 
-export const ScrollingTextAnimation="ScrollingTextAnimation"
-export const ScrollingText="ScrollingText"
+export const ScrollingTextAnimation = "ScrollingTextAnimation"
+export const ScrollingText = "ScrollingText"
 export const classNamePrefix = "scrolling-text";
