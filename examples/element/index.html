@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollingText Element Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        scrolling-text {
+            display: block;
+            width: 100%;
+            height: 100px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2563eb;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            margin: 20px 0;
+            padding: 20px;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .status {
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        .success {
+            color: #16a34a;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ScrollingText Custom Element Test</h1>
+
+    <div class="status" id="status">
+        <p id="statusText">Loading...</p>
+    </div>
+
+    <h2>Example 1: Auto-start with fade animation</h2>
+    <scrolling-text id="scroller1" interval="3000" animation-duration="1000" loop="true">
+        <div>Fade in and out</div>
+        <div>Smooth transitions</div>
+        <div>Beautiful animations</div>
+    </scrolling-text>
+
+    <h2>Example 2: Manual control</h2>
+    <scrolling-text id="scroller2" interval="2000" animation-duration="800" loop="true" auto-start="false">
+        <div>Press Start below</div>
+        <div>To begin scrolling</div>
+        <div>These messages</div>
+    </scrolling-text>
+
+    <div class="controls">
+        <button onclick="document.getElementById('scroller2').start()">Start</button>
+        <button onclick="document.getElementById('scroller2').pause()">Pause</button>
+        <button onclick="document.getElementById('scroller2').stop()">Stop</button>
+    </div>
+
+    <h2>Example 3: Rich HTML content</h2>
+    <scrolling-text interval="4000" loop="true">
+        <div>
+            <h3 style="margin: 0;">Welcome! 👋</h3>
+            <p style="margin: 5px 0 0 0; font-size: 16px;">This is rich HTML content</p>
+        </div>
+        <div>
+            <h3 style="margin: 0;">Custom Element ✨</h3>
+            <p style="margin: 5px 0 0 0; font-size: 16px;">Works like a charm</p>
+        </div>
+        <div>
+            <h3 style="margin: 0;">No Errors! 🎉</h3>
+            <p style="margin: 5px 0 0 0; font-size: 16px;">Check the console</p>
+        </div>
+    </scrolling-text>
+
+    <!-- Load the element -->
+    <script src="../../dist/element.min.js"></script>
+
+    <script>
+        // Check for errors
+        window.addEventListener('error', function (e) {
+            document.getElementById('statusText').innerHTML =
+                '<span class="error">❌ Error: ' + e.message + '</span>';
+        });
+
+        // Check if element loaded successfully
+        setTimeout(() => {
+            const scroller1 = document.getElementById('scroller1');
+            if (scroller1 && typeof scroller1.start === 'function') {
+                document.getElementById('statusText').innerHTML =
+                    '<span class="success">✅ ScrollingText element loaded successfully! No errors detected.</span>';
+            } else {
+                document.getElementById('statusText').innerHTML =
+                    '<span class="error">❌ Element not initialized properly</span>';
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>

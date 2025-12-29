@@ -42,6 +42,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
 
   const handleStateChange = (state: "stopped" | "playing" | "paused") => {
     setPlayState(state);
+    onCurrentIndexChange(0);
   };
 
   if (texts.length === 0) {
@@ -78,25 +79,22 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
       <div className={styles.controls}>
         <button
           onClick={handleStart}
-          className={`${styles.controlButton} ${
-            playState === "playing" ? styles.controlButtonActive : ""
-          }`}
+          className={`${styles.controlButton} ${playState === "playing" ? styles.controlButtonActive : ""
+            }`}
         >
           ▶️ Start
         </button>
         <button
           onClick={handlePause}
-          className={`${styles.controlButton} ${
-            playState === "paused" ? styles.controlButtonActive : ""
-          }`}
+          className={`${styles.controlButton} ${playState === "paused" ? styles.controlButtonActive : ""
+            }`}
         >
           ⏸️ Pause
         </button>
         <button
           onClick={handleStop}
-          className={`${styles.controlButton} ${
-            playState === "stopped" ? styles.controlButtonActive : ""
-          }`}
+          className={`${styles.controlButton} ${playState === "stopped" ? styles.controlButtonActive : ""
+            }`}
         >
           ⏹️ Stop
         </button>
