@@ -18,7 +18,6 @@ import { OptionsType, TextType } from "../core/types";
  */
 class ScrollingTextElement extends HTMLElement {
     private _scrollingText: ScrollingText | null = null;
-    private _container: HTMLDivElement;
     private _originalChildren: Element[] = [];
 
     static get observedAttributes() {
@@ -34,18 +33,11 @@ class ScrollingTextElement extends HTMLElement {
 
     constructor() {
         super();
-        this._container = document.createElement("div");
-        this._container.style.width = "100%";
-        this._container.style.height = "100%";
     }
 
     connectedCallback() {
         // Store original children before modifying DOM
         this._originalChildren = Array.from(this.children);
-
-        // Clear the element and add container
-        this.innerHTML = "";
-        this.appendChild(this._container);
 
         this._initialize();
     }
@@ -99,7 +91,7 @@ class ScrollingTextElement extends HTMLElement {
         if (loop !== null) options.loop = loop !== "false";
 
         // Create ScrollingText instance
-        this._scrollingText = new ScrollingText(this._container, texts, options);
+        this._scrollingText = new ScrollingText(this, texts, options);
 
         // Auto-start if specified
         const autoStart = this.getAttribute("auto-start");

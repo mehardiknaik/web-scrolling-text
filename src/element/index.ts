@@ -1,2 +1,3 @@
 
-import "./element";
+export * from "./element";
+export * from "./types";
