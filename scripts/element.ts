@@ -1,16 +1,9 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import external from "rollup-plugin-peer-deps-external";
-//@ts-ignore
-import del from "rollup-plugin-delete";
 import postcss from "rollup-plugin-postcss";
 import { babel } from "@rollup/plugin-babel";
-import replace from "@rollup/plugin-replace";
-import { terser } from "rollup-plugin-terser";
 import { RollupOptions } from "rollup";
-import { aliases, banner, classNamePrefix, ScrollingText, tsPlugin } from "./common";
-
-import pkg from "../package.json" with { type: "json" };
+import { aliases, banner, classNamePrefix, terserPlugin } from "./common";
 import typescript from "@rollup/plugin-typescript";
 
 const elementBuild: RollupOptions = {
@@ -46,9 +39,7 @@ const elementBuild: RollupOptions = {
     babel({
       babelHelpers: "bundled",
     }),
-    terser({
-
-    }),
+    terserPlugin,
     banner
   ],
 };
