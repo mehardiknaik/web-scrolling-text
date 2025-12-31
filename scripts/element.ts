@@ -17,6 +17,7 @@ const elementBuild: RollupOptions = {
       file: "dist/element.min.js",
       format: "iife",
       name: "ScrollingTextElement",
+      footer: "if (typeof ScrollingTextElement !== 'undefined' && ScrollingTextElement.register) { ScrollingTextElement.register(); }",
     },
   ],
   plugins: [

@@ -30,6 +30,28 @@ npm i web-scrolling-text
 
 [→ View Vanilla JS Docs](https://mehardiknaik.github.io/web-scrolling-text/docs/vanilla/basic)
 
+### Web Component
+
+**Via CDN:**
+
+```html
+<script src="https://unpkg.com/web-scrolling-text/dist/element.min.js"></script>
+
+<scrolling-text>
+  <div>Hello</div>
+  <div>World</div>
+</scrolling-text>
+```
+
+**Via NPM (Bundlers):**
+
+```javascript
+import { register } from "web-scrolling-text/element";
+register();
+```
+
+[→ View Web Component Docs](https://mehardiknaik.github.io/web-scrolling-text/docs/custom-element/getting-started)
+
 ### React
 
 ```tsx
@@ -99,6 +121,10 @@ export default function App() {
 - [Configuration Options](https://mehardiknaik.github.io/web-scrolling-text/docs/angular/options)
 - [Control Methods](https://mehardiknaik.github.io/web-scrolling-text/docs/angular/controls)
 - [Animations](https://mehardiknaik.github.io/web-scrolling-text/docs/angular/animations)
+
+### Web Component
+- [Getting Started](https://mehardiknaik.github.io/web-scrolling-text/docs/custom-element/getting-started)
+- [Framework Integration](https://mehardiknaik.github.io/web-scrolling-text/docs/custom-element/frameworks)
 
 ### Additional Resources
 - [API Reference & Types](https://mehardiknaik.github.io/web-scrolling-text/docs/version)

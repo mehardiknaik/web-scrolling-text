@@ -1,6 +1,13 @@
 import ScrollingText from "../core/scrolling";
 import { OptionsType, TextType } from "../core/types";
 
+class DummyHTMLElement { };
+
+const ClassToExtend =
+    (typeof window === 'undefined' || typeof HTMLElement === 'undefined'
+        ? DummyHTMLElement
+        : HTMLElement) as typeof HTMLElement;
+
 /**
  * @description: Web Component for ScrollingText
  * @extends HTMLElement
@@ -16,7 +23,7 @@ import { OptionsType, TextType } from "../core/types";
  *   <div>Third text content</div>
  * </scrolling-text>
  */
-class ScrollingTextElement extends HTMLElement {
+class ScrollingTextElement extends ClassToExtend {
     private _scrollingText: ScrollingText | null = null;
     private _originalChildren: Element[] = [];
 
@@ -129,7 +136,12 @@ class ScrollingTextElement extends HTMLElement {
     }
 }
 
-// Register the custom element
-if (typeof window !== "undefined" && !customElements.get("scrolling-text")) {
-    customElements.define("scrolling-text", ScrollingTextElement);
+const register = () => {
+    if (typeof window === 'undefined') return;
+    if (!customElements.get("scrolling-text")) {
+        customElements.define("scrolling-text", ScrollingTextElement);
+    }
 }
+
+
+export { ScrollingTextElement, register };

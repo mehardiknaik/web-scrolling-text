@@ -46,7 +46,7 @@ function App() {
 import fade from "web-scrolling-text/animation/fade";
 
 const container = document.getElementById('scrolling-text');
-const scrollingText = new ScrollingText(container, {
+const scrollingText = new ScrollingText(container, ['Hello', 'World', 'Welcome', 'to', 'Scrolling Text'], {
   ...fade,
   interval: 3000
 });
@@ -74,10 +74,41 @@ import fade from 'web-scrolling-text/animation/fade';
 })
 export class AppComponent {
   ngAfterViewInit() {
-    const st = new ScrollingText(this.scrollingText, fade);
+    const st = new ScrollingText(this.scrollingText, ['Hello', 'World', 'Welcome', 'to', 'Scrolling Text'], fade);
     st.start();
   }
 }`,
+        },
+        {
+            name: "Web Component",
+            icon: "🧩",
+            title: "Web Component",
+            description: "Use the custom element directly in your HTML. No build step required, just import and use the <scrolling-text> tag.",
+            features: [
+                "Native Custom Element",
+                "Works with any framework",
+                "Declarative HTML API",
+                "Zero config required"
+            ],
+            code: `<!-- If using a bundler (React/Vue/Svelte) -->
+<script>
+  import { register } from "web-scrolling-text/element";
+  register();
+</script>
+
+<!-- OR: Import via CDN -->
+<script src="https://unpkg.com/web-scrolling-text/dist/element.min.js"></script>
+
+<!-- Use the custom element -->
+<scrolling-text 
+  interval="3000" 
+  animation-duration="1000"
+  enter-animation="fade"
+>
+  <div>Native</div>
+  <div>Web</div>
+  <div>Component</div>
+</scrolling-text>`,
         },
     ];
 
@@ -153,6 +184,7 @@ export class AppComponent {
                                                     {platform.name === "React" && "App.jsx"}
                                                     {platform.name === "Vanilla JS" && "index.js"}
                                                     {platform.name === "Angular" && "app.component.ts"}
+                                                    {platform.name === "Web Component" && "index.html"}
                                                 </div>
                                             </div>
 
@@ -163,11 +195,13 @@ export class AppComponent {
                                                         {platform.name === "React" && "⚛️"}
                                                         {platform.name === "Vanilla JS" && "JS"}
                                                         {platform.name === "Angular" && "TS"}
+                                                        {platform.name === "Web Component" && "HTML"}
                                                     </span>
                                                     <span className={styles.vsCodeTabName}>
                                                         {platform.name === "React" && "App.jsx"}
                                                         {platform.name === "Vanilla JS" && "index.js"}
                                                         {platform.name === "Angular" && "app.component.ts"}
+                                                        {platform.name === "Web Component" && "index.html"}
                                                     </span>
                                                 </div>
                                             </div>
@@ -203,6 +237,7 @@ export class AppComponent {
                                         {platforms[activePlatform].name === "React" && "App.jsx"}
                                         {platforms[activePlatform].name === "Vanilla JS" && "index.js"}
                                         {platforms[activePlatform].name === "Angular" && "app.component.ts"}
+                                        {platforms[activePlatform].name === "Web Component" && "index.html"}
                                     </div>
                                 </div>
 
@@ -213,11 +248,13 @@ export class AppComponent {
                                             {platforms[activePlatform].name === "React" && "⚛️"}
                                             {platforms[activePlatform].name === "Vanilla JS" && "JS"}
                                             {platforms[activePlatform].name === "Angular" && "TS"}
+                                            {platforms[activePlatform].name === "Web Component" && "HTML"}
                                         </span>
                                         <span className={styles.vsCodeTabName}>
                                             {platforms[activePlatform].name === "React" && "App.jsx"}
                                             {platforms[activePlatform].name === "Vanilla JS" && "index.js"}
                                             {platforms[activePlatform].name === "Angular" && "app.component.ts"}
+                                            {platforms[activePlatform].name === "Web Component" && "index.html"}
                                         </span>
                                     </div>
                                 </div>

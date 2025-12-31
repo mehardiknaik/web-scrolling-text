@@ -1,8 +1,8 @@
+import { ScrollingTextElement } from "./element";
+
 declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            "scrolling-text": HTMLElement;
-        }
+    interface HTMLElementTagNameMap {
+        'scrolling-text': ScrollingTextElement;
     }
 }
 
