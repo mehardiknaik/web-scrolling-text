@@ -159,16 +159,18 @@ export class AppComponent {
                                     className={`${styles.platformCard} ${activePlatform === index ? styles.platformCardActive : ""
                                         }`}
                                 >
-                                    <div className={styles.platformHeader}>
-                                        <span className={styles.platformIcon}>{platform.icon}</span>
-                                        <h3 className={styles.platformTitle}>{platform.title}</h3>
+                                    <div className={styles.platformCardContent} onClick={() => setActivePlatform(index)}>
+                                        <div className={styles.platformHeader}>
+                                            <span className={styles.platformIcon}>{platform.icon}</span>
+                                            <h3 className={styles.platformTitle}>{platform.title}</h3>
+                                        </div>
+                                        <p className={styles.platformDescription}>{platform.description}</p>
+                                        <ul className={styles.platformFeatures}>
+                                            {platform.features.map((feature, idx) => (
+                                                <li key={idx}>✓ {feature}</li>
+                                            ))}
+                                        </ul>
                                     </div>
-                                    <p className={styles.platformDescription}>{platform.description}</p>
-                                    <ul className={styles.platformFeatures}>
-                                        {platform.features.map((feature, idx) => (
-                                            <li key={idx}>✓ {feature}</li>
-                                        ))}
-                                    </ul>
 
                                     {/* Mobile Code Block - Shows after each platform card */}
                                     <div className={styles.mobileCodeBlock}>

@@ -27,10 +27,8 @@ npm install web-scrolling-text
 Then script import it in your entry file:
 
 ```javascript
-```javascript
 import { register } from 'web-scrolling-text/element';
 register();
-```
 ```
 
 ## Basic Usage
