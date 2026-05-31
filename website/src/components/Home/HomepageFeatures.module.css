@@ -161,6 +161,15 @@
 
   .cardWrapper {
     width: 280px;
-    height: 420px;
+    height: 50vh;
+  }
+
+  .useCaseCard {
+    overflow: auto;
+  }
+
+  .useCaseCategory {
+    position: sticky;
+    top: 0;
   }
 }

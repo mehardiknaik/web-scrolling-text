@@ -137,13 +137,15 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()}, Inc. Web Scrolling Text. ${
-        ScrollingText.version
-      }`,
+      copyright: `Copyright © ${new Date().getFullYear()}, Inc. Web Scrolling Text. ${ScrollingText.version
+        }`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.vsLight,
+      darkTheme: prismThemes.vsDark,
+    },
+    colorMode: {
+      respectPrefersColorScheme: true,
     },
   } satisfies Preset.ThemeConfig,
 };
