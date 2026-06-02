@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 2 
 ---
 
 # Animations
@@ -8,57 +8,61 @@ Add stunning visual effects to your scrolling text with pre-built animation modu
 
 import AnimationDocs from '@site/src/components/AnimationDocs';
 
-<AnimationDocs framework="vanilla" />
+<AnimationDocs framework="element" />
 
 ## Using with Module Bundlers
 
-If you're using a module bundler:
+If you're using a module bundler (Vite, Webpack, etc.):
 
 ```javascript title="main.js"
-import ScrollingText from 'web-scrolling-text';
+import { register } from 'web-scrolling-text/element';
 import fade from 'web-scrolling-text/animation/fade';
 
-const container = document.getElementById('container');
-const texts = ['Hello', 'World'];
+// Register the custom element
+register();
 
-const scroller = new ScrollingText(container, texts, {
-  ...fade,
-  interval: 2000
-});
-
-scroller.start();
+// Apply animations to the custom element
+const scroller = document.querySelector('scrolling-text');
+scroller.setAttribute('enter-animation', fade.enterAnimation);
+scroller.setAttribute('exit-animation', fade.exitAnimation);
 ```
 
 ## Mixing Enter and Exit Animations
 
-You can use different animations for enter and exit:
+You can use different animations for enter and exit by specifying different animations on attributes:
 
 ```javascript
+import { register } from 'web-scrolling-text/element';
 import fadeAnim from 'web-scrolling-text/animation/fade';
 import bounceAnim from 'web-scrolling-text/animation/bounce';
 
-const scroller = new ScrollingText(container, texts, {
-  enterAnimation: fadeAnim.enterAnimation,
-  exitAnimation: bounceAnim.exitAnimation,
-  interval: 2000
-});
+register();
 
-scroller.start();
+const scroller = document.querySelector('scrolling-text');
+scroller.setAttribute('enter-animation', fadeAnim.enterAnimation);
+scroller.setAttribute('exit-animation', bounceAnim.exitAnimation);
 ```
 
 ## Custom Animation Duration
 
-Combine animations with custom durations:
+Combine custom animations with attributes like `animation-duration` and `interval`:
 
 ```html
+<scrolling-text 
+  id="scroller" 
+  interval="1500" 
+  animation-duration="500"
+>
+  <div>Fade in and out</div>
+  <div>Beautiful animations</div>
+</scrolling-text>
+
+<!-- Load the fade animation module -->
 <script src="https://unpkg.com/web-scrolling-text/dist/animation/fade.min.js"></script>
 <script>
-  const scroller = new ScrollingText(container, texts, {
-    ...ScrollingTextAnimation.fade,
-    animationDuration: 500,  // Faster fade
-    interval: 1500
-  });
-  scroller.start();
+  const scroller = document.getElementById('scroller');
+  scroller.setAttribute('enter-animation', ScrollingTextAnimation.fade.enterAnimation);
+  scroller.setAttribute('exit-animation', ScrollingTextAnimation.fade.exitAnimation);
 </script>
 ```
 
@@ -101,7 +105,7 @@ Combine animations with custom durations:
 <!-- ... and so on -->
 ```
 
-:::tip
+:::tip 
 Try the Playground
 Visit the [interactive playground](/playground) to preview all animations and generate code snippets!
 :::

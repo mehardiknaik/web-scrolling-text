@@ -3,7 +3,7 @@ import CodeBlock from '@theme/CodeBlock';
 import { ANIMATIONS, AnimationDef } from './animations';
 
 interface AnimationDocsProps {
-    framework: 'react' | 'vanilla' | 'angular';
+    framework: 'react' | 'vanilla' | 'angular' | 'element';
 }
 
 export default function AnimationDocs({ framework }: AnimationDocsProps) {
@@ -38,6 +38,13 @@ export default function AnimationDocs({ framework }: AnimationDocsProps) {
   );
   this.scroller.start();
 }`;
+            case 'element':
+                return `<script src="https://unpkg.com/web-scrolling-text/dist/animation/${anim.name}.min.js"></script>
+<script>
+  const scroller = document.querySelector('scrolling-text');
+  scroller.setAttribute('enter-animation', ScrollingTextAnimation.${anim.name}.enterAnimation);
+  scroller.setAttribute('exit-animation', ScrollingTextAnimation.${anim.name}.exitAnimation);
+</script>`;
         }
     };
 
@@ -57,7 +64,7 @@ export default function AnimationDocs({ framework }: AnimationDocsProps) {
             {ANIMATIONS.map((anim) => (
                 <div key={anim.name}>
                     <h3>{anim.label} Animation</h3>
-                    <CodeBlock language={framework === 'vanilla' ? 'html' : 'tsx'}>
+                    <CodeBlock language={framework === 'vanilla' || framework === 'element' ? 'html' : 'tsx'}>
                         {renderExample(anim)}
                     </CodeBlock>
                 </div>

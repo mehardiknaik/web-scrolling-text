@@ -13,6 +13,7 @@ The package includes a native **Web Component** (Custom Element) that works in a
 The easiest way to use the component is via a CDN. Add this to your HTML head:
 
 ```html
+<script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>  
 <script src="https://unpkg.com/web-scrolling-text/dist/element.min.js"></script>
 ```
 

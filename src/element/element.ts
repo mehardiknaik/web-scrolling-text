@@ -1,5 +1,5 @@
-import ScrollingText from "../core/scrolling";
-import { OptionsType, TextType } from "../core/types";
+import ScrollingText from "@/core";
+import { OptionsType, TextType } from "@/core/types";
 
 class DummyHTMLElement { };
 

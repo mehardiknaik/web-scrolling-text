@@ -62,13 +62,29 @@ Features:
 
 ---
 
+### Custom Element Example
+
+A native **Web Component** (`<scrolling-text>`) that works in any HTML environment — no framework required.
+
+**[View Source Code →](https://github.com/mehardiknaik/web-scrolling-text/tree/main/examples/element)**
+
+Features:
+- Native Web Component (Custom Element)
+- No framework or build tools required
+- CDN-based installation
+- Supports auto-start and manual control (`start`, `pause`, `stop`)
+- Rich HTML content inside slides
+- Custom enter/exit animations via attributes
+
+---
+
 ## Running Examples Locally
 
 Clone the repository and navigate to any example:
 
 ```bash
 git clone https://github.com/mehardiknaik/web-scrolling-text.git
-cd web-scrolling-text/examples/react  # or nextjs, angular, vanilla
+cd web-scrolling-text/examples/react  # or nextjs, angular, vanilla, element
 npm install
 npm run dev
 ```

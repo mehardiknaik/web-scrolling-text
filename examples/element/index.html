@@ -98,7 +98,7 @@
     </div>
 
     <h2>Example 3: Rich HTML content</h2>
-    <scrolling-text interval="4000" loop="true">
+    <scrolling-text id="rich" interval="4000" loop="true">
         <div>
             <h3 style="margin: 0;">Welcome! 👋</h3>
             <p style="margin: 5px 0 0 0; font-size: 16px;">This is rich HTML content</p>
@@ -113,8 +113,12 @@
         </div>
     </scrolling-text>
 
+    <!-- Global types will be available globally as ScrollingText -->
+    <script src="../../dist/index.min.js"></script>
     <!-- Load the element -->
     <script src="../../dist/element.min.js"></script>
+
+    <script src="../../dist//animation/bounce.min.js"></script>
 
     <script>
         // Check for errors
@@ -133,6 +137,11 @@
                 document.getElementById('statusText').innerHTML =
                     '<span class="error">❌ Element not initialized properly</span>';
             }
+
+            const richElement = document.getElementById("rich")
+            richElement.setAttribute("enter-animation", ScrollingTextAnimation.bounce.enterAnimation)
+            richElement.setAttribute("exit-animation", ScrollingTextAnimation.bounce.exitAnimation)
+
         }, 100);
     </script>
 </body>
