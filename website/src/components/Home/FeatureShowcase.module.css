@@ -34,7 +34,6 @@
     background: var(--ifm-card-background-color);
     border-radius: 20px;
     border: 2px solid var(--ifm-color-emphasis-100);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
     position: relative;
     overflow: hidden;

@@ -1,6 +1,7 @@
 import React from "react";
 import Heading from "@theme/Heading";
 import styles from "./FeatureShowcase.module.css";
+import { motion, Variants } from "motion/react";
 
 export default function FeatureShowcase() {
     const features = [
@@ -52,18 +53,35 @@ export default function FeatureShowcase() {
                     Everything you need to create stunning text animations
                 </p>
 
-                <div className={styles.showcaseGrid}>
+                <motion.div variants={container}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }} className={styles.showcaseGrid}>
                     {features.map((feature, idx) => (
-                        <div key={idx} className={styles.showcaseCard}>
+                        <motion.div variants={item}
+                            transition={{ duration: 0.5 }} key={idx} className={styles.showcaseCard} >
                             <div className={styles.showcaseIconWrapper}>
                                 <div className={styles.showcaseIcon}>{feature.icon}</div>
                             </div>
                             <h3 className={styles.showcaseCardTitle}>{feature.title}</h3>
                             <p className={styles.showcaseCardDescription}>{feature.description}</p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
 }
+const container: Variants = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.2,
+        },
+    },
+};
+
+const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+};

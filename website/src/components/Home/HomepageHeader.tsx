@@ -1,12 +1,15 @@
-import React from "react";
+import React, { memo } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import Heading from "@theme/Heading";
 import ScrollingText from "web-scrolling-text/react";
 import fade from "web-scrolling-text/animation/cinematic";
 import styles from "./HomepageHeader.module.css";
+import { motion } from "motion/react";
 
-const AnimatedBackground = React.lazy(() => import("@site/src/components/AnimatedBackground"));
+const AnimatedBackground = React.lazy(() => import(/* webpackChunkName: "animated-background" */"@site/src/components/AnimatedBackground"));
+
+const AnimateLink = motion(Link);
 
 export default function HomepageHeader() {
     const [pattern, setPattern] = React.useState<number>(0);
@@ -32,44 +35,97 @@ export default function HomepageHeader() {
             <AnimatedBackground pattern={pattern as any} />
             <div className={clsx("container", styles.container)}>
                 <Heading as="h1" className={clsx("hero__title", styles.heroTitle)}>
-                    Create{" "}
-                    <ScrollingText
-                        options={{
-                            ...fade,
-                            interval: 2500,
-                            animationDuration: 800,
-                            onChange: handlePatternChange,
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                            duration: 0.5,
+                            delay: 0.01
                         }}
                     >
-                        {heroWords.map((word, index) => (
-                            <span key={index}>{word}</span>
-                        ))}
-                    </ScrollingText>
-                    Scrolling Text Animations
+                        Create{" "}
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                            duration: 0.5,
+                            delay: 0.2,
+                        }}
+                    >
+                        <ScrollingText
+                            options={{
+                                ...fade,
+                                interval: 2500,
+                                animationDuration: 800,
+                                onChange: handlePatternChange,
+                            }}
+                        >
+                            {heroWords.map((word, index) => (
+                                <span key={index}>{word}</span>
+                            ))}
+                        </ScrollingText>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                            duration: 0.5,
+                            delay: 0.35,
+                        }}>Scrolling Text Animations</motion.div>
                 </Heading>
-                <p className={clsx("hero__subtitle", styles.heroSubtitle)}>
+                <motion.p initial={{ opacity: 0, scale: 0.6 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                        duration: 0.5,
+                        delay: 0.5,
+                    }} className={clsx("hero__subtitle", styles.heroSubtitle)}>
                     A lightweight, customizable library for creating stunning scrolling text effects.
                     <br />
                     Works with React, Next.js, Angular, or plain JavaScript.
-                </p>
-                <div className={styles.buttons}>
-                    <Link
-                        className="button button--primary button--lg"
-                        to="/docs/intro"
-                    >
-                        Get Started - 5min ⏱️
-                    </Link>
-                    <Link
-                        className={clsx("button button--secondary button--lg")}
-                        to="/playground"
-                    >
-                        Try Playground 🎮
-                    </Link>
-                </div>
-                <div className={styles.quickInstall}>
+                </motion.p>
+                <LinkComp />
+                <motion.div initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                        duration: 0.5,
+                        delay: 0.7,
+                    }} className={styles.quickInstall}>
                     <code className={styles.installCommand}>npm install web-scrolling-text</code>
-                </div>
+                </motion.div>
             </div>
         </header>
     );
+}
+
+const LinkComp = memo(() => {
+    return (<div className={styles.buttons}>
+        <AnimatedLinkComp initial={{ opacity: 0, x: -200 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+                duration: 0.5,
+                delay: 0.7,
+                type: "spring"
+            }}
+            className="button button--primary button--lg"
+            to="/docs/intro">
+            Get Started - 5min ⏱️
+        </AnimatedLinkComp>
+        <AnimateLink
+            initial={{ opacity: 0, x: 200 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+                duration: 0.5,
+                delay: 0.7,
+                type: "spring"
+            }}
+            className={clsx("button button--secondary button--lg")}
+            to="/playground"
+        >
+            Try Playground 🎮
+        </AnimateLink>
+    </div>)
+})
+
+const AnimatedLinkComp = (props: React.ComponentProps<typeof AnimateLink>) => {
+    return (<AnimateLink {...props} />)
 }

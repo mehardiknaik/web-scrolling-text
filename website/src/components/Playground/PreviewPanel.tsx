@@ -33,7 +33,6 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
 
   const handlePause = () => {
     scrollerRef.current?.pause();
-    handleStateChange("paused");
   };
 
   const handleStop = () => {
@@ -42,7 +41,6 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
 
   const handleStateChange = (state: "stopped" | "playing" | "paused") => {
     setPlayState(state);
-    onCurrentIndexChange(0);
   };
 
   if (texts.length === 0) {
@@ -71,6 +69,8 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
             onChange: onCurrentIndexChange,
             onStart: () => handleStateChange("playing"),
             onStop: () => handleStateChange("stopped"),
+            onPause: () => handleStateChange("paused"),
+            onReachEnd: () => console.log("End of loop"),
           }}
         >
           {texts}

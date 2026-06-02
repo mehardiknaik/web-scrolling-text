@@ -31,6 +31,7 @@ class ScrollingText {
   private _onChange: ((index: number) => void) | undefined;
   private _onStart: (() => void) | undefined;
   private _onStop: (() => void) | undefined;
+  private _onPause: (() => void) | undefined;
 
   constructor(
     container: HTMLElement,
@@ -50,6 +51,7 @@ class ScrollingText {
     this._onChange = options.onChange;
     this._onStart = options.onStart;
     this._onStop = options.onStop;
+    this._onPause = options.onPause;
     this._setup();
   }
 
@@ -152,8 +154,8 @@ class ScrollingText {
 
   start(): void {
     if (!this._timer && this._container?.innerHTML) {
-      this._onStart?.();
       this._startTimer();
+      this._onStart?.();
     }
   }
 
@@ -164,6 +166,7 @@ class ScrollingText {
 
   pause(): void {
     this._cleanUp(); //clear the timer
+    this._onPause?.();
   }
 
   /**
@@ -176,6 +179,7 @@ class ScrollingText {
     if (this._currentIndex) {
       this._currentIndex = 0;
       this._showText(this._texts[this._currentIndex]);
+      this._onChange?.(this._currentIndex);
     }
     this._onStop?.();
   }

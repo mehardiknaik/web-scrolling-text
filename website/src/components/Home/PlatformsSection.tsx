@@ -97,6 +97,7 @@ export class AppComponent {
 </script>
 
 <!-- OR: Import via CDN -->
+<script src="https://unpkg.com/web-scrolling-text/dist/index.min.js"></script>  
 <script src="https://unpkg.com/web-scrolling-text/dist/element.min.js"></script>
 
 <!-- Use the custom element -->

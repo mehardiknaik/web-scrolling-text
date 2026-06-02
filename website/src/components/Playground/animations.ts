@@ -24,17 +24,17 @@ export const animations: AnimationOption[] = [
 
 // Map of animation names to their dynamic import functions
 const animationLoaders: Record<string, () => Promise<any>> = {
-  fade: () => import('web-scrolling-text/animation/fade'),
-  bounce: () => import('web-scrolling-text/animation/bounce'),
-  flip: () => import('web-scrolling-text/animation/flip'),
-  rotate: () => import('web-scrolling-text/animation/rotate'),
-  scaleIn: () => import('web-scrolling-text/animation/scaleIn'),
-  scaleOut: () => import('web-scrolling-text/animation/scaleOut'),
-  zoomInDown: () => import('web-scrolling-text/animation/zoomInDown'),
-  cinematic: () => import('web-scrolling-text/animation/cinematic'),
-  glitch: () => import('web-scrolling-text/animation/glitch'),
-  swing: () => import('web-scrolling-text/animation/swing'),
-  rubberBand: () => import('web-scrolling-text/animation/rubberBand'),
+  fade: () => import(/* webpackChunkName: "fade" */ 'web-scrolling-text/animation/fade'),
+  bounce: () => import(/* webpackChunkName: "bounce" */ 'web-scrolling-text/animation/bounce'),
+  flip: () => import(/* webpackChunkName: "flip" */ 'web-scrolling-text/animation/flip'),
+  rotate: () => import(/* webpackChunkName: "rotate" */ 'web-scrolling-text/animation/rotate'),
+  scaleIn: () => import(/* webpackChunkName: "scaleIn" */ 'web-scrolling-text/animation/scaleIn'),
+  scaleOut: () => import(/* webpackChunkName: "scaleOut" */ 'web-scrolling-text/animation/scaleOut'),
+  zoomInDown: () => import(/* webpackChunkName: "zoomInDown" */ 'web-scrolling-text/animation/zoomInDown'),
+  cinematic: () => import(/* webpackChunkName: "cinematic" */ 'web-scrolling-text/animation/cinematic'),
+  glitch: () => import(/* webpackChunkName: "glitch" */ 'web-scrolling-text/animation/glitch'),
+  swing: () => import(/* webpackChunkName: "swing" */ 'web-scrolling-text/animation/swing'),
+  rubberBand: () => import(/* webpackChunkName: "rubberBand" */ 'web-scrolling-text/animation/rubberBand'),
 };
 
 // Helper function to load animation dynamically

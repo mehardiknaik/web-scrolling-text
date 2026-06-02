@@ -290,6 +290,7 @@
     padding: 1.5rem;
     min-height: 120px;
     text-wrap: nowrap;
+    gap: 7px;
   }
 }
 

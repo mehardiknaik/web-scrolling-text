@@ -1,5 +1,3 @@
-import ScrollingText from "./scrolling";
-
 export interface ConfigType {
   /**
    * @description: The interval between each text change
@@ -71,6 +69,6 @@ export interface MethodType {
   onPause?: () => void;
 }
 
-export interface OptionsType extends ConfigType, MethodType {}
+export interface OptionsType extends ConfigType, MethodType { }
 
 export type TextType = string;

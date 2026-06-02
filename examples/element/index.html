@@ -18,7 +18,7 @@
             color: #333;
         }
 
-        scrolling-text {
+        .scrolling-text {
             display: block;
             width: 100%;
             height: 100px;
@@ -67,6 +67,11 @@
         .success {
             color: #16a34a;
         }
+
+        .container {
+            background-color: #f3f4f6;
+            display: flex;
+        }
     </style>
 </head>
 
@@ -78,14 +83,15 @@
     </div>
 
     <h2>Example 1: Auto-start with fade animation</h2>
-    <scrolling-text id="scroller1" interval="3000" animation-duration="1000" loop="true">
+    <scrolling-text class="scrolling-text" id="scroller1" interval="3000" animation-duration="1000" loop="true">
         <div>Fade in and out</div>
         <div>Smooth transitions</div>
         <div>Beautiful animations</div>
     </scrolling-text>
 
     <h2>Example 2: Manual control</h2>
-    <scrolling-text id="scroller2" interval="2000" animation-duration="800" loop="true" auto-start="false">
+    <scrolling-text class="scrolling-text" id="scroller2" interval="2000" animation-duration="800" loop="true"
+        auto-start="false">
         <div>Press Start below</div>
         <div>To begin scrolling</div>
         <div>These messages</div>
@@ -98,21 +104,25 @@
     </div>
 
     <h2>Example 3: Rich HTML content</h2>
-    <scrolling-text id="rich" interval="4000" loop="true">
-        <div>
-            <h3 style="margin: 0;">Welcome! 👋</h3>
-            <p style="margin: 5px 0 0 0; font-size: 16px;">This is rich HTML content</p>
-        </div>
-        <div>
-            <h3 style="margin: 0;">Custom Element ✨</h3>
-            <p style="margin: 5px 0 0 0; font-size: 16px;">Works like a charm</p>
-        </div>
-        <div>
-            <h3 style="margin: 0;">No Errors! 🎉</h3>
-            <p style="margin: 5px 0 0 0; font-size: 16px;">Check the console</p>
-        </div>
-    </scrolling-text>
-
+    <div class="container">
+        Hello
+        <scrolling-text id="rich" interval="4000" loop="true" enter-animation="scrolling-text-bounce-in"
+            exit-animation="scrolling-text-bounce-out">
+            <div>
+                <h3 style="margin: 0;">Welcome! 👋</h3>
+                <p style="margin: 5px 0 0 0; font-size: 16px;">This is rich HTML content</p>
+            </div>
+            <div>
+                <h3 style="margin: 0;">Custom Element ✨</h3>
+                <p style="margin: 5px 0 0 0; font-size: 16px;">Works like a charm</p>
+            </div>
+            <div>
+                <h3 style="margin: 0;">No Errors! 🎉</h3>
+                <p style="margin: 5px 0 0 0; font-size: 16px;">Check the console</p>
+            </div>
+        </scrolling-text>
+        How are
+    </div>
     <!-- Global types will be available globally as ScrollingText -->
     <script src="../../dist/index.min.js"></script>
     <!-- Load the element -->
@@ -137,10 +147,9 @@
                 document.getElementById('statusText').innerHTML =
                     '<span class="error">❌ Element not initialized properly</span>';
             }
-
-            const richElement = document.getElementById("rich")
-            richElement.setAttribute("enter-animation", ScrollingTextAnimation.bounce.enterAnimation)
-            richElement.setAttribute("exit-animation", ScrollingTextAnimation.bounce.exitAnimation)
+            // const richElement = document.getElementById("rich")
+            // richElement.setAttribute("enter-animation", ScrollingTextAnimation.bounce.enterAnimation)
+            // richElement.setAttribute("exit-animation", ScrollingTextAnimation.bounce.exitAnimation)
 
         }, 100);
     </script>
