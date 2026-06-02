@@ -60,6 +60,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
       <h3>👁️ Preview</h3>
 
       <div key={texts.length} className={styles.previewContainer}>
+        You Can
         <ScrollingText
           ref={scrollerRef}
           options={{
@@ -74,6 +75,7 @@ const PreviewPanel: React.FC<PreviewPanelProps> = ({
         >
           {texts}
         </ScrollingText>
+        Search
       </div>
 
       <div className={styles.controls}>

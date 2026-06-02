@@ -1,22 +1,26 @@
 .wrapper {
   position: relative;
+  transition: width var(--duration);
 }
 
-.animationin{
+.animationin {
   --enter-animation: scrollin;
 }
 
 .animationout {
   --exit-animation: scrollout;
 }
+
 .text {
-  width: 100%;
+  width: fit-content;
   white-space: nowrap;
 }
+
 .enter {
   animation: var(--duration) ease forwards;
   animation-name: var(--enter-animation);
 }
+
 .exit {
   position: absolute;
   top: 0;
@@ -24,11 +28,13 @@
   animation: var(--duration) ease forwards;
   animation-name: var(--exit-animation);
 }
+
 @keyframes scrollin {
   from {
     transform: translateY(100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -40,6 +46,7 @@
     transform: translateY(0);
     opacity: 1;
   }
+
   to {
     transform: translateY(-100%);
     opacity: 0;

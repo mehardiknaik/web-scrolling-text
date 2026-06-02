@@ -86,6 +86,7 @@ class ScrollingText {
       textEl.innerHTML = text;
     }
     this._innerWrapper?.appendChild(textEl);
+    this.calcWidth(textEl);
 
     if (this._currentTextEl) {
       this._currentTextEl.classList.add(style.exit);
@@ -103,6 +104,14 @@ class ScrollingText {
     } else {
       this._currentTextEl = textEl;
     }
+  }
+
+  private calcWidth(textEl: HTMLDivElement) {
+    const width = textEl.scrollWidth;
+    this._innerWrapper.style.setProperty(
+      "width",
+      `${width}px`
+    );
   }
 
   private _next() {
