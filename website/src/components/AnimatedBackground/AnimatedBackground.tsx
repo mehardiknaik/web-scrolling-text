@@ -2,9 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import styles from './AnimatedBackground.module.css';
 import { getAnimation, animations, type Particle } from './animations';
 
+const DebugControls = React.lazy(() => import('./DebugControls'));
+
 interface AnimatedBackgroundProps {
   pattern?: number;
 }
+const params = new URLSearchParams(window.location.search);
+const debug = params.get('debug');
+const isDev = process.env.NODE_ENV === 'development' || debug === 'true';
 
 export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,10 +22,18 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
   const normalizedPattern = pattern % animations.length;
   const patternRef = useRef(normalizedPattern);
 
-  // Update pattern ref when prop changes
+  // Developer state for manual override
+  const [activePattern, setActivePattern] = React.useState(normalizedPattern);
+  const [isOverride, setIsOverride] = React.useState(false);
+  const isOverrideRef = useRef(false);
+
+  // Update pattern ref and state when prop changes (if not overridden)
   useEffect(() => {
-    const normalized = pattern % animations.length;
-    patternRef.current = normalized;
+    if (!isOverrideRef.current) {
+      const normalized = pattern % animations.length;
+      patternRef.current = normalized;
+      setActivePattern(normalized);
+    }
   }, [pattern]);
 
   useEffect(() => {
@@ -229,11 +242,33 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
     };
   }, []);
 
+  const selectAnimation = (index: number) => {
+    isOverrideRef.current = true;
+    setIsOverride(true);
+    patternRef.current = index;
+    setActivePattern(index);
+  };
+
+  const toggleOverride = () => {
+    const nextOverride = !isOverride;
+    isOverrideRef.current = nextOverride;
+    setIsOverride(nextOverride);
+    if (!nextOverride) {
+      const normalized = pattern % animations.length;
+      patternRef.current = normalized;
+      setActivePattern(normalized);
+    }
+  };
+
+
   return (
-    <canvas
-      ref={canvasRef}
-      className={styles.animatedBackground}
-      aria-hidden="true"
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className={styles.animatedBackground}
+        aria-hidden="true"
+      />
+      {isDev && <DebugControls selectAnimation={selectAnimation} toggleOverride={toggleOverride} isOverride={isOverride} activePattern={activePattern} />}
+    </>
   );
 }

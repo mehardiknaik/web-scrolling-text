@@ -6,6 +6,8 @@ import animation5 from './animation5';
 import animation6 from './animation6';
 import animation7 from './animation7';
 import animation8 from './animation8';
+import animation9 from './animation9';
+import animation10 from './animation10';
 import type { Animation } from './types';
 
 /**
@@ -27,6 +29,8 @@ export const animations: Animation[] = [
     animation6,
     animation7,
     animation8,
+    animation9,
+    animation10,
 ];
 
 /**
