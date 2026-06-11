@@ -7,9 +7,9 @@ const DebugControls = React.lazy(() => import('./DebugControls'));
 interface AnimatedBackgroundProps {
   pattern?: number;
 }
-const params = new URLSearchParams(window.location.search);
-const debug = params.get('debug');
-const isDev = process.env.NODE_ENV === 'development' || debug === 'true';
+// const params = new URLSearchParams(window.location.search);
+// const debug = params.get('debug');
+const isDev = process.env.NODE_ENV === 'development'
 
 export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
