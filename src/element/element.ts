@@ -1,5 +1,5 @@
 import ScrollingText from "@/core";
-import { OptionsType, TextType } from "@/core/types";
+import { EventCallbackType, OptionsType, ScrollingTextEventMap, TextType } from "@/core/types";
 
 class DummyHTMLElement { };
 
@@ -133,6 +133,22 @@ class ScrollingTextElement extends ClassToExtend {
      */
     dispose() {
         this._scrollingText?.dispose();
+    }
+    /**
+     * @description: Register event listener
+     * @param eventName Event name
+     * @param callback Callback function
+     */
+    on<K extends keyof ScrollingTextEventMap>(eventName: K, callback: EventCallbackType<K>) {
+        this._scrollingText?.on(eventName, callback);
+    }
+    /**
+     * @description: Remove event listener
+     * @param eventName Event name
+     * @param callback Callback function
+     */
+    off<K extends keyof ScrollingTextEventMap>(eventName: K, callback: EventCallbackType<K>) {
+        this._scrollingText?.off(eventName, callback);
     }
 }
 

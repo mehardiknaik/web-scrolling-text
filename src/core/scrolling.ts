@@ -1,5 +1,6 @@
 import { OptionsType, TextType } from "./types";
 import style from "./style.module.css";
+import Event, { EventType } from "./events";
 
 const defaultOptions: OptionsType = {
   interval: 3000,
@@ -15,7 +16,7 @@ const defaultOptions: OptionsType = {
  * @returns {ScrollingText}
  * @requires: true
  */
-class ScrollingText {
+class ScrollingText extends Event {
   private _container: HTMLElement;
   private _intervalTime: number | undefined;
   private _texts: TextType[];
@@ -27,17 +28,13 @@ class ScrollingText {
   private _enterAnimation: string | undefined;
   private _exitAnimation: string | undefined;
   private _loop: boolean | undefined;
-  private _onReachEnd: (() => void) | undefined;
-  private _onChange: ((index: number) => void) | undefined;
-  private _onStart: (() => void) | undefined;
-  private _onStop: (() => void) | undefined;
-  private _onPause: (() => void) | undefined;
 
   constructor(
     container: HTMLElement,
     texts: TextType[],
     options: OptionsType = {}
   ) {
+    super()
     options = { ...defaultOptions, ...options };
     this._container = container;
     this._texts = texts;
@@ -47,11 +44,6 @@ class ScrollingText {
     this._exitAnimation = options.exitAnimation;
     this._loop = options.loop;
     this._currentIndex = 0;
-    this._onReachEnd = options.onReachEnd;
-    this._onChange = options.onChange;
-    this._onStart = options.onStart;
-    this._onStop = options.onStop;
-    this._onPause = options.onPause;
     this._setup();
   }
 
@@ -88,9 +80,10 @@ class ScrollingText {
       textEl.innerHTML = text;
     }
     this._innerWrapper?.appendChild(textEl);
-    this.calcWidth(textEl);
+    this._calcWidth(textEl);
 
     if (this._currentTextEl) {
+      this._emit(EventType.change, this._currentIndex, textEl)
       this._currentTextEl.classList.add(style.exit);
       this._currentTextEl.setAttribute("aria-hidden", "true");
       setTimeout(() => {
@@ -108,7 +101,7 @@ class ScrollingText {
     }
   }
 
-  private calcWidth(textEl: HTMLDivElement) {
+  private _calcWidth(textEl: HTMLDivElement) {
     const width = textEl.scrollWidth;
     this._innerWrapper.style.setProperty(
       "width",
@@ -118,11 +111,10 @@ class ScrollingText {
 
   private _next() {
     this._currentIndex = (this._currentIndex + 1) % this._texts.length;
-    this._onChange?.(this._currentIndex);
     if (this._currentIndex === this._texts.length - 1) {
-      this._onReachEnd?.();
+      this._emit(EventType.reachEnd)
       if (!this._loop) {
-        this._onStop?.();
+        this._emit('stop')
         this._cleanUp();
       } else {
         this._startTimer(); //start the timer again
@@ -155,7 +147,7 @@ class ScrollingText {
   start(): void {
     if (!this._timer && this._container?.innerHTML) {
       this._startTimer();
-      this._onStart?.();
+      this._emit(EventType.start)
     }
   }
 
@@ -166,7 +158,7 @@ class ScrollingText {
 
   pause(): void {
     this._cleanUp(); //clear the timer
-    this._onPause?.();
+    this._emit(EventType.pause, this._currentIndex)
   }
 
   /**
@@ -179,9 +171,8 @@ class ScrollingText {
     if (this._currentIndex) {
       this._currentIndex = 0;
       this._showText(this._texts[this._currentIndex]);
-      this._onChange?.(this._currentIndex);
     }
-    this._onStop?.();
+    this._emit(EventType.stop)
   }
 
   /**

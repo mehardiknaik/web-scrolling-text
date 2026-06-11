@@ -36,39 +36,21 @@ export interface ConfigType {
   loop?: boolean;
 }
 
-export interface MethodType {
-  /**
-   * @description: Callback when the text reaches the end
-   * @type: {() => void}
-   * @requires: false
-   */
-  onReachEnd?: () => void;
-  /**
-   * @description: Callback when the text changes
-   * @type: {(index: number) => void}
-   * @requires: false
-   */
-  onChange?: (index: number) => void;
-  /**
-   * @description: Callback when the text starts scrolling
-   * @type: {() => void}
-   * @requires: false
-   */
-  onStart?: () => void;
-  /**
-   * @description: Callback when the text stops scrolling
-   * @type: {() => void}
-   * @requires: false
-   */
-  onStop?: () => void;
-  /**
-   * @description: Callback when the text is paused
-   * @type: {() => void}
-   * @requires: false
-   */
-  onPause?: () => void;
-}
 
-export interface OptionsType extends ConfigType, MethodType { }
+
+export interface OptionsType extends ConfigType { }
 
 export type TextType = string;
+
+
+
+export interface ScrollingTextEventMap {
+  change: [number, HTMLDivElement];
+  reachEnd: [];
+  start: [];
+  stop: [];
+  pause: [number];
+}
+
+export type EventNameType = keyof ScrollingTextEventMap
+export type EventCallbackType<K extends EventNameType> = (...data: ScrollingTextEventMap[K]) => void

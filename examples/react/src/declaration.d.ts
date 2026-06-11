@@ -1,9 +1,10 @@
 import React from 'react';
+import { ScrollingType } from "web-scrolling-text"
 
 declare module 'react' {
     namespace JSX {
         interface IntrinsicElements {
-            'scrolling-text': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+            'scrolling-text': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, ScrollingType> & {
                 'interval'?: string | number;
                 'animation-duration'?: string | number;
                 'enter-animation'?: string;
