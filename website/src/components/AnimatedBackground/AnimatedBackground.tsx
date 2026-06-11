@@ -7,9 +7,7 @@ const DebugControls = React.lazy(() => import('./DebugControls'));
 interface AnimatedBackgroundProps {
   pattern?: number;
 }
-// const params = new URLSearchParams(window.location.search);
-// const debug = params.get('debug');
-const isDev = process.env.NODE_ENV === 'development'
+
 
 export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -26,6 +24,13 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
   const [activePattern, setActivePattern] = React.useState(normalizedPattern);
   const [isOverride, setIsOverride] = React.useState(false);
   const isOverrideRef = useRef(false);
+  const [isDev, setIsDev] = React.useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const debug = params.get('debug');
+    setIsDev(process.env.NODE_ENV === 'development' || debug === 'true');
+  }, [])
 
   // Update pattern ref and state when prop changes (if not overridden)
   useEffect(() => {
