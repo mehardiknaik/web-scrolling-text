@@ -89,3 +89,33 @@
     font-size: 1rem;
   }
 }
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
+.animatedBorderButton {
+  --border-angle: 0turn;
+  border: 3px solid transparent !important;
+  background: linear-gradient(#111827, #111827) padding-box,
+              conic-gradient(from var(--border-angle), #ff00cc, #3333ff, #00ffcc, #ff00cc) border-box !important;
+  color: #ffffff !important;
+  animation: gradientBorderRotate 3s linear infinite;
+  box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.animatedBorderButton:hover {
+  box-shadow: 0 4px 25px rgba(51, 51, 255, 0.5);
+}
+
+@keyframes gradientBorderRotate {
+  0% {
+    --border-angle: 0turn;
+  }
+  100% {
+    --border-angle: 1turn;
+  }
+}

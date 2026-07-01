@@ -106,7 +106,7 @@ const LinkComp = memo(() => {
                 delay: 0.7,
                 type: "spring"
             }}
-            className="button button--primary button--lg"
+            className={clsx("button button--lg", styles.animatedBorderButton)}
             to="/docs/intro">
             Get Started - 5min ⏱️
         </AnimatedLinkComp>

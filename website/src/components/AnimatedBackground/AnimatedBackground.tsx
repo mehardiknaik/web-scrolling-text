@@ -121,9 +121,69 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
     observer.observe(canvas);
 
+    // Draw background gradient directly on canvas
+    const drawGradient = () => {
+      const w = canvas.width;
+      const h = canvas.height;
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      
+      const time = Date.now() * 0.0005; // Slow animation time
+
+      // Base fill
+      if (isDark) {
+        ctx.fillStyle = 'rgb(10, 8, 20)';
+      } else {
+        ctx.fillStyle = 'rgb(245, 243, 255)';
+      }
+      ctx.fillRect(0, 0, w, h);
+
+      // Calculate animated positions
+      const x1 = w * 0.2 + Math.cos(time) * w * 0.1;
+      const y1 = h * 0.3 + Math.sin(time * 0.8) * h * 0.1;
+      
+      const x2 = w * 0.8 + Math.cos(time * 1.2 + Math.PI) * w * 0.1;
+      const y2 = h * 0.7 + Math.sin(time * 0.9 + Math.PI) * h * 0.1;
+      
+      const x3 = w * 0.5 + Math.cos(time * 0.7 + Math.PI / 2) * w * 0.1;
+      const y3 = h * 0.5 + Math.sin(time * 1.1 + Math.PI / 2) * h * 0.1;
+
+      // Radial glow — top-left purple
+      const g1 = ctx.createRadialGradient(x1, y1, 0, x1, y1, w * 0.5);
+      if (isDark) {
+        g1.addColorStop(0, 'rgba(124, 58, 237, 0.18)');
+      } else {
+        g1.addColorStop(0, 'rgba(124, 58, 237, 0.12)');
+      }
+      g1.addColorStop(1, 'transparent');
+      ctx.fillStyle = g1;
+      ctx.fillRect(0, 0, w, h);
+
+      // Radial glow — bottom-right blue
+      const g2 = ctx.createRadialGradient(x2, y2, 0, x2, y2, w * 0.45);
+      if (isDark) {
+        g2.addColorStop(0, 'rgba(59, 130, 246, 0.12)');
+      } else {
+        g2.addColorStop(0, 'rgba(59, 130, 246, 0.10)');
+      }
+      g2.addColorStop(1, 'transparent');
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, w, h);
+
+      // Radial glow — center subtle
+      const g3 = ctx.createRadialGradient(x3, y3, 0, x3, y3, w * 0.55);
+      if (isDark) {
+        g3.addColorStop(0, 'rgba(99, 60, 173, 0.10)');
+      } else {
+        g3.addColorStop(0, 'rgba(139, 92, 246, 0.06)');
+      }
+      g3.addColorStop(1, 'transparent');
+      ctx.fillStyle = g3;
+      ctx.fillRect(0, 0, w, h);
+    };
+
     // Animation loop
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawGradient();
 
       const mouse = mouseRef.current;
       const mouseRadius = 200;
@@ -225,6 +285,17 @@ export default function AnimatedBackground({ pattern = 0 }: AnimatedBackgroundPr
           ctx.fill();
         }
       });
+
+      // Apply bottom fade after particles so everything fades out
+      const fadeStart = canvas.height * 0.7;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-out';
+      const fade = ctx.createLinearGradient(0, fadeStart, 0, canvas.height);
+      fade.addColorStop(0, 'rgba(0, 0, 0, 0)');
+      fade.addColorStop(1, 'rgba(0, 0, 0, 1)');
+      ctx.fillStyle = fade;
+      ctx.fillRect(0, fadeStart, canvas.width, canvas.height - fadeStart);
+      ctx.restore();
 
       // Only continue animation if canvas is visible
       if (isVisibleRef.current) {
