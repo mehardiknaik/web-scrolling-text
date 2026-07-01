@@ -8,10 +8,11 @@ import styles from './Playground.module.css';
 
 const PlaygroundComponent: React.FC = () => {
   const [texts, setTexts] = React.useState<string[]>([
-    'Hello World',
-    'Welcome to Web Scrolling Text',
-    'Customize Your Animation',
-    '🎨 Beautiful Animations',
+    'Wait',
+    'Continue',
+    'Search',
+    'Check',
+    'Look'
   ]);
   const [interval, setInterval] = React.useState(3000);
   const [animationDuration, setAnimationDuration] = React.useState(1000);

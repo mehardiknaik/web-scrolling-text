@@ -21,9 +21,6 @@ export default function DebugControls({
     <motion.div drag dragElastic={0}
       dragMomentum={false} whileDrag={{ cursor: "grabbing" }} style={{
         position: 'absolute',
-        top: '12px',
-        left: '50%',
-        transform: 'translateX(-50%)',
         backgroundColor: 'rgba(15, 23, 42, 0.92)',
         backdropFilter: 'blur(12px)',
         border: '1px solid rgba(56, 189, 248, 0.3)',
