@@ -84,65 +84,6 @@ const options: OptionsType = {
 };
 ```
 
-## Callback Options
-
-### onStart
-
-Called when the animation starts.
-
-- **Type:** `() => void`
-
-```typescript
-const options: OptionsType = {
-  onStart: () => {
-    console.log('Animation started!');
-  }
-};
-```
-
-### onStop
-
-Called when the animation stops.
-
-- **Type:** `() => void`
-
-```typescript
-const options: OptionsType = {
-  onStop: () => {
-    console.log('Animation stopped!');
-  }
-};
-```
-
-### onChange
-
-Called when the text changes. Receives the current index.
-
-- **Type:** `(index: number) => void`
-
-```typescript
-const options: OptionsType = {
-  onChange: (index: number) => {
-    console.log(`Now showing text at index: ${index}`);
-  }
-};
-```
-
-### onReachEnd
-
-Called when reaching the last text.
-
-- **Type:** `() => void`
-
-```typescript
-const options: OptionsType = {
-  loop: false,
-  onReachEnd: () => {
-    console.log('Reached the end!');
-  }
-};
-```
-
 ## Complete Example
 
 ```typescript title="app.component.ts"
@@ -170,13 +111,7 @@ export class AppComponent {
     animationDuration: 800,
     
     // Behavior
-    loop: true,
-    
-    // Callbacks
-    onStart: () => console.log('Started'),
-    onStop: () => console.log('Stopped'),
-    onChange: (index: number) => console.log('Index:', index),
-    onReachEnd: () => console.log('Reached end')
+    loop: true
   };
 }
 ```

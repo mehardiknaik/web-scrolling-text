@@ -51,6 +51,8 @@ scroller.dispose();
 After calling `dispose()`, the instance cannot be reused. You'll need to create a new instance if you want to use scrolling text again.
 :::
 
+
+
 ## Interactive Example
 
 ```html title="index.html"
@@ -177,11 +179,11 @@ const container = document.getElementById('container');
 const texts = ['One', 'Two', 'Three'];
 
 // Create instance
-const scroller = new ScrollingText(container, texts, {
-  onStart: () => console.log('Lifecycle: Started'),
-  onStop: () => console.log('Lifecycle: Stopped'),
-  onChange: (index) => console.log('Lifecycle: Changed to index', index)
-});
+const scroller = new ScrollingText(container, texts);
+
+scroller.on('start', () => console.log('Lifecycle: Started'));
+scroller.on('stop', () => console.log('Lifecycle: Stopped'));
+scroller.on('change', (index) => console.log('Lifecycle: Changed to index', index));
 
 // Start animation
 scroller.start();  // Logs: "Lifecycle: Started"

@@ -88,73 +88,6 @@ const scroller = new ScrollingText(container, texts, {
 });
 ```
 
-## Callback Options
-
-### onStart
-
-Callback function executed when the animation starts.
-
-- **Type:** `() => void`
-- **Default:** `undefined`
-- **Required:** No
-
-```javascript
-const scroller = new ScrollingText(container, texts, {
-  onStart: () => {
-    console.log('Animation started!');
-  }
-});
-```
-
-### onStop
-
-Callback function executed when the animation stops.
-
-- **Type:** `() => void`
-- **Default:** `undefined`
-- **Required:** No
-
-```javascript
-const scroller = new ScrollingText(container, texts, {
-  onStop: () => {
-    console.log('Animation stopped!');
-  }
-});
-```
-
-### onChange
-
-Callback function executed when the text changes. Receives the current index as a parameter.
-
-- **Type:** `(index: number) => void`
-- **Default:** `undefined`
-- **Required:** No
-
-```javascript
-const scroller = new ScrollingText(container, texts, {
-  onChange: (index) => {
-    console.log(`Now showing text at index: ${index}`);
-  }
-});
-```
-
-### onReachEnd
-
-Callback function executed when reaching the last text.
-
-- **Type:** `() => void`
-- **Default:** `undefined`
-- **Required:** No
-
-```javascript
-const scroller = new ScrollingText(container, texts, {
-  loop: false,
-  onReachEnd: () => {
-    console.log('Reached the end!');
-  }
-});
-```
-
 ## Complete Example
 
 ```javascript
@@ -171,13 +104,7 @@ const scroller = new ScrollingText(container, texts, {
   exitAnimation: 'customExit',
   
   // Behavior options
-  loop: true,
-  
-  // Callbacks
-  onStart: () => console.log('Started'),
-  onStop: () => console.log('Stopped'),
-  onChange: (index) => console.log('Index:', index),
-  onReachEnd: () => console.log('Reached end')
+  loop: true
 });
 
 scroller.start();
