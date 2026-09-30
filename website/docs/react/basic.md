@@ -55,7 +55,8 @@ export default function Page() {
 }
 ```
 
-:::info Server-Side Rendering
+:::info 
+Server-Side Rendering
 The first element in your children array is rendered on the server side. In the example above, **"Hello"** will be rendered on the server, ensuring SEO-friendly content.
 :::
 

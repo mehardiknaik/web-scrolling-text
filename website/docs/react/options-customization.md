@@ -234,14 +234,6 @@ export default App;
     transform: translateY(-20px);
   }
 }
-
-.fadeIn {
-  animation: fadeIn var(--duration) ease-out;
-}
-
-.fadeOut {
-  animation: fadeOut var(--duration) ease-in;
-}
 ```
 
 ## Using Pre-built Animations
