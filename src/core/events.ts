@@ -43,6 +43,13 @@ class Event {
             return event._eventName !== eventName && event._callback !== callback
         })
     }
+
+    /**
+     * @description: Destroy all event listeners
+     */
+    protected _dispose() {
+        this._event = [];
+    }
 }
 
 

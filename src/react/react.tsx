@@ -91,11 +91,6 @@ const ScrollingText: React.FC<ScrollingTextProps> = ({
       else ref.current = scroller;
     }
     return () => {
-      if (mergedOptions.onReachEnd) scroller.off("reachEnd", mergedOptions.onReachEnd)
-      if (mergedOptions.onChange) scroller.off("change", mergedOptions.onChange)
-      if (mergedOptions.onStart) scroller.off("start", mergedOptions.onStart)
-      if (mergedOptions.onStop) scroller.off("stop", mergedOptions.onStop)
-      if (mergedOptions.onPause) scroller.off("pause", mergedOptions.onPause)
       scroller.dispose()
     }
   }, [JSON.stringify(options), JSON.stringify(contextOptions)]);

@@ -181,6 +181,7 @@ class ScrollingText extends Event {
    */
 
   dispose(): void {
+    super._dispose()
     this._cleanUp();
     this._container.innerHTML = "";
     this._currentTextEl = null;
