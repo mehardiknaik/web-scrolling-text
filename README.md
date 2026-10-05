@@ -2,9 +2,9 @@
 
 A lightweight, customizable text animation library for creating smooth scrolling text effects with support for React, Next.js, Angular, and Vanilla JavaScript.
 
-**[🚀 Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)** • **[🎮 Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)** • **[📚 Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)**
+**[🚀 Website](https://mehardiknaik.github.io/web-scrolling-text/)** • **[🎮 Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)** • **[📚 Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)**
 
-https://github.com/user-attachments/assets/87e55d25-2435-4ca6-aaad-ef0fb9d378d7
+<img src="https://raw.githubusercontent.com/mehardiknaik/web-scrolling-text/main/.github/images/sc.gif" alt="Demo">
 
 ## 📦 Installation
 
@@ -174,6 +174,6 @@ ICS © [Hardik Naik](https://github.com/mehardiknaik)
 - [GitHub Repository](https://github.com/mehardiknaik/web-scrolling-text)
 - [NPM Package](https://www.npmjs.com/package/web-scrolling-text)
 - [Documentation](https://mehardiknaik.github.io/web-scrolling-text/docs/intro)
-- [Live Demo](https://mehardiknaik.github.io/web-scrolling-text/)
+- [Website](https://mehardiknaik.github.io/web-scrolling-text/)
 - [Playground](https://mehardiknaik.github.io/web-scrolling-text/playground)
 - [Examples](https://mehardiknaik.github.io/web-scrolling-text/examples)
